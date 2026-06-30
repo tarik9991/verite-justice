@@ -134,6 +134,14 @@ body[dir="rtl"] .hero .lead-q{font-family:'Amiri',serif;font-style:normal}
 .listen-hero .btn{padding:11px 20px;font-size:.9rem;border-color:var(--gold)}
 .listen-hero .btn .play-ic{color:var(--gold-soft)}
 
+/* ============ VIDEO ============ */
+.video-sec{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:64px 22px}
+.video-inner{max-width:var(--maxw);margin:0 auto;text-align:center}
+.video-sec h2{font-size:clamp(1.7rem,5vw,2.5rem);color:var(--gold-soft);margin-bottom:10px}
+.video-sub{color:var(--ink-dim);margin:0 auto 30px;max-width:540px}
+.video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
 /* ============ CHAPTERS ============ */
 .story{max-width:var(--maxw);margin:0 auto;padding:40px 22px}
 .chapter{
@@ -249,6 +257,20 @@ footer .legal strong{color:var(--gold-soft)}
   <div class="scroll-cue"><span data-i="scroll">Faites défiler</span><span class="line"></span></div>
 </header>
 
+<!-- ===================== VIDEO ===================== -->
+<section class="video-sec" id="video">
+  <div class="video-inner">
+    <h2 data-i="videoTitle">À regarder</h2>
+    <p class="video-sub" data-i="videoSub">Quelques minutes pour comprendre l'essentiel de l'affaire.</p>
+    <div class="video-frame">
+      <iframe src="https://www.youtube-nocookie.com/embed/clDgkF9Og6s?rel=0"
+              title="Vérité & Justice" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== STORY ===================== -->
 <main class="story" id="story"><!-- chapters injected by JS --></main>
 
@@ -295,6 +317,8 @@ const I18N = {
     sub:"L'histoire d'une succession, d'un silence,<br>et de questions restées sans réponse.",
     leadq:"« Comment une succession peut-elle être déclarée <em>vide</em>, quand les comptes, eux, parlent ? »",
     scroll:"Faites défiler",
+    videoTitle:"À regarder",
+    videoSub:"Quelques minutes pour comprendre l'essentiel de l'affaire.",
     tlTitle:"La chronologie",
     ctaTitle:"Le silence est leur meilleure arme.",
     ctaText:"Partagez cette histoire. Que la justice — française, marocaine et algérienne — réponde aux questions qu'un fils a le droit de poser.",
@@ -383,6 +407,8 @@ const I18N = {
     sub:"قصة تركة، وصمت،<br>وأسئلة بقيت بلا جواب.",
     leadq:"«كيف يمكن أن تُعلَن تركة <em>فارغة</em>، بينما الحسابات المصرفية تنطق بعكس ذلك؟»",
     scroll:"مرّر للأسفل",
+    videoTitle:"شاهد الفيديو",
+    videoSub:"دقائق قليلة لفهم جوهر القضية.",
     tlTitle:"التسلسل الزمني",
     ctaTitle:"الصمت هو سلاحهم الأقوى.",
     ctaText:"شارك هذه القصة. فلتجِب العدالة — الفرنسية والمغربية والجزائرية — عن أسئلة يحقّ لابنٍ أن يطرحها.",
