@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vérité &amp; Justice — الحقيقة والعدالة</title>
+<meta name="description" content="L'histoire d'une succession, d'un silence, et de questions restées sans réponse." />
+
+<!-- ============================================================
+     NOTE IMPORTANTE (à lire avant de publier)
+     ------------------------------------------------------------
+     1. ANONYMAT : aucun nom propre n'est utilisé, uniquement des
+        rôles. Garde-le ainsi.
+     2. TON : faits + questions. On n'écrit JAMAIS "coupable" ni
+        "assassin" pour désigner une personne identifiable. On dit
+        "selon le rapport de police", "il s'agirait de", on POSE
+        des questions. C'est ce qui te protège juridiquement.
+     3. DOCUMENTS : le flou CSS ci-dessous est COSMÉTIQUE. L'image
+        d'origine reste accessible. Tu DOIS caviarder (barre noire
+        en dur) les zones sensibles DANS LE FICHIER IMAGE lui-même
+        avant de le déposer dans /docs/. Ne mets jamais en ligne un
+        document non caviardé en comptant sur le flou CSS.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --bg:#0d0f12;
+  --bg-soft:#14171c;
+  --panel:#181c22;
+  --ink:#e9e6df;
+  --ink-dim:#a39e93;
+  --line:#2a2f37;
+  --gold:#c8a35a;
+  --gold-soft:#e0c489;
+  --red:#b8443a;
+  --paper:#efe9dc;
+  --paper-ink:#23211c;
+  --maxw:880px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  line-height:1.75;
+  font-weight:300;
+  overflow-x:hidden;
+}
+body[dir="rtl"]{font-family:'Cairo',system-ui,sans-serif}
+
+/* ---- typographic scale ---- */
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600;line-height:1.2}
+body[dir="rtl"] h1,
+body[dir="rtl"] h2,
+body[dir="rtl"] h3{font-family:'Amiri',serif;font-weight:700}
+
+::selection{background:var(--gold);color:#000}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;
+  background:rgba(13,15,18,.82);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;letter-spacing:.06em;color:var(--gold-soft);
+  display:flex;align-items:center;gap:.5rem;
+}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red)}
+.controls{display:flex;align-items:center;gap:10px}
+.btn{
+  font-family:inherit;font-size:.82rem;letter-spacing:.04em;
+  background:transparent;color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;
+  padding:7px 14px;cursor:pointer;transition:.2s;
+  display:inline-flex;align-items:center;gap:7px;
+}
+.btn:hover{border-color:var(--gold);color:var(--gold-soft)}
+.btn.active{background:var(--gold);color:#000;border-color:var(--gold)}
+.btn-icon svg{width:15px;height:15px;display:block}
+.lang-switch{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang-switch button{
+  font-family:inherit;background:transparent;color:var(--ink-dim);
+  border:0;padding:7px 13px;cursor:pointer;font-size:.82rem;transition:.2s
+}
+.lang-switch button.active{background:var(--gold);color:#000}
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  align-items:center;text-align:center;padding:120px 22px 80px;
+  position:relative;
+  background:radial-gradient(ellipse at 50% 0%, #1a1e25 0%, var(--bg) 60%);
+}
+.hero .eyebrow{
+  color:var(--gold);letter-spacing:.32em;font-size:.72rem;
+  text-transform:uppercase;margin-bottom:26px;font-weight:500;
+}
+.hero h1{
+  font-size:clamp(2.6rem,8vw,5.2rem);
+  background:linear-gradient(180deg,#fff 0%,#cdbf9d 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+.hero .sub{
+  color:var(--ink-dim);max-width:560px;font-size:1.08rem;margin:18px auto 0;
+}
+.hero .lead-q{
+  margin-top:46px;max-width:620px;font-family:'Playfair Display',serif;
+  font-style:italic;font-size:clamp(1.2rem,3.4vw,1.7rem);color:var(--gold-soft);
+  line-height:1.5;
+}
+body[dir="rtl"] .hero .lead-q{font-family:'Amiri',serif;font-style:normal}
+.scroll-cue{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  color:var(--ink-dim);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.7;
+}
+.scroll-cue .line{width:1px;height:38px;background:linear-gradient(var(--gold),transparent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ============ AUDIO MASTER BAR ============ */
+.listen-hero{margin-top:40px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.listen-hero .btn{padding:11px 20px;font-size:.9rem;border-color:var(--gold)}
+.listen-hero .btn .play-ic{color:var(--gold-soft)}
+
+/* ============ CHAPTERS ============ */
+.story{max-width:var(--maxw);margin:0 auto;padding:40px 22px}
+.chapter{
+  padding:70px 0;border-top:1px solid var(--line);
+  opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease;
+}
+.chapter.in{opacity:1;transform:none}
+.chapter:first-child{border-top:0}
+.ch-head{display:flex;align-items:baseline;gap:18px;margin-bottom:22px;flex-wrap:wrap}
+.ch-num{
+  font-family:'Playfair Display',serif;font-size:3.2rem;color:var(--line);
+  line-height:1;flex-shrink:0;
+}
+.ch-title{font-size:clamp(1.5rem,4vw,2.1rem);color:var(--ink)}
+.ch-date{
+  color:var(--gold);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+  margin-bottom:6px;font-weight:500;
+}
+.chapter p{margin:0 0 1.2rem;color:#d7d2c8;font-size:1.06rem}
+.chapter p strong{color:var(--gold-soft);font-weight:500}
+.ch-listen{margin-top:8px}
+.ch-listen .btn{font-size:.8rem}
+.ch-listen .btn.speaking{background:var(--red);border-color:var(--red);color:#fff}
+
+/* pull-question */
+.pull{
+  border-left:3px solid var(--gold);padding:6px 0 6px 22px;margin:30px 0;
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.25rem;color:var(--gold-soft);line-height:1.5;
+}
+body[dir="rtl"] .pull{border-left:0;border-right:3px solid var(--gold);padding:6px 22px 6px 0;font-family:'Amiri',serif;font-style:normal}
+
+/* ============ FIGURES (documents) ============ */
+figure.doc{margin:34px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+figure.doc .frame{position:relative;background:#0a0b0d;display:flex;justify-content:center}
+figure.doc img{max-width:100%;display:block;filter:saturate(.9)}
+/* cosmetic redaction overlay – REMINDER: redact the real file too */
+.redact{position:absolute;background:#000;border-radius:2px}
+.redact.blur{background:rgba(10,10,10,.2);backdrop-filter:blur(9px)}
+figure.doc figcaption{padding:14px 18px;color:var(--ink-dim);font-size:.85rem;border-top:1px solid var(--line)}
+figure.doc .tag{display:inline-block;background:var(--bg);border:1px solid var(--line);color:var(--gold-soft);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:5px;margin-bottom:8px}
+.doc-placeholder{aspect-ratio:1.5/1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#3a3f48;gap:10px;background:repeating-linear-gradient(45deg,#0a0b0d,#0a0b0d 12px,#0c0e11 12px,#0c0e11 24px)}
+.doc-placeholder svg{width:42px;height:42px;opacity:.5}
+.doc-placeholder span{font-size:.8rem;letter-spacing:.08em}
+
+/* ============ TIMELINE ============ */
+.timeline-sec{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:80px 22px}
+.timeline-sec .inner{max-width:var(--maxw);margin:0 auto}
+.timeline-sec h2{font-size:clamp(1.8rem,5vw,2.6rem);text-align:center;margin-bottom:50px;color:var(--gold-soft)}
+.tl{position:relative;padding-inline-start:30px}
+.tl::before{content:"";position:absolute;inset-inline-start:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--gold),transparent)}
+.tl-item{position:relative;padding:0 0 34px}
+.tl-item::before{content:"";position:absolute;inset-inline-start:-30px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--gold);transform:translateX(0)}
+body[dir="rtl"] .tl-item::before{transform:translateX(2px)}
+.tl-date{color:var(--gold);font-size:.82rem;letter-spacing:.12em;font-weight:600;margin-bottom:4px}
+.tl-text{color:#d7d2c8;font-size:1rem}
+
+/* ============ FIGURES NUMBERS ============ */
+.ledger{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:34px 0}
+.ledger .cell{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+.ledger .cell .k{color:var(--ink-dim);font-size:.8rem;margin-bottom:8px}
+.ledger .cell .v{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--gold-soft)}
+.ledger .cell.contra{border-color:var(--red)}
+.ledger .cell.contra .v{color:var(--red)}
+@media(max-width:560px){.ledger{grid-template-columns:1fr}}
+
+/* ============ CTA ============ */
+.cta{padding:100px 22px;text-align:center;background:radial-gradient(ellipse at 50% 100%, #1a1e25 0%, var(--bg) 60%)}
+.cta h2{font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:16px}
+.cta p{color:var(--ink-dim);max-width:520px;margin:0 auto 34px;font-size:1.08rem}
+.share{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.share .btn{padding:12px 22px;font-size:.92rem}
+
+/* ============ FOOTER / DISCLAIMER ============ */
+footer{border-top:1px solid var(--line);padding:40px 22px;max-width:var(--maxw);margin:0 auto;color:var(--ink-dim);font-size:.82rem;text-align:center;line-height:1.7}
+footer .legal{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:22px;color:#9c978c}
+footer .legal strong{color:var(--gold-soft)}
+
+/* utility */
+.hidden{display:none!important}
+</style>
+</head>
+<body dir="ltr" lang="fr">
+
+<!-- ===================== TOP BAR ===================== -->
+<div class="topbar">
+  <div class="brand"><span class="dot"></span><span data-i="brand">Vérité &amp; Justice</span></div>
+  <div class="controls">
+    <button class="btn btn-icon" id="masterPlay" title="Écouter">
+      <span class="play-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      <span data-i="listenAll">Écouter</span>
+    </button>
+    <div class="lang-switch">
+      <button data-lang="fr" class="active">FR</button>
+      <button data-lang="ar">ع</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="eyebrow" data-i="eyebrow">Un dossier. Des faits. Des questions.</div>
+  <h1 data-i="title">Vérité &amp; Justice</h1>
+  <p class="sub" data-i="sub">L'histoire d'une succession, d'un silence,<br>et de questions restées sans réponse.</p>
+  <p class="lead-q" data-i="leadq">« Comment une succession peut-elle être déclarée <em>vide</em>, quand les comptes, eux, parlent ? »</p>
+  <div class="listen-hero">
+    <button class="btn" id="heroPlay">
+      <span class="play-ic"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      <span data-i="listenStory">Écouter l'histoire</span>
+    </button>
+    <a class="btn" href="#ch1" data-i="readStory">Lire l'histoire</a>
+  </div>
+  <div class="scroll-cue"><span data-i="scroll">Faites défiler</span><span class="line"></span></div>
+</header>
+
+<!-- ===================== STORY ===================== -->
+<main class="story" id="story"><!-- chapters injected by JS --></main>
+
+<!-- ===================== TIMELINE ===================== -->
+<section class="timeline-sec">
+  <div class="inner">
+    <h2 data-i="tlTitle">La chronologie</h2>
+    <div class="tl" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta">
+  <h2 data-i="ctaTitle">Le silence est leur meilleure arme.</h2>
+  <p data-i="ctaText">Partagez cette histoire. Que la justice — française, marocaine et algérienne — réponde aux questions qu'un fils a le droit de poser.</p>
+  <div class="share">
+    <button class="btn" id="shareBtn" data-i="share">Partager</button>
+    <a class="btn" id="waShare" target="_blank" rel="noopener" data-i="whatsapp">WhatsApp</a>
+    <a class="btn" id="fbShare" target="_blank" rel="noopener" data-i="facebook">Facebook</a>
+    <a class="btn" id="xShare" target="_blank" rel="noopener">X / Twitter</a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="legal" data-i="disclaimer">
+    <strong>Présomption d'innocence.</strong> Ce site ne désigne aucune personne nommément et n'affirme la culpabilité de personne. Il rapporte des faits issus de pièces officielles et pose des questions d'intérêt public. Toute personne évoquée est présumée innocente tant qu'elle n'a pas été définitivement jugée.
+  </div>
+  <div data-i="footNote">© <span id="year"></span> — Récit citoyen à visée d'intérêt public.</div>
+</footer>
+
+<script>
+/* =========================================================
+   CONTENU BILINGUE  (FR / AR)
+   Rôles anonymisés. Ton factuel + interrogatif.
+   ========================================================= */
+const I18N = {
+  fr:{
+    dir:"ltr", code:"fr-FR",
+    brand:"Vérité & Justice",
+    listenAll:"Écouter", listenStory:"Écouter l'histoire", readStory:"Lire l'histoire",
+    eyebrow:"Un dossier. Des faits. Des questions.",
+    title:"Vérité & Justice",
+    sub:"L'histoire d'une succession, d'un silence,<br>et de questions restées sans réponse.",
+    leadq:"« Comment une succession peut-elle être déclarée <em>vide</em>, quand les comptes, eux, parlent ? »",
+    scroll:"Faites défiler",
+    tlTitle:"La chronologie",
+    ctaTitle:"Le silence est leur meilleure arme.",
+    ctaText:"Partagez cette histoire. Que la justice — française, marocaine et algérienne — réponde aux questions qu'un fils a le droit de poser.",
+    share:"Partager", whatsapp:"WhatsApp", facebook:"Facebook",
+    chListen:"Écouter ce chapitre", chStop:"Arrêter",
+    disclaimer:"<strong>Présomption d'innocence.</strong> Ce site ne désigne aucune personne nommément et n'affirme la culpabilité de personne. Il rapporte des faits issus de pièces officielles et pose des questions d'intérêt public. Toute personne évoquée est présumée innocente tant qu'elle n'a pas été définitivement jugée.",
+    footNote:'© <span id="year2"></span> — Récit citoyen à visée d\'intérêt public.',
+    docTag:"Pièce du dossier",
+    docPlaceholder:"Déposez ici le document caviardé",
+    docCaptions:{
+      "docs/police-2021.jpg":"Rapport d'enquête de la police de Neuilly-sur-Seine — 10 septembre 2021",
+      "docs/classement-2021.jpg":"Décision de classement sans suite — septembre 2021",
+      "docs/ordonnance-2026.jpg":"Ordonnance d'instruction criminelle — qualifications retenues",
+      "docs/acte-notoriete-2026.jpg":"Projet d'acte de notoriété déclarant la succession « vide » — non daté",
+      "docs/releve-vente-300k.jpg":"Relevé — produit de la vente du bien immobilier (≈ 300 000 €)",
+      "docs/rapport-mission-220k.jpg":"Rapport de mission déposé au tribunal — fonds transférés à l'administration (≈ 220 000 €)",
+      "docs/releve-compte-129k.jpg":"Relevé — compte mentionné dans le rapport (≈ 129 000 €)",
+      "docs/gendarmerie-maroc.jpg":"Élément relevé par la gendarmerie royale — biens situés au Maroc"
+    },
+    chapters:[
+      {date:"Février 2017", title:"L'origine du drame",
+        html:`<p>Un homme, père de huit enfants, <strong>binational franco-algérien</strong>, décède. La famille croit d'abord à une mort ordinaire.</p>
+              <p>Mais selon les conclusions d'un <strong>rapport d'enquête de la police de Neuilly-sur-Seine</strong>, daté du 10 septembre 2021, la thèse retenue serait celle d'un <strong>assassinat</strong>.</p>
+              <div class="pull">Si une enquête officielle documente un crime, pourquoi le dossier n'a-t-il pas immédiatement suivi son cours ?</div>`,
+        speak:"L'origine du drame. Un homme, père de huit enfants, binational franco-algérien, décède. La famille croit d'abord à une mort ordinaire. Mais selon les conclusions d'un rapport d'enquête de la police de Neuilly-sur-Seine, daté du 10 septembre 2021, la thèse retenue serait celle d'un assassinat. Si une enquête officielle documente un crime, pourquoi le dossier n'a-t-il pas immédiatement suivi son cours ?"},
+      {date:"Septembre 2021", title:"Le premier silence",
+        html:`<p>Quelques jours après les conclusions de l'enquête, l'affaire est <strong>classée sans suite</strong>.</p>
+              <p>Un classement n'est pas un acquittement : c'est une décision administrative de <strong>ne pas poursuivre</strong>. L'enquête, elle, avait pourtant réuni des éléments.</p>
+              <div class="pull">Comment un dossier que la police elle-même avait étayé peut-il être refermé aussi vite ?</div>`,
+        speak:"Le premier silence. Quelques jours après les conclusions de l'enquête, l'affaire est classée sans suite. Un classement n'est pas un acquittement : c'est une décision administrative de ne pas poursuivre. L'enquête, elle, avait pourtant réuni des éléments. Comment un dossier que la police elle-même avait étayé peut-il être refermé aussi vite ?"},
+      {date:"2022", title:"Les gardiens de l'héritage",
+        html:`<p>Une <strong>mandataire judiciaire</strong> est désignée pour administrer la succession, aux côtés d'une <strong>étude notariale</strong>.</p>
+              <p>À partir de là, le patrimoine est géré loin du regard de l'un des héritiers. Un appartement est vendu. Des fonds circulent.</p>
+              <div class="pull">Qui a proposé le nom de cette administratrice, et selon quels critères ?</div>`,
+        speak:"Les gardiens de l'héritage. Une mandataire judiciaire est désignée pour administrer la succession, aux côtés d'une étude notariale. À partir de là, le patrimoine est géré loin du regard de l'un des héritiers. Un appartement est vendu. Des fonds circulent. Qui a proposé le nom de cette administratrice, et selon quels critères ?"},
+      {date:"2025 — 2026", title:"Le réveil",
+        html:`<p>L'un des héritiers refuse le silence. En contournant le classement, il obtient l'<strong>ouverture d'une instruction criminelle</strong> confiée à un juge.</p>
+              <p>L'ordonnance retient les qualifications les plus graves — <strong>assassinat, préméditation</strong> — et vise un texte qui frappe spécifiquement les <strong>personnes chargées d'une mission de service public</strong>.</p>
+              <div class="pull">Pourquoi ce texte sur les agents publics, inscrit dès le départ, par le juge lui-même ?</div>`,
+        speak:"Le réveil. L'un des héritiers refuse le silence. En contournant le classement, il obtient l'ouverture d'une instruction criminelle confiée à un juge. L'ordonnance retient les qualifications les plus graves, assassinat, préméditation, et vise un texte qui frappe spécifiquement les personnes chargées d'une mission de service public. Pourquoi ce texte sur les agents publics, inscrit dès le départ, par le juge lui-même ?"},
+      {date:"Juin 2026", title:"La succession « vide »",
+        html:`<p>Quelques jours seulement après le dépôt d'une plainte visant la gestion de l'héritage, un <strong>projet d'acte officiel</strong> est adressé à l'héritier.</p>
+              <p>On y lirait qu'il n'existe <strong>« aucun bien »</strong> dans la succession. Pourtant, un rapport déposé devant le tribunal mentionne, lui, des mouvements de fonds bien réels.</p>
+              <div class="pull">Comment ces deux documents, signés par les mêmes mains, peuvent-ils coexister ?</div>`,
+        speak:"La succession vide. Quelques jours seulement après le dépôt d'une plainte visant la gestion de l'héritage, un projet d'acte officiel est adressé à l'héritier. On y lirait qu'il n'existe aucun bien dans la succession. Pourtant, un rapport déposé devant le tribunal mentionne, lui, des mouvements de fonds bien réels. Comment ces deux documents, signés par les mêmes mains, peuvent-ils coexister ?"},
+      {date:"Les pièces", title:"Les chiffres qui parlent", ledger:true,
+        html:`<p>D'un côté, les <strong>documents officiels</strong> du dossier. De l'autre, un acte qui affirme qu'il n'y a <strong>rien</strong>. Entre les deux, un écart de plusieurs centaines de milliers d'euros.</p>
+              <div class="pull">Les chiffres ne se contredisent pas. Ils sont écrits, noir sur blanc, dans les pièces versées à la justice.</div>`,
+        speak:"Les chiffres qui parlent. D'un côté, les documents officiels du dossier. De l'autre, un acte qui affirme qu'il n'y a rien. Entre les deux, un écart de plusieurs centaines de milliers d'euros. Les chiffres ne se contredisent pas. Ils sont écrits, noir sur blanc, dans les pièces versées à la justice."},
+      {date:"Le volet international", title:"Les biens du Maroc",
+        html:`<p>L'héritage ne s'arrête pas aux frontières françaises. Une partie du patrimoine du défunt se trouverait aussi <strong>au Maroc</strong>.</p>
+              <p>Là-bas également, des éléments auraient été relevés par la <strong>gendarmerie royale</strong>. Pourtant, l'acte qui déclare la succession « vide » n'en dit pas un mot.</p>
+              <p>La France et le Maroc sont liés par des <strong>conventions d'entraide judiciaire</strong> : un juge français peut demander aux autorités marocaines de <strong>localiser et geler</strong> ces biens.</p>
+              <div class="pull">Si un patrimoine existe de l'autre côté de la Méditerranée, pourquoi l'acte officiel le passe-t-il sous silence ?</div>`,
+        speak:"Les biens du Maroc. L'héritage ne s'arrête pas aux frontières françaises. Une partie du patrimoine du défunt se trouverait aussi au Maroc. Là-bas également, des éléments auraient été relevés par la gendarmerie royale. Pourtant, l'acte qui déclare la succession vide n'en dit pas un mot. La France et le Maroc sont liés par des conventions d'entraide judiciaire : un juge français peut demander aux autorités marocaines de localiser et geler ces biens. Si un patrimoine existe de l'autre côté de la Méditerranée, pourquoi l'acte officiel le passe-t-il sous silence ?"},
+      {date:"Aujourd'hui", title:"Les questions que nous posons",
+        html:`<p>Nous n'accusons personne. La présomption d'innocence appartient à tous. Mais nous demandons une seule chose : <strong>que la lumière soit faite</strong>.</p>
+              <p>Un citoyen franco-algérien a le droit de savoir <strong>comment est mort son père</strong>, et <strong>où est passé son héritage</strong>. Que les justices de France, du Maroc et d'Algérie se parlent, et répondent.</p>
+              <div class="pull">Pourquoi un dossier d'assassinat documenté avance-t-il si lentement ? Pourquoi déclarer vide ce que les comptes disent plein ?</div>`,
+        speak:"Les questions que nous posons. Nous n'accusons personne. La présomption d'innocence appartient à tous. Mais nous demandons une seule chose : que la lumière soit faite. Un citoyen franco-algérien a le droit de savoir comment est mort son père, et où est passé son héritage. Que les justices de France, du Maroc et d'Algérie se parlent, et répondent. Pourquoi un dossier d'assassinat documenté avance-t-il si lentement ? Pourquoi déclarer vide ce que les comptes disent plein ?"}
+    ],
+    ledger:[
+      {k:"Vente d'un bien immobilier (selon les pièces)", v:"≈ 300 000 €", contra:false},
+      {k:"Fonds transférés à l'administration", v:"≈ 220 000 €", contra:false},
+      {k:"Compte mentionné dans un rapport", v:"≈ 129 000 €", contra:false},
+      {k:"Ce que déclare l'acte officiel", v:"« aucun bien »", contra:true}
+    ],
+    timeline:[
+      {d:"Fév. 2017", t:"Décès du père, binational franco-algérien."},
+      {d:"10 sept. 2021", t:"Rapport d'enquête de la police de Neuilly : thèse de l'assassinat étayée."},
+      {d:"Sept. 2021", t:"Classement sans suite de l'affaire."},
+      {d:"2022", t:"Désignation d'une mandataire judiciaire pour la succession."},
+      {d:"27 mai 2026", t:"Une pièce-clé est versée à l'instruction criminelle."},
+      {d:"1ᵉʳ juin 2026", t:"Dépôt d'une plainte visant la gestion de l'héritage."},
+      {d:"4–5 juin 2026", t:"Réception d'un projet d'acte déclarant la succession « vide » — non daté."},
+      {d:"Volet Maroc", t:"Des biens situés au Maroc et des éléments relevés par la gendarmerie royale ressortent — absents de l'acte « vide »."}
+    ]
+  },
+
+  ar:{
+    dir:"rtl", code:"ar-SA",
+    brand:"الحقيقة والعدالة",
+    listenAll:"استماع", listenStory:"استمع إلى القصة", readStory:"اقرأ القصة",
+    eyebrow:"ملف. وقائع. أسئلة.",
+    title:"الحقيقة والعدالة",
+    sub:"قصة تركة، وصمت،<br>وأسئلة بقيت بلا جواب.",
+    leadq:"«كيف يمكن أن تُعلَن تركة <em>فارغة</em>، بينما الحسابات المصرفية تنطق بعكس ذلك؟»",
+    scroll:"مرّر للأسفل",
+    tlTitle:"التسلسل الزمني",
+    ctaTitle:"الصمت هو سلاحهم الأقوى.",
+    ctaText:"شارك هذه القصة. فلتجِب العدالة — الفرنسية والمغربية والجزائرية — عن أسئلة يحقّ لابنٍ أن يطرحها.",
+    share:"مشاركة", whatsapp:"واتساب", facebook:"فيسبوك",
+    chListen:"استمع إلى هذا الفصل", chStop:"إيقاف",
+    disclaimer:"<strong>قرينة البراءة.</strong> لا يذكر هذا الموقع أي شخص بالاسم ولا يؤكّد إدانة أحد. إنه ينقل وقائع مستمدّة من وثائق رسمية ويطرح أسئلة ذات مصلحة عامة. كل شخص يُشار إليه بريء حتى تثبت إدانته بحكم نهائي.",
+    footNote:'© <span id="year2"></span> — سرد مواطن ذو مصلحة عامة.',
+    docTag:"وثيقة من الملف",
+    docPlaceholder:"ضع هنا الوثيقة بعد حجب المعلومات الحساسة",
+    docCaptions:{
+      "docs/police-2021.jpg":"تقرير تحقيق شرطة نويي-سور-سين — 10 سبتمبر 2021",
+      "docs/classement-2021.jpg":"قرار الحفظ دون متابعة — سبتمبر 2021",
+      "docs/ordonnance-2026.jpg":"أمر بفتح تحقيق جنائي — التوصيفات المعتمدة",
+      "docs/acte-notoriete-2026.jpg":"مشروع عقد إشهاد يُعلن التركة «فارغة» — دون تاريخ",
+      "docs/releve-vente-300k.jpg":"كشف — حصيلة بيع العقار (≈ 300 000 €)",
+      "docs/rapport-mission-220k.jpg":"تقرير مهمة مودَع لدى المحكمة — أموال حُوّلت إلى الإدارة (≈ 220 000 €)",
+      "docs/releve-compte-129k.jpg":"كشف — حساب مذكور في التقرير (≈ 129 000 €)",
+      "docs/gendarmerie-maroc.jpg":"عنصر رصده الدرك الملكي — أملاك موجودة في المغرب"
+    },
+    chapters:[
+      {date:"فبراير 2017", title:"أصل المأساة",
+        html:`<p>رجل، أبٌ لثمانية أبناء، <strong>يحمل الجنسيتين الفرنسية والجزائرية</strong>، يتوفّى. تظنّ العائلة في البداية أنها وفاة عادية.</p>
+              <p>لكن وفق استنتاجات <strong>تقرير تحقيق لشرطة نويي-سور-سين</strong>، المؤرّخ في 10 سبتمبر 2021، فإن الفرضية المعتمدة هي <strong>الاغتيال</strong>.</p>
+              <div class="pull">إذا وثّق تحقيق رسمي وقوع جريمة، فلماذا لم يأخذ الملف مجراه على الفور؟</div>`,
+        speak:"أصل المأساة. رجل، أبٌ لثمانية أبناء، يحمل الجنسيتين الفرنسية والجزائرية، يتوفّى. تظنّ العائلة في البداية أنها وفاة عادية. لكن وفق استنتاجات تقرير تحقيق لشرطة نويي سور سين، المؤرّخ في عاشر سبتمبر 2021، فإن الفرضية المعتمدة هي الاغتيال. إذا وثّق تحقيق رسمي وقوع جريمة، فلماذا لم يأخذ الملف مجراه على الفور؟"},
+      {date:"سبتمبر 2021", title:"الصمت الأول",
+        html:`<p>بعد أيام قليلة من نتائج التحقيق، يُحفظ الملف <strong>دون متابعة</strong>.</p>
+              <p>الحفظ ليس تبرئة: إنه قرار إداري <strong>بعدم المتابعة</strong>. ومع ذلك فقد جمع التحقيق عناصر دامغة.</p>
+              <div class="pull">كيف يُغلَق بهذه السرعة ملفٌ أسّسته الشرطة نفسها بأدلّتها؟</div>`,
+        speak:"الصمت الأول. بعد أيام قليلة من نتائج التحقيق، يُحفظ الملف دون متابعة. الحفظ ليس تبرئة: إنه قرار إداري بعدم المتابعة. ومع ذلك فقد جمع التحقيق عناصر دامغة. كيف يُغلَق بهذه السرعة ملفٌ أسّسته الشرطة نفسها بأدلّتها؟"},
+      {date:"2022", title:"حُرّاس التركة",
+        html:`<p>تُعيَّن <strong>وكيلة قضائية</strong> لإدارة التركة، إلى جانب <strong>مكتب توثيق</strong>.</p>
+              <p>منذ تلك اللحظة، تُدار الأملاك بعيدًا عن أعين أحد الورثة. تُباع شقة. وتتحرّك أموال.</p>
+              <div class="pull">من اقترح اسم هذه الوكيلة، وبأي معايير؟</div>`,
+        speak:"حُرّاس التركة. تُعيَّن وكيلة قضائية لإدارة التركة، إلى جانب مكتب توثيق. منذ تلك اللحظة، تُدار الأملاك بعيدًا عن أعين أحد الورثة. تُباع شقة. وتتحرّك أموال. من اقترح اسم هذه الوكيلة، وبأي معايير؟"},
+      {date:"2025 — 2026", title:"اليقظة",
+        html:`<p>أحد الورثة يرفض الصمت. وبتجاوز قرار الحفظ، ينجح في <strong>فتح تحقيق جنائي</strong> يُعهَد به إلى قاضٍ.</p>
+              <p>يعتمد الأمر القضائي أخطر التوصيفات — <strong>الاغتيال مع سبق الإصرار</strong> — ويستند إلى نصٍّ يستهدف تحديدًا <strong>المكلّفين بمهمة مرفق عام</strong>.</p>
+              <div class="pull">لماذا أُدرِج هذا النص الخاص بأعوان الدولة منذ البداية، وبقلم القاضي نفسه؟</div>`,
+        speak:"اليقظة. أحد الورثة يرفض الصمت. وبتجاوز قرار الحفظ، ينجح في فتح تحقيق جنائي يُعهَد به إلى قاضٍ. يعتمد الأمر القضائي أخطر التوصيفات، الاغتيال مع سبق الإصرار، ويستند إلى نصٍّ يستهدف تحديدًا المكلّفين بمهمة مرفق عام. لماذا أُدرِج هذا النص الخاص بأعوان الدولة منذ البداية، وبقلم القاضي نفسه؟"},
+      {date:"يونيو 2026", title:"التركة «الفارغة»",
+        html:`<p>بعد أيام قليلة فقط من إيداع شكوى تستهدف إدارة التركة، يُرسَل <strong>مشروع عقد رسمي</strong> إلى الوارث.</p>
+              <p>يُذكر فيه أنه <strong>«لا توجد أي أملاك»</strong> في التركة. غير أن تقريرًا مودَعًا لدى المحكمة يذكر، هو، حركات مالية حقيقية.</p>
+              <div class="pull">كيف يمكن لهاتين الوثيقتين، الموقّعتين من الأيدي نفسها، أن تتعايشا؟</div>`,
+        speak:"التركة الفارغة. بعد أيام قليلة فقط من إيداع شكوى تستهدف إدارة التركة، يُرسَل مشروع عقد رسمي إلى الوارث. يُذكر فيه أنه لا توجد أي أملاك في التركة. غير أن تقريرًا مودَعًا لدى المحكمة يذكر هو حركات مالية حقيقية. كيف يمكن لهاتين الوثيقتين، الموقّعتين من الأيدي نفسها، أن تتعايشا؟"},
+      {date:"الوثائق", title:"الأرقام التي تتكلّم", ledger:true,
+        html:`<p>من جهة، <strong>الوثائق الرسمية</strong> للملف. ومن جهة أخرى، عقدٌ يؤكّد أنه <strong>لا شيء</strong>. وبينهما فارق يبلغ مئات آلاف اليوروهات.</p>
+              <div class="pull">الأرقام لا تتناقض. إنها مكتوبة، بالأبيض والأسود، في الوثائق المقدّمة للعدالة.</div>`,
+        speak:"الأرقام التي تتكلّم. من جهة، الوثائق الرسمية للملف. ومن جهة أخرى، عقدٌ يؤكّد أنه لا شيء. وبينهما فارق يبلغ مئات آلاف اليوروهات. الأرقام لا تتناقض. إنها مكتوبة، بالأبيض والأسود، في الوثائق المقدّمة للعدالة."},
+      {date:"البُعد الدولي", title:"أملاك المغرب",
+        html:`<p>التركة لا تتوقّف عند الحدود الفرنسية. فجزء من أملاك المتوفّى يوجد، فيما يبدو، <strong>في المغرب</strong> أيضًا.</p>
+              <p>وهناك كذلك، يُقال إن <strong>الدرك الملكي</strong> رصد عناصر معيّنة. ومع ذلك، فإن العقد الذي يُعلن التركة «فارغة» لا يذكر عنها كلمة واحدة.</p>
+              <p>وترتبط فرنسا والمغرب <strong>باتفاقيات للتعاون القضائي</strong>: يمكن لقاضٍ فرنسي أن يطلب من السلطات المغربية <strong>تحديد هذه الأملاك وتجميدها</strong>.</p>
+              <div class="pull">إذا كانت هناك أملاك على الضفة الأخرى من المتوسّط، فلماذا يتجاهلها العقد الرسمي تمامًا؟</div>`,
+        speak:"أملاك المغرب. التركة لا تتوقّف عند الحدود الفرنسية. فجزء من أملاك المتوفّى يوجد، فيما يبدو، في المغرب أيضًا. وهناك كذلك، يُقال إن الدرك الملكي رصد عناصر معيّنة. ومع ذلك، فإن العقد الذي يُعلن التركة فارغة لا يذكر عنها كلمة واحدة. وترتبط فرنسا والمغرب باتفاقيات للتعاون القضائي: يمكن لقاضٍ فرنسي أن يطلب من السلطات المغربية تحديد هذه الأملاك وتجميدها. إذا كانت هناك أملاك على الضفة الأخرى من المتوسّط، فلماذا يتجاهلها العقد الرسمي تمامًا؟"},
+      {date:"اليوم", title:"الأسئلة التي نطرحها",
+        html:`<p>نحن لا نتّهم أحدًا. قرينة البراءة حقٌّ للجميع. لكننا نطلب أمرًا واحدًا: <strong>أن تُكشف الحقيقة</strong>.</p>
+              <p>من حقّ مواطن فرنسي-جزائري أن يعرف <strong>كيف مات والده</strong>، و<strong>أين ذهبت تركته</strong>. فلتتحاور عدالات فرنسا والمغرب والجزائر، ولتُجِب.</p>
+              <div class="pull">لماذا يتقدّم ملف اغتيال موثَّق ببطء شديد؟ ولماذا تُعلَن فارغةً تركةٌ تقول الحسابات إنها مليئة؟</div>`,
+        speak:"الأسئلة التي نطرحها. نحن لا نتّهم أحدًا. قرينة البراءة حقٌّ للجميع. لكننا نطلب أمرًا واحدًا: أن تُكشف الحقيقة. من حقّ مواطن فرنسي جزائري أن يعرف كيف مات والده، وأين ذهبت تركته. فلتتحاور عدالات فرنسا والمغرب والجزائر، ولتُجِب. لماذا يتقدّم ملف اغتيال موثَّق ببطء شديد؟ ولماذا تُعلَن فارغةً تركةٌ تقول الحسابات إنها مليئة؟"}
+    ],
+    ledger:[
+      {k:"بيع عقار (وفق الوثائق)", v:"≈ 300 000 €", contra:false},
+      {k:"أموال حُوّلت إلى الإدارة", v:"≈ 220 000 €", contra:false},
+      {k:"حساب مذكور في تقرير", v:"≈ 129 000 €", contra:false},
+      {k:"ما يُعلنه العقد الرسمي", v:"«لا أملاك»", contra:true}
+    ],
+    timeline:[
+      {d:"فبراير 2017", t:"وفاة الأب، حامل الجنسيتين الفرنسية والجزائرية."},
+      {d:"10 سبتمبر 2021", t:"تقرير شرطة نويي: فرضية الاغتيال مدعومة بالأدلة."},
+      {d:"سبتمبر 2021", t:"حفظ الملف دون متابعة."},
+      {d:"2022", t:"تعيين وكيلة قضائية للتركة."},
+      {d:"27 مايو 2026", t:"إيداع وثيقة مفصلية ضمن التحقيق الجنائي."},
+      {d:"1 يونيو 2026", t:"إيداع شكوى تستهدف إدارة التركة."},
+      {d:"4–5 يونيو 2026", t:"استلام مشروع عقد يُعلن التركة «فارغة» — دون تاريخ."},
+      {d:"الملف المغربي", t:"ظهور أملاك في المغرب وعناصر رصدها الدرك الملكي — غائبة عن العقد «الفارغ»."}
+    ]
+  }
+};
+
+/* =========================================================
+   RENDU + LOGIQUE
+   ========================================================= */
+let LANG = "fr";
+const $ = s=>document.querySelector(s);
+const $$ = s=>[...document.querySelectorAll(s)];
+
+function render(){
+  const d = I18N[LANG];
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = d.dir;
+  document.body.dir = d.dir;
+  document.body.lang = LANG;
+
+  // static i18n strings
+  $$("[data-i]").forEach(el=>{
+    const k = el.getAttribute("data-i");
+    if(d[k]!==undefined) el.innerHTML = d[k];
+  });
+  // lang buttons
+  $$(".lang-switch button").forEach(b=>b.classList.toggle("active", b.dataset.lang===LANG));
+
+  // chapters
+  const story = $("#story");
+  story.innerHTML = "";
+  d.chapters.forEach((c,i)=>{
+    const sec = document.createElement("section");
+    sec.className = "chapter";
+    sec.id = "ch"+(i+1);
+    let ledgerHtml = "";
+    if(c.ledger){
+      ledgerHtml = `<div class="ledger">` + d.ledger.map(l=>
+        `<div class="cell ${l.contra?'contra':''}"><div class="k">${l.k}</div><div class="v">${l.v}</div></div>`
+      ).join("") + `</div>`;
+    }
+    // documents par chapitre (placeholders – dépose les fichiers caviardés dans /docs)
+    // Chaque chapitre peut avoir PLUSIEURS documents.
+    let figHtml = "";
+    const docMap = {
+      1:["docs/police-2021.jpg"],
+      2:["docs/classement-2021.jpg"],
+      4:["docs/ordonnance-2026.jpg"],
+      5:["docs/acte-notoriete-2026.jpg"],
+      6:["docs/releve-vente-300k.jpg","docs/rapport-mission-220k.jpg","docs/releve-compte-129k.jpg"],
+      7:["docs/gendarmerie-maroc.jpg"]
+    };
+    if(docMap[i+1]){
+      figHtml = docMap[i+1].map(src=>{
+        const cap = (d.docCaptions && d.docCaptions[src]) ? d.docCaptions[src] : (c.date+" — "+c.title);
+        return `
+      <figure class="doc">
+        <div class="frame">
+          <img src="${src}" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;doc-placeholder&quot;><svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;><path d=&quot;M7 3h7l5 5v13H7z&quot;/><path d=&quot;M14 3v5h5&quot;/></svg><span>${d.docPlaceholder}</span></div>'">
+          <!-- exemple de caviardage cosmétique : <div class="redact" style="top:20%;left:12%;width:40%;height:6%"></div> -->
+        </div>
+        <figcaption><span class="tag">${d.docTag}</span><br>${cap}</figcaption>
+      </figure>`;
+      }).join("");
+    }
+    sec.innerHTML = `
+      <div class="ch-head">
+        <div class="ch-num">${String(i+1).padStart(2,"0")}</div>
+        <div>
+          <div class="ch-date">${c.date}</div>
+          <h2 class="ch-title">${c.title}</h2>
+        </div>
+      </div>
+      ${c.html}
+      ${ledgerHtml}
+      ${figHtml}
+      <div class="ch-listen">
+        <button class="btn ch-play" data-idx="${i}">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span>${d.chListen}</span>
+        </button>
+      </div>`;
+    story.appendChild(sec);
+  });
+
+  // timeline
+  const tl = $("#timeline");
+  tl.innerHTML = d.timeline.map(t=>`<div class="tl-item"><div class="tl-date">${t.d}</div><div class="tl-text">${t.t}</div></div>`).join("");
+
+  // share links
+  buildShare();
+  // re-arm observers + audio buttons
+  armReveal();
+  armChapterAudio();
+  const y=$("#year"); if(y) y.textContent=new Date().getFullYear();
+  const y2=$("#year2"); if(y2) y2.textContent=new Date().getFullYear();
+}
+
+/* ---------- scroll reveal ---------- */
+let io;
+function armReveal(){
+  if(io) io.disconnect();
+  io = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); } });
+  },{threshold:.12});
+  $$(".chapter").forEach(c=>io.observe(c));
+}
+
+/* ============================================================
+   AUDIO
+   Deux modes :
+   (A) FICHIERS MP3 enregistrés (qualité humaine, recommandé pour
+       l'arabe). Dépose-les dans docs/audio/ et renseigne AUDIO
+       ci-dessous. S'ils existent, ils sont utilisés en priorité.
+   (B) Sinon, SYNTHÈSE VOCALE du navigateur (Web Speech API).
+       Dépend des voix installées sur l'appareil ; l'arabe est
+       souvent absent → la lecture peut rester muette.
+   ============================================================ */
+const AUDIO = {
+  // Exemple : "docs/audio/fr-1.mp3". Laisse null si pas de fichier.
+  fr:{ chapters:[null,null,null,null,null,null,null,null], full:null },
+  ar:{ chapters:[null,null,null,null,null,null,null,null], full:null }
+};
+
+const synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+let speakingBtn = null, isPlayingAll = false, keepAlive = null;
+let audioEl = null; // élément <audio> pour les MP3
+const warnedNoVoice = {fr:false, ar:false};
+
+/* ---- voix : chargement asynchrone fiable ---- */
+function ensureVoices(){
+  return new Promise(res=>{
+    if(!synth) return res([]);
+    let v = synth.getVoices();
+    if(v && v.length) return res(v);
+    let done=false;
+    const t=setTimeout(()=>{ if(!done){done=true; res(synth.getVoices()||[]);} },1500);
+    synth.onvoiceschanged = ()=>{ if(!done){done=true; clearTimeout(t); res(synth.getVoices()||[]);} };
+  });
+}
+function pickVoice(code, voices){
+  const c=code.toLowerCase(), base=c.split("-")[0];
+  return voices.find(v=>(v.lang||"").toLowerCase()===c)
+      || voices.find(v=>(v.lang||"").toLowerCase().replace("_","-").startsWith(base))
+      || voices.find(v=>(v.lang||"").toLowerCase().includes(base)) || null;
+}
+/* ---- découpe en phrases (fiabilité, surtout en arabe) ---- */
+function splitChunks(text){
+  const raw = text.split(/(?<=[.؟!?،])\s+/);
+  const out=[]; let buf="";
+  raw.forEach(s=>{
+    if(!s.trim()) return;
+    if((buf+" "+s).trim().length>170){ if(buf)out.push(buf.trim()); buf=s; }
+    else buf=(buf?buf+" ":"")+s;
+  });
+  if(buf.trim()) out.push(buf.trim());
+  return out.length?out:[text];
+}
+/* ---- contournement bug Chrome (la synthèse s'arrête après ~15s) ---- */
+function startKeepAlive(){ stopKeepAlive(); keepAlive=setInterval(()=>{ if(synth&&synth.speaking){ synth.pause(); synth.resume(); } },9000); }
+function stopKeepAlive(){ if(keepAlive){ clearInterval(keepAlive); keepAlive=null; } }
+
+async function speakText(text, onend){
+  if(!synth){ alert("La lecture vocale n'est pas supportée par ce navigateur."); onend&&onend(); return; }
+  const d=I18N[LANG];
+  const voices=await ensureVoices();
+  const voice=pickVoice(d.code, voices);
+  if(LANG==="ar" && !voice && !warnedNoVoice.ar){
+    warnedNoVoice.ar=true;
+    alert("⚠️ Aucune voix arabe n'est installée sur cet appareil, la lecture arabe restera muette.\n\nSolutions :\n• Sur Android/iPhone : installe une voix arabe (Réglages › Accessibilité › Voix / Synthèse vocale).\n• Sur Windows : Paramètres › Heure et langue › Voix › Ajouter une voix (arabe).\n• Le mieux pour une vraie voix humaine : utiliser des enregistrements MP3 (voir README).");
+  }
+  const chunks=splitChunks(text);
+  let i=0;
+  const next=()=>{
+    if(i>=chunks.length){ onend&&onend(); return; }
+    const u=new SpeechSynthesisUtterance(chunks[i++]);
+    u.lang=d.code; if(voice)u.voice=voice;
+    u.rate = LANG==="ar"?0.9:1.0; u.pitch=1;
+    u.onend=next; u.onerror=next;
+    synth.speak(u);
+  };
+  if(synth.paused) synth.resume();
+  startKeepAlive();
+  next();
+}
+
+/* ---- lecture d'un fichier MP3 ---- */
+function playFile(src, onend){
+  stopFile();
+  audioEl=new Audio(src);
+  audioEl.onended=()=>{ onend&&onend(); };
+  audioEl.onerror=()=>{ onend&&onend(); };
+  audioEl.play().catch(()=>{ onend&&onend(); });
+}
+function stopFile(){ if(audioEl){ try{audioEl.pause();}catch(e){} audioEl=null; } }
+
+function stopSpeech(){
+  if(synth) synth.cancel();
+  stopFile(); stopKeepAlive();
+  isPlayingAll=false;
+  if(speakingBtn){ resetBtn(speakingBtn); speakingBtn=null; }
+  $$(".ch-play").forEach(resetBtn);
+  setMasterState(false);
+}
+function resetBtn(btn){
+  btn.classList.remove("speaking");
+  const span=btn.querySelector("span");
+  if(span) span.textContent = I18N[LANG].chListen;
+}
+function playChapterMedia(idx, onend){
+  const file = AUDIO[LANG] && AUDIO[LANG].chapters && AUDIO[LANG].chapters[idx];
+  if(file) playFile(file, onend);
+  else speakText(I18N[LANG].chapters[idx].speak, onend);
+}
+function speakChapter(idx, btn){
+  stopSpeech();
+  speakingBtn=btn;
+  btn.classList.add("speaking");
+  const span=btn.querySelector("span"); if(span) span.textContent=I18N[LANG].chStop;
+  playChapterMedia(idx, ()=>{ resetBtn(btn); speakingBtn=null; });
+}
+function speakAll(){
+  stopSpeech();
+  isPlayingAll=true;
+  setMasterState(true);
+  // un seul gros fichier "full" si fourni
+  const full = AUDIO[LANG] && AUDIO[LANG].full;
+  if(full){ playFile(full, ()=>{ isPlayingAll=false; setMasterState(false); }); return; }
+  const n=I18N[LANG].chapters.length;
+  let idx=0;
+  const next=()=>{
+    if(!isPlayingAll || idx>=n){ isPlayingAll=false; setMasterState(false); return; }
+    playChapterMedia(idx++, next);
+  };
+  next();
+}
+function setMasterState(on){
+  [$("#masterPlay"),$("#heroPlay")].forEach(b=>{ if(b) b.classList.toggle("active",on); });
+}
+function isBusy(){ return isPlayingAll || (synth&&synth.speaking) || (audioEl&&!audioEl.paused); }
+function toggleAll(){ if(isBusy()){ stopSpeech(); } else { speakAll(); } }
+function armChapterAudio(){
+  $$(".ch-play").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      if(btn.classList.contains("speaking")){ stopSpeech(); }
+      else { speakChapter(+btn.dataset.idx, btn); }
+    });
+  });
+}
+// précharge la liste des voix au plus tôt
+if(synth){ ensureVoices(); }
+
+/* ---------- SHARE ---------- */
+function buildShare(){
+  const url = encodeURIComponent(location.href);
+  const txt = encodeURIComponent(I18N[LANG].title + " — " + (LANG==="ar"?"الحقيقة والعدالة":"Vérité & Justice"));
+  const wa=$("#waShare"), fb=$("#fbShare"), x=$("#xShare");
+  if(wa) wa.href=`https://wa.me/?text=${txt}%20${url}`;
+  if(fb) fb.href=`https://www.facebook.com/sharer/sharer.php?u=${url}`;
+  if(x)  x.href =`https://twitter.com/intent/tweet?text=${txt}&url=${url}`;
+}
+$("#shareBtn").addEventListener("click", async ()=>{
+  const data={title:I18N[LANG].title, text:I18N[LANG].sub.replace(/<[^>]+>/g," "), url:location.href};
+  if(navigator.share){ try{ await navigator.share(data); }catch(e){} }
+  else { try{ await navigator.clipboard.writeText(location.href); $("#shareBtn").textContent="✓"; }catch(e){} }
+});
+
+/* ---------- wiring ---------- */
+$$(".lang-switch button").forEach(b=>{
+  b.addEventListener("click",()=>{ stopSpeech(); LANG=b.dataset.lang; render(); });
+});
+$("#masterPlay").addEventListener("click", toggleAll);
+$("#heroPlay").addEventListener("click", toggleAll);
+window.addEventListener("beforeunload", ()=>synth.cancel());
+
+render();
+</script>
+</body>
+</html>
