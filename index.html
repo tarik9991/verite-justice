@@ -257,19 +257,21 @@ footer .legal strong{color:var(--gold-soft)}
   <div class="scroll-cue"><span data-i="scroll">Faites défiler</span><span class="line"></span></div>
 </header>
 
-<!-- ===================== VIDEO ===================== -->
+<!-- ===================== VIDEO (masquée — nouvelle vidéo à venir) =====================
+     Pour réactiver demain : dé-commenter et remplacer VIDEO_ID par le nouvel ID YouTube.
 <section class="video-sec" id="video">
   <div class="video-inner">
     <h2 data-i="videoTitle">À regarder</h2>
     <p class="video-sub" data-i="videoSub">Quelques minutes pour comprendre l'essentiel de l'affaire.</p>
     <div class="video-frame">
-      <iframe src="https://www.youtube-nocookie.com/embed/clDgkF9Og6s?rel=0"
+      <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0"
               title="Vérité & Justice" loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   </div>
 </section>
+============================================================================ -->
 
 <!-- ===================== STORY ===================== -->
 <main class="story" id="story"><!-- chapters injected by JS --></main>
@@ -329,51 +331,73 @@ const I18N = {
     docTag:"Pièce du dossier",
     docPlaceholder:"Déposez ici le document caviardé",
     docCaptions:{
-      "docs/police-2021.jpg":"Rapport d'enquête de la police de Neuilly-sur-Seine — 10 septembre 2021",
-      "docs/classement-2021.jpg":"Décision de classement sans suite — septembre 2021",
-      "docs/ordonnance-2026.jpg":"Ordonnance d'instruction criminelle — qualifications retenues",
-      "docs/acte-notoriete-2026.jpg":"Projet d'acte de notoriété déclarant la succession « vide » — non daté",
-      "docs/releve-vente-300k.jpg":"Relevé — produit de la vente du bien immobilier (≈ 300 000 €)",
-      "docs/rapport-mission-220k.jpg":"Rapport de mission déposé au tribunal — fonds transférés à l'administration (≈ 220 000 €)",
-      "docs/releve-compte-129k.jpg":"Relevé — compte mentionné dans le rapport (≈ 129 000 €)",
-      "docs/gendarmerie-maroc.jpg":"Élément relevé par la gendarmerie royale — biens situés au Maroc"
+      "docs/police-2021.jpg":"Procès-verbal de la police de Neuilly-sur-Seine — enquête sur le décès",
+      "docs/presse-essabah.jpg":"Une du journal Essabah : « Le conservateur des palais émiratis a-t-il été tué par empoisonnement ? »",
+      "docs/classement-2021.jpg":"Classement sans suite du 24 septembre 2021 — notification du tribunal, 20 octobre 2021",
+      "docs/destitution-2017.jpg":"Arrêté du 27 décembre 2017 (Journal officiel) — la notaire déclarée démissionnaire d'office, office supprimé",
+      "docs/ordonnance-2026.jpg":"Ordonnance du 13 novembre 2025 — qualification retenue : ASSASSINAT, consignation fixée",
+      "docs/acte-notoriete-2026.jpg":"Courriel du 2 juin 2026 — envoi du projet d'acte de notoriété (fichier modifiable, non daté)",
+      "docs/releve-vente-300k.jpg":"Relevé de compte de l'étude notariale — produit de la vente (≈ 300 000 €), hors Caisse des Dépôts",
+      "docs/rapport-mission-220k.jpg":"Rapport de mission déposé au tribunal — 17 décembre 2025",
+      "docs/releve-compte-129k.jpg":"Fiche de compte de la succession — les flux en euros, ligne par ligne",
+      "docs/gendarmerie-maroc.jpg":"Procès-verbal marocain n° 72/3201/2018 — meurtre prémédité avec guet-apens",
+      "docs/faux-contrat-maroc.jpg":"Expédition d'un acte de vente à Rabat (2 485 000 DH) — page 1",
+      "docs/faux-contrat-maroc-2.jpg":"Le même acte — l'emplacement de la signature du vendeur est vide",
+      "docs/releve-mandataire-200k.jpg":"Fiche de compte de la mandataire : 200 000 € reçus de l'office notarial (07/10/2025), puis CONTREPASSATION du même montant",
+      "docs/taxes-foncieres-2016.jpg":"Avis d'imposition marocain 2016 — établi au nom du défunt (Hay Riad, Rabat)",
+      "docs/taxes-foncieres-2017.jpg":"Avis d'imposition marocain 2017 — toujours au nom du défunt",
+      "docs/protestation-cambon.jpg":"Lettre ouverte au Président du Sénat (Paris, 4 juin 2018) — signée par ASDHOM, AMDH, MRAP, FEMED et d'autres organisations des droits humains"
     },
     chapters:[
-      {date:"Février 2017", title:"L'origine du drame",
-        html:`<p>Un homme, père de huit enfants, <strong>binational franco-algérien</strong>, décède. La famille croit d'abord à une mort ordinaire.</p>
-              <p>Mais selon les conclusions d'un <strong>rapport d'enquête de la police de Neuilly-sur-Seine</strong>, daté du 10 septembre 2021, la thèse retenue serait celle d'un <strong>assassinat</strong>.</p>
+      {date:"16 février 2017", title:"L'origine du drame",
+        html:`<p>Un homme, père de huit enfants, <strong>binational franco-algérien</strong>, ancien <strong>conservateur d'un palais du Golfe</strong>, meurt le <strong>16 février 2017 à Neuilly-sur-Seine</strong> (acte de décès n° 160). La famille croit d'abord à une mort ordinaire.</p>
+              <p>Mais selon les conclusions d'un <strong>rapport d'enquête de la police de Neuilly-sur-Seine</strong>, la thèse retenue serait celle d'un <strong>assassinat</strong>. La presse arabe s'interroge en une : <em>« Le conservateur des palais émiratis a-t-il été tué par empoisonnement ? »</em>. Dès 2017, une plainte déposée au Maroc demandait l'<strong>exhumation et l'autopsie</strong>.</p>
               <div class="pull">Si une enquête officielle documente un crime, pourquoi le dossier n'a-t-il pas immédiatement suivi son cours ?</div>`,
-        speak:"L'origine du drame. Un homme, père de huit enfants, binational franco-algérien, décède. La famille croit d'abord à une mort ordinaire. Mais selon les conclusions d'un rapport d'enquête de la police de Neuilly-sur-Seine, daté du 10 septembre 2021, la thèse retenue serait celle d'un assassinat. Si une enquête officielle documente un crime, pourquoi le dossier n'a-t-il pas immédiatement suivi son cours ?"},
-      {date:"Septembre 2021", title:"Le premier silence",
-        html:`<p>Quelques jours après les conclusions de l'enquête, l'affaire est <strong>classée sans suite</strong>.</p>
+        speak:"L'origine du drame. Un homme, père de huit enfants, binational franco-algérien, ancien conservateur d'un palais du Golfe, meurt le 16 février 2017 à Neuilly-sur-Seine. La famille croit d'abord à une mort ordinaire. Mais selon les conclusions d'un rapport d'enquête de la police de Neuilly-sur-Seine, la thèse retenue serait celle d'un assassinat. La presse arabe s'interroge en une : le conservateur des palais émiratis a-t-il été tué par empoisonnement ? Dès 2017, une plainte déposée au Maroc demandait l'exhumation et l'autopsie. Si une enquête officielle documente un crime, pourquoi le dossier n'a-t-il pas immédiatement suivi son cours ?"},
+      {date:"24 septembre 2021", title:"Le premier silence",
+        html:`<p>Le <strong>24 septembre 2021</strong>, l'affaire est <strong>classée sans suite</strong> par le parquet (plainte n° 20 174 000239). La notification arrive par un simple courriel du tribunal, le 20 octobre 2021.</p>
               <p>Un classement n'est pas un acquittement : c'est une décision administrative de <strong>ne pas poursuivre</strong>. L'enquête, elle, avait pourtant réuni des éléments.</p>
               <div class="pull">Comment un dossier que la police elle-même avait étayé peut-il être refermé aussi vite ?</div>`,
-        speak:"Le premier silence. Quelques jours après les conclusions de l'enquête, l'affaire est classée sans suite. Un classement n'est pas un acquittement : c'est une décision administrative de ne pas poursuivre. L'enquête, elle, avait pourtant réuni des éléments. Comment un dossier que la police elle-même avait étayé peut-il être refermé aussi vite ?"},
-      {date:"2022", title:"Les gardiens de l'héritage",
-        html:`<p>Une <strong>mandataire judiciaire</strong> est désignée pour administrer la succession, aux côtés d'une <strong>étude notariale</strong>.</p>
+        speak:"Le premier silence. Le 24 septembre 2021, l'affaire est classée sans suite par le parquet. La notification arrive par un simple courriel du tribunal, le 20 octobre 2021. Un classement n'est pas un acquittement : c'est une décision administrative de ne pas poursuivre. L'enquête, elle, avait pourtant réuni des éléments. Comment un dossier que la police elle-même avait étayé peut-il être refermé aussi vite ?"},
+      {date:"31 janvier 2022", title:"Les gardiens de l'héritage",
+        html:`<p>Le <strong>31 janvier 2022</strong>, une <strong>mandataire judiciaire</strong> est désignée par un tribunal pour administrer la succession — à l'initiative, non pas des héritiers, mais du <strong>syndic de copropriété</strong>. Le règlement de la succession est ensuite confié à une <strong>étude notariale</strong>.</p>
+              <p>Cette étude a un passé singulier : par <strong>arrêté du 27 décembre 2017</strong>, publié au Journal officiel, la notaire avait été déclarée <strong>démissionnaire d'office</strong> et son office <strong>supprimé</strong>. Elle réapparaît pourtant, quelques années plus tard, au cœur de cette succession.</p>
               <p>À partir de là, le patrimoine est géré loin du regard de l'un des héritiers. Un appartement est vendu. Des fonds circulent.</p>
-              <div class="pull">Qui a proposé le nom de cette administratrice, et selon quels critères ?</div>`,
-        speak:"Les gardiens de l'héritage. Une mandataire judiciaire est désignée pour administrer la succession, aux côtés d'une étude notariale. À partir de là, le patrimoine est géré loin du regard de l'un des héritiers. Un appartement est vendu. Des fonds circulent. Qui a proposé le nom de cette administratrice, et selon quels critères ?"},
-      {date:"2025 — 2026", title:"Le réveil",
-        html:`<p>L'un des héritiers refuse le silence. En contournant le classement, il obtient l'<strong>ouverture d'une instruction criminelle</strong> confiée à un juge.</p>
-              <p>L'ordonnance retient les qualifications les plus graves — <strong>assassinat, préméditation</strong> — et vise un texte qui frappe spécifiquement les <strong>personnes chargées d'une mission de service public</strong>.</p>
-              <div class="pull">Pourquoi ce texte sur les agents publics, inscrit dès le départ, par le juge lui-même ?</div>`,
-        speak:"Le réveil. L'un des héritiers refuse le silence. En contournant le classement, il obtient l'ouverture d'une instruction criminelle confiée à un juge. L'ordonnance retient les qualifications les plus graves, assassinat, préméditation, et vise un texte qui frappe spécifiquement les personnes chargées d'une mission de service public. Pourquoi ce texte sur les agents publics, inscrit dès le départ, par le juge lui-même ?"},
-      {date:"Juin 2026", title:"La succession « vide »",
-        html:`<p>Quelques jours seulement après le dépôt d'une plainte visant la gestion de l'héritage, un <strong>projet d'acte officiel</strong> est adressé à l'héritier.</p>
-              <p>On y lirait qu'il n'existe <strong>« aucun bien »</strong> dans la succession. Pourtant, un rapport déposé devant le tribunal mentionne, lui, des mouvements de fonds bien réels.</p>
-              <div class="pull">Comment ces deux documents, signés par les mêmes mains, peuvent-ils coexister ?</div>`,
-        speak:"La succession vide. Quelques jours seulement après le dépôt d'une plainte visant la gestion de l'héritage, un projet d'acte officiel est adressé à l'héritier. On y lirait qu'il n'existe aucun bien dans la succession. Pourtant, un rapport déposé devant le tribunal mentionne, lui, des mouvements de fonds bien réels. Comment ces deux documents, signés par les mêmes mains, peuvent-ils coexister ?"},
+              <div class="pull">Qui a choisi ces professionnelles, et selon quels critères ?</div>`,
+        speak:"Les gardiens de l'héritage. Le 31 janvier 2022, une mandataire judiciaire est désignée par un tribunal pour administrer la succession, à l'initiative non pas des héritiers, mais du syndic de copropriété. Le règlement de la succession est ensuite confié à une étude notariale. Cette étude a un passé singulier : par arrêté du 27 décembre 2017, publié au Journal officiel, la notaire avait été déclarée démissionnaire d'office et son office supprimé. Elle réapparaît pourtant, quelques années plus tard, au cœur de cette succession. À partir de là, le patrimoine est géré loin du regard de l'un des héritiers. Un appartement est vendu. Des fonds circulent. Qui a choisi ces professionnelles, et selon quels critères ?"},
+      {date:"2024 — 2026", title:"Le réveil",
+        html:`<p>L'un des héritiers refuse le silence. Le <strong>12 septembre 2024</strong>, il dépose une <strong>plainte avec constitution de partie civile</strong>. Le <strong>13 novembre 2025</strong>, le doyen des juges d'instruction rend une ordonnance : la qualification retenue est <strong>ASSASSINAT</strong>, avec <strong>préméditation</strong>, pour des faits courant de janvier 2017 à septembre 2024.</p>
+              <p>Une consignation de <strong>2 500 €</strong> est fixée, à verser avant le 9 janvier 2026. Elle est payée : <strong>l'instruction criminelle est officiellement relancée</strong> — là où le parquet avait classé.</p>
+              <div class="pull">Un juge estime qu'il y a matière à instruire pour assassinat. Qu'attend-on pour agir ?</div>`,
+        speak:"Le réveil. L'un des héritiers refuse le silence. Le 12 septembre 2024, il dépose une plainte avec constitution de partie civile. Le 13 novembre 2025, le doyen des juges d'instruction rend une ordonnance : la qualification retenue est assassinat, avec préméditation, pour des faits courant de janvier 2017 à septembre 2024. Une consignation de 2 500 euros est fixée, puis payée : l'instruction criminelle est officiellement relancée, là où le parquet avait classé. Un juge estime qu'il y a matière à instruire pour assassinat. Qu'attend-on pour agir ?"},
+      {date:"2 juin 2026", title:"La succession « vide »",
+        html:`<p>Quelques jours après le dépôt de nouvelles plaintes visant la gestion de l'héritage, un <strong>projet d'acte de notoriété</strong> est adressé aux héritiers par courriel, le <strong>2 juin 2026</strong> — un fichier <strong>Word modifiable, non daté</strong>.</p>
+              <p>On y lirait qu'il n'existe <strong>« aucun bien »</strong> dans la succession. Pourtant, le <strong>rapport de mission</strong> déposé au tribunal par la mandataire elle-même détaille des mouvements de fonds bien réels. Le <strong>3 juin 2026</strong>, l'héritier notifie son <strong>refus</strong> de signer.</p>
+              <div class="pull">Comment ces deux documents, issus des mêmes mains, peuvent-ils coexister ?</div>`,
+        speak:"La succession vide. Quelques jours après le dépôt de nouvelles plaintes visant la gestion de l'héritage, un projet d'acte de notoriété est adressé aux héritiers par courriel, le 2 juin 2026. Un fichier Word modifiable, non daté. On y lirait qu'il n'existe aucun bien dans la succession. Pourtant, le rapport de mission déposé au tribunal par la mandataire elle-même détaille des mouvements de fonds bien réels. Le 3 juin 2026, l'héritier notifie son refus de signer. Comment ces deux documents, issus des mêmes mains, peuvent-ils coexister ?"},
       {date:"Les pièces", title:"Les chiffres qui parlent", ledger:true,
-        html:`<p>D'un côté, les <strong>documents officiels</strong> du dossier. De l'autre, un acte qui affirme qu'il n'y a <strong>rien</strong>. Entre les deux, un écart de plusieurs centaines de milliers d'euros.</p>
+        html:`<p>D'un côté, les <strong>documents officiels</strong> du dossier : la vente d'un bien le <strong>1ᵉʳ août 2025</strong>, des recettes identifiées de <strong>429 425 €</strong>, un compte d'administration affichant encore <strong>212 625,10 €</strong> en mars 2026. De l'autre, un acte qui affirme qu'il n'y a <strong>rien</strong>.</p>
+              <p>Et un détail qui n'en est pas un : <strong>aucune de ces sommes n'a transité par la Caisse des Dépôts et Consignations</strong>, le circuit pourtant prévu pour protéger les fonds d'une succession litigieuse. Tout a circulé de compte privé à compte privé.</p>
+              <p>La fiche de compte de la mandataire montre même un <strong>virement de 200 000 €</strong> reçu de l'office notarial le <strong>7 octobre 2025</strong> sur son compte professionnel… suivi d'une <strong>« CONTREPASSATION »</strong> du même montant. Un aller-retour de 200 000 € entre la notaire et la mandataire, sans explication.</p>
+              <p>Faites le compte : <strong>300 000 € + 200 000 € + 129 000 € = 629 000 €</strong> sortis du circuit légal. Ce qui était réellement dû se limitait, selon les pièces, à environ <strong>24 000 €</strong> de charges de copropriété et <strong>11 000 €</strong> de taxes. Rien n'est passé par la Caisse des Dépôts. <strong>Tout a disparu.</strong></p>
               <div class="pull">Les chiffres ne se contredisent pas. Ils sont écrits, noir sur blanc, dans les pièces versées à la justice.</div>`,
-        speak:"Les chiffres qui parlent. D'un côté, les documents officiels du dossier. De l'autre, un acte qui affirme qu'il n'y a rien. Entre les deux, un écart de plusieurs centaines de milliers d'euros. Les chiffres ne se contredisent pas. Ils sont écrits, noir sur blanc, dans les pièces versées à la justice."},
+        speak:"Les chiffres qui parlent. D'un côté, les documents officiels du dossier : la vente d'un bien le premier août 2025, des recettes identifiées de 429 425 euros, un compte d'administration affichant encore 212 625 euros en mars 2026. De l'autre, un acte qui affirme qu'il n'y a rien. Et un détail qui n'en est pas un : aucune de ces sommes n'a transité par la Caisse des Dépôts et Consignations, le circuit pourtant prévu pour protéger les fonds d'une succession litigieuse. Tout a circulé de compte privé à compte privé. La fiche de compte de la mandataire montre même un virement de 200 000 euros reçu de l'office notarial le 7 octobre 2025 sur son compte professionnel, suivi d'une contrepassation du même montant. Un aller-retour de 200 000 euros entre la notaire et la mandataire, sans explication. Faites le compte : 300 000 plus 200 000 plus 129 000, soit 629 000 euros sortis du circuit légal. Ce qui était réellement dû se limitait à environ 24 000 euros de charges de copropriété et 11 000 euros de taxes. Rien n'est passé par la Caisse des Dépôts. Tout a disparu. Les chiffres ne se contredisent pas. Ils sont écrits, noir sur blanc, dans les pièces versées à la justice."},
       {date:"Le volet international", title:"Les biens du Maroc",
-        html:`<p>L'héritage ne s'arrête pas aux frontières françaises. Une partie du patrimoine du défunt se trouverait aussi <strong>au Maroc</strong>.</p>
-              <p>Là-bas également, des éléments auraient été relevés par la <strong>gendarmerie royale</strong>. Pourtant, l'acte qui déclare la succession « vide » n'en dit pas un mot.</p>
+        html:`<p>L'héritage ne s'arrête pas aux frontières françaises. Les <strong>certificats de propriété officiels</strong> de la conservation foncière marocaine attestent d'un patrimoine du défunt <strong>au Maroc</strong> — et une mutation par « vente » y est enregistrée en <strong>mars 2017</strong>, quelques semaines à peine après le décès.</p>
+              <p>Parmi les pièces : l'expédition d'un <strong>acte de vente</strong> d'un appartement à Rabat (<strong>2 485 000 dirhams</strong>) où l'emplacement de la <strong>signature du vendeur est vide</strong>. Un acte de vente que le vendeur n'a pas signé.</p>
+              <p>Deux appartements du complexe <strong>Prestigia « Ryad Al Andalous », Hay Riad, à Rabat</strong>, sont concernés — et les deux histoires se ressemblent étrangement :</p>
+              <p>Le premier — <strong>immeuble 7, appartement 5</strong> — serait passé au nom d'un <strong>député marocain</strong> qui affirme l'avoir <strong>acheté en 2011</strong>. Or <strong>l'immeuble n° 7 n'existait pas encore en 2011</strong>. Et les <strong>avis d'imposition marocains de 2016 et de 2017</strong> sont toujours établis <strong>au nom du défunt</strong>, à cette adresse exacte.</p>
+              <p>Le second serait passé au nom d'une <strong>cohéritière</strong>, sur la base d'un acte de vente daté de <strong>2013</strong> — l'acte sans signature du vendeur montré ci-dessous. Là encore, <strong>l'immeuble n'existait pas en 2013</strong> à la date supposée de la vente. Et l'acte n'est pas une vente sur plan (VEFA) : il vend un bien <strong>achevé</strong>… qui n'était pas construit.</p>
+              <p>Au Maroc, la justice ne l'entend pas autrement : un <strong>procès-verbal (n° 72/3201/2018)</strong> vise des faits de <strong>meurtre prémédité avec guet-apens</strong>, et dès 2017 une plainte demandait l'exhumation et l'autopsie. Pourtant, l'acte français qui déclare la succession « vide » ne dit pas un mot de ce patrimoine.</p>
               <p>La France et le Maroc sont liés par des <strong>conventions d'entraide judiciaire</strong> : un juge français peut demander aux autorités marocaines de <strong>localiser et geler</strong> ces biens.</p>
-              <div class="pull">Si un patrimoine existe de l'autre côté de la Méditerranée, pourquoi l'acte officiel le passe-t-il sous silence ?</div>`,
-        speak:"Les biens du Maroc. L'héritage ne s'arrête pas aux frontières françaises. Une partie du patrimoine du défunt se trouverait aussi au Maroc. Là-bas également, des éléments auraient été relevés par la gendarmerie royale. Pourtant, l'acte qui déclare la succession vide n'en dit pas un mot. La France et le Maroc sont liés par des conventions d'entraide judiciaire : un juge français peut demander aux autorités marocaines de localiser et geler ces biens. Si un patrimoine existe de l'autre côté de la Méditerranée, pourquoi l'acte officiel le passe-t-il sous silence ?"},
+              <div class="pull">Deux « ventes » datées de 2011 et 2013 pour des appartements dans un immeuble qui n'existait pas — et dont le fisc facturait encore les taxes au défunt en 2017.</div>`,
+        speak:"Les biens du Maroc. L'héritage ne s'arrête pas aux frontières françaises. Les certificats de propriété officiels de la conservation foncière marocaine attestent d'un patrimoine du défunt au Maroc, et une mutation par vente y est enregistrée en mars 2017, quelques semaines à peine après le décès. Parmi les pièces : l'expédition d'un acte de vente d'un appartement à Rabat, deux millions quatre cent quatre-vingt-cinq mille dirhams, où l'emplacement de la signature du vendeur est vide. Un acte de vente que le vendeur n'a pas signé. Deux appartements du complexe Prestigia Ryad Al Andalous, à Hay Riad, Rabat, sont concernés, et les deux histoires se ressemblent étrangement. Le premier, immeuble sept, appartement cinq, serait passé au nom d'un député marocain qui affirme l'avoir acheté en 2011. Or l'immeuble numéro sept n'existait pas encore en 2011. Et les avis d'imposition marocains de 2016 et de 2017 sont toujours établis au nom du défunt, à cette adresse exacte. Le second serait passé au nom d'une cohéritière, sur la base d'un acte de vente daté de 2013, l'acte sans signature du vendeur. Là encore, l'immeuble n'existait pas en 2013 à la date supposée de la vente. Et l'acte n'est pas une vente sur plan : il vend un bien achevé qui n'était pas construit. Au Maroc, un procès-verbal de 2018 vise des faits de meurtre prémédité avec guet-apens, et dès 2017 une plainte demandait l'exhumation et l'autopsie. Pourtant, l'acte français qui déclare la succession vide ne dit pas un mot de ce patrimoine. Deux ventes datées de 2011 et 2013 pour des appartements dans un immeuble qui n'existait pas, et dont le fisc facturait encore les taxes au défunt en 2017."},
+      {date:"Les protections", title:"Une médaille d'or pour quel mérite ?",
+        html:`<p>L'homme au nom duquel serait passé l'appartement de Hay Riad n'est pas un inconnu : <strong>Mahmoud Archane</strong>, ex-commissaire de police devenu député, désigné par une douzaine d'organisations de défense des droits humains (ASDHOM, AMDH, MRAP, FEMED…) comme <strong>« l'un des grands chefs tortionnaires du régime marocain »</strong> des années de plomb — le centre de torture de <strong>Derb Moulay Cherif</strong>, des opposants <strong>« torturés à mort sous sa direction »</strong>, selon leur lettre ouverte.</p>
+              <p>C'est pourtant à lui que le sénateur <strong>Christian Cambon</strong> — alors président de la <strong>Commission des affaires étrangères et de la défense du Sénat</strong> — a remis, le <strong>14 avril 2018 à Rabat</strong>, une <strong>médaille d'or du Sénat</strong>. Le 4 juin 2018, ces organisations ont adressé une <strong>lettre ouverte au Président du Sénat</strong> : « un élu de la République récompense un tortionnaire pour ses "loyaux services" ». Cette lettre est la pièce affichée ci-dessous.</p>
+              <p>Nous posons alors des questions que tout citoyen — français ou algérien — a le droit de poser : pourquoi la République honore-t-elle un homme que les défenseurs des droits humains désignent comme tortionnaire ? Et quand la victime d'un assassinat est un <strong>citoyen algérien</strong> dont l'héritage se retrouve, selon les pièces, au nom de ce même homme, <strong>qui protège qui</strong> ? Des amitiés politiques au sommet de l'État peuvent-elles peser sur le cours d'une instruction criminelle à Nanterre ?</p>
+              <div class="pull">Une médaille de la République à l'homme au nom duquel passe l'héritage d'un Algérien assassiné : coïncidence, ou protection ?</div>`,
+        speak:"Une médaille d'or pour quel mérite ? L'homme au nom duquel serait passé l'appartement de Hay Riad n'est pas un inconnu : Mahmoud Archane, ex-commissaire de police devenu député, désigné par une douzaine d'organisations de défense des droits humains comme l'un des grands chefs tortionnaires du régime marocain des années de plomb. Le centre de torture de Derb Moulay Cherif, des opposants torturés à mort sous sa direction, selon leur lettre ouverte. C'est pourtant à lui que le sénateur Christian Cambon, alors président de la Commission des affaires étrangères et de la défense du Sénat, a remis, le 14 avril 2018 à Rabat, une médaille d'or du Sénat. Le 4 juin 2018, ces organisations ont adressé une lettre ouverte au Président du Sénat : un élu de la République récompense un tortionnaire pour ses loyaux services. Nous posons alors des questions que tout citoyen, français ou algérien, a le droit de poser : pourquoi la République honore-t-elle un homme que les défenseurs des droits humains désignent comme tortionnaire ? Et quand la victime d'un assassinat est un citoyen algérien dont l'héritage se retrouve, selon les pièces, au nom de ce même homme, qui protège qui ? Des amitiés politiques au sommet de l'État peuvent-elles peser sur le cours d'une instruction criminelle à Nanterre ? Une médaille de la République à l'homme au nom duquel passe l'héritage d'un Algérien assassiné : coïncidence, ou protection ?"},
       {date:"Aujourd'hui", title:"Les questions que nous posons",
         html:`<p>Nous n'accusons personne. La présomption d'innocence appartient à tous. Mais nous demandons une seule chose : <strong>que la lumière soit faite</strong>.</p>
               <p>Un citoyen franco-algérien a le droit de savoir <strong>comment est mort son père</strong>, et <strong>où est passé son héritage</strong>. Que les justices de France, du Maroc et d'Algérie se parlent, et répondent.</p>
@@ -381,20 +405,30 @@ const I18N = {
         speak:"Les questions que nous posons. Nous n'accusons personne. La présomption d'innocence appartient à tous. Mais nous demandons une seule chose : que la lumière soit faite. Un citoyen franco-algérien a le droit de savoir comment est mort son père, et où est passé son héritage. Que les justices de France, du Maroc et d'Algérie se parlent, et répondent. Pourquoi un dossier d'assassinat documenté avance-t-il si lentement ? Pourquoi déclarer vide ce que les comptes disent plein ?"}
     ],
     ledger:[
-      {k:"Vente d'un bien immobilier (selon les pièces)", v:"≈ 300 000 €", contra:false},
-      {k:"Fonds transférés à l'administration", v:"≈ 220 000 €", contra:false},
-      {k:"Compte mentionné dans un rapport", v:"≈ 129 000 €", contra:false},
-      {k:"Ce que déclare l'acte officiel", v:"« aucun bien »", contra:true}
+      {k:"Vente du bien immobilier (1ᵉʳ août 2025)", v:"≈ 300 000 €", contra:false},
+      {k:"Recettes identifiées dans les pièces", v:"429 425 €", contra:false},
+      {k:"Solde du compte d'administration (mars 2026)", v:"212 625,10 €", contra:false},
+      {k:"Versé au syndic — pour une dette réelle d'≈ 14 651 €", v:"56 192,55 €", contra:false},
+      {k:"Sorti du circuit légal (300 k + 200 k + 129 k)", v:"629 000 €", contra:true},
+      {k:"Réellement dû (charges ≈ 24 k€ + taxes ≈ 11 k€)", v:"≈ 35 000 €", contra:false},
+      {k:"Passé par la Caisse des Dépôts (obligatoire)", v:"0 €", contra:true},
+      {k:"Ce que déclare le projet d'acte officiel", v:"« aucun bien »", contra:true}
     ],
     timeline:[
-      {d:"Fév. 2017", t:"Décès du père, binational franco-algérien."},
-      {d:"10 sept. 2021", t:"Rapport d'enquête de la police de Neuilly : thèse de l'assassinat étayée."},
-      {d:"Sept. 2021", t:"Classement sans suite de l'affaire."},
-      {d:"2022", t:"Désignation d'une mandataire judiciaire pour la succession."},
-      {d:"27 mai 2026", t:"Une pièce-clé est versée à l'instruction criminelle."},
-      {d:"1ᵉʳ juin 2026", t:"Dépôt d'une plainte visant la gestion de l'héritage."},
-      {d:"4–5 juin 2026", t:"Réception d'un projet d'acte déclarant la succession « vide » — non daté."},
-      {d:"Volet Maroc", t:"Des biens situés au Maroc et des éléments relevés par la gendarmerie royale ressortent — absents de l'acte « vide »."}
+      {d:"16 fév. 2017", t:"Décès du père à Neuilly-sur-Seine (acte n° 160). La presse arabe évoque un empoisonnement."},
+      {d:"Mars 2017", t:"Au Maroc, une mutation immobilière par « vente » est enregistrée — quelques semaines après le décès."},
+      {d:"27 déc. 2017", t:"La notaire est déclarée démissionnaire d'office par arrêté publié au Journal officiel ; son office est supprimé."},
+      {d:"14 avr. 2018", t:"À Rabat, le sénateur Cambon remet la médaille d'or du Sénat à Mahmoud Archane. Le 4 juin, des ONG des droits humains protestent par lettre ouverte au Président du Sénat."},
+      {d:"2018 — 2019", t:"Au Maroc, un procès-verbal (n° 72/3201/2018) vise un meurtre prémédité avec guet-apens."},
+      {d:"10 sept. 2021", t:"Rapport d'enquête de la police de Neuilly : la thèse de l'assassinat est étayée."},
+      {d:"24 sept. 2021", t:"Classement sans suite par le parquet (notifié le 20 octobre)."},
+      {d:"31 janv. 2022", t:"Désignation d'une mandataire judiciaire — à l'initiative du syndic de copropriété."},
+      {d:"12 sept. 2024", t:"L'héritier dépose une plainte avec constitution de partie civile."},
+      {d:"1ᵉʳ août 2025", t:"Le bien immobilier est vendu (≈ 300 000 €) — hors Caisse des Dépôts."},
+      {d:"7 oct. 2025", t:"200 000 € virés de l'office notarial vers le compte professionnel de la mandataire — puis « contrepassation » du même montant."},
+      {d:"13 nov. 2025", t:"Ordonnance du doyen des juges d'instruction : qualification ASSASSINAT, consignation fixée puis payée — l'instruction est relancée."},
+      {d:"2 juin 2026", t:"Réception du projet d'acte déclarant la succession « vide » — fichier modifiable, non daté. Refus notifié le 3 juin."},
+      {d:"Aujourd'hui", t:"Trois justices saisies — France, Maroc, Algérie. Les questions restent posées."}
     ]
   },
 
@@ -419,51 +453,73 @@ const I18N = {
     docTag:"وثيقة من الملف",
     docPlaceholder:"ضع هنا الوثيقة بعد حجب المعلومات الحساسة",
     docCaptions:{
-      "docs/police-2021.jpg":"تقرير تحقيق شرطة نويي-سور-سين — 10 سبتمبر 2021",
-      "docs/classement-2021.jpg":"قرار الحفظ دون متابعة — سبتمبر 2021",
-      "docs/ordonnance-2026.jpg":"أمر بفتح تحقيق جنائي — التوصيفات المعتمدة",
-      "docs/acte-notoriete-2026.jpg":"مشروع عقد إشهاد يُعلن التركة «فارغة» — دون تاريخ",
-      "docs/releve-vente-300k.jpg":"كشف — حصيلة بيع العقار (≈ 300 000 €)",
-      "docs/rapport-mission-220k.jpg":"تقرير مهمة مودَع لدى المحكمة — أموال حُوّلت إلى الإدارة (≈ 220 000 €)",
-      "docs/releve-compte-129k.jpg":"كشف — حساب مذكور في التقرير (≈ 129 000 €)",
-      "docs/gendarmerie-maroc.jpg":"عنصر رصده الدرك الملكي — أملاك موجودة في المغرب"
+      "docs/police-2021.jpg":"محضر شرطة نويي-سور-سين — التحقيق في الوفاة",
+      "docs/presse-essabah.jpg":"غلاف جريدة الصباح: «هل قُتل محافظ القصور الإماراتية مسموماً؟»",
+      "docs/classement-2021.jpg":"الحفظ دون متابعة بتاريخ 24 سبتمبر 2021 — تبليغ المحكمة في 20 أكتوبر 2021",
+      "docs/destitution-2017.jpg":"قرار 27 ديسمبر 2017 (الجريدة الرسمية) — إعلان استقالة الموثقة حكماً وإلغاء مكتبها",
+      "docs/ordonnance-2026.jpg":"أمر 13 نوفمبر 2025 — التوصيف المعتمد: اغتيال، وتحديد الكفالة القضائية",
+      "docs/acte-notoriete-2026.jpg":"بريد إلكتروني بتاريخ 2 يونيو 2026 — إرسال مشروع عقد الإشهاد (ملف قابل للتعديل، دون تاريخ)",
+      "docs/releve-vente-300k.jpg":"كشف حساب مكتب التوثيق — حصيلة البيع (≈ 300 000 €) خارج صندوق الودائع",
+      "docs/rapport-mission-220k.jpg":"تقرير المهمة المودَع لدى المحكمة — 17 ديسمبر 2025",
+      "docs/releve-compte-129k.jpg":"بطاقة حساب التركة — التدفقات المالية باليورو، سطراً سطراً",
+      "docs/gendarmerie-maroc.jpg":"محضر مغربي رقم 72/3201/2018 — قتل عمد مع سبق الإصرار والترصد",
+      "docs/faux-contrat-maroc.jpg":"نسخة من عقد بيع بالرباط (2 485 000 درهم) — الصفحة 1",
+      "docs/faux-contrat-maroc-2.jpg":"العقد نفسه — خانة توقيع البائع فارغة",
+      "docs/releve-mandataire-200k.jpg":"بطاقة حساب الوكيلة: 200 000 € وصلت من مكتب التوثيق (07/10/2025)، ثم «عكس القيد» بالمبلغ نفسه",
+      "docs/taxes-foncieres-2016.jpg":"إعلام ضريبي مغربي 2016 — باسم المتوفّى (حي الرياض، الرباط)",
+      "docs/taxes-foncieres-2017.jpg":"إعلام ضريبي مغربي 2017 — ما يزال باسم المتوفّى",
+      "docs/protestation-cambon.jpg":"رسالة مفتوحة إلى رئيس مجلس الشيوخ الفرنسي (باريس، 4 يونيو 2018) — موقَّعة من منظمات حقوقية عدّة"
     },
     chapters:[
-      {date:"فبراير 2017", title:"أصل المأساة",
-        html:`<p>رجل، أبٌ لثمانية أبناء، <strong>يحمل الجنسيتين الفرنسية والجزائرية</strong>، يتوفّى. تظنّ العائلة في البداية أنها وفاة عادية.</p>
-              <p>لكن وفق استنتاجات <strong>تقرير تحقيق لشرطة نويي-سور-سين</strong>، المؤرّخ في 10 سبتمبر 2021، فإن الفرضية المعتمدة هي <strong>الاغتيال</strong>.</p>
+      {date:"16 فبراير 2017", title:"أصل المأساة",
+        html:`<p>رجل، أبٌ لثمانية أبناء، <strong>يحمل الجنسيتين الفرنسية والجزائرية</strong>، كان <strong>محافظاً لقصر في الخليج</strong>، يتوفّى في <strong>16 فبراير 2017 بنويي-سور-سين</strong> (شهادة الوفاة رقم 160). تظنّ العائلة في البداية أنها وفاة عادية.</p>
+              <p>لكن وفق استنتاجات <strong>تقرير تحقيق لشرطة نويي-سور-سين</strong>، فإن الفرضية المعتمدة هي <strong>الاغتيال</strong>. وتساءلت الصحافة العربية على صفحتها الأولى: <em>«هل قُتل محافظ القصور الإماراتية مسموماً؟»</em>. ومنذ 2017، طالبت شكوى مودعة بالمغرب <strong>باستخراج الجثة وتشريحها</strong>.</p>
               <div class="pull">إذا وثّق تحقيق رسمي وقوع جريمة، فلماذا لم يأخذ الملف مجراه على الفور؟</div>`,
-        speak:"أصل المأساة. رجل، أبٌ لثمانية أبناء، يحمل الجنسيتين الفرنسية والجزائرية، يتوفّى. تظنّ العائلة في البداية أنها وفاة عادية. لكن وفق استنتاجات تقرير تحقيق لشرطة نويي سور سين، المؤرّخ في عاشر سبتمبر 2021، فإن الفرضية المعتمدة هي الاغتيال. إذا وثّق تحقيق رسمي وقوع جريمة، فلماذا لم يأخذ الملف مجراه على الفور؟"},
-      {date:"سبتمبر 2021", title:"الصمت الأول",
-        html:`<p>بعد أيام قليلة من نتائج التحقيق، يُحفظ الملف <strong>دون متابعة</strong>.</p>
+        speak:"أصل المأساة. رجل، أبٌ لثمانية أبناء، يحمل الجنسيتين الفرنسية والجزائرية، كان محافظاً لقصر في الخليج، يتوفّى في السادس عشر من فبراير 2017 بنويي سور سين. تظنّ العائلة في البداية أنها وفاة عادية. لكن وفق استنتاجات تقرير تحقيق لشرطة نويي سور سين، فإن الفرضية المعتمدة هي الاغتيال. وتساءلت الصحافة العربية: هل قُتل محافظ القصور الإماراتية مسموماً؟ ومنذ 2017، طالبت شكوى مودعة بالمغرب باستخراج الجثة وتشريحها. إذا وثّق تحقيق رسمي وقوع جريمة، فلماذا لم يأخذ الملف مجراه على الفور؟"},
+      {date:"24 سبتمبر 2021", title:"الصمت الأول",
+        html:`<p>في <strong>24 سبتمبر 2021</strong>، تُحفظ القضية <strong>دون متابعة</strong> من طرف النيابة (الشكوى رقم 20 174 000239). ويصل التبليغ عبر بريد إلكتروني بسيط من المحكمة في 20 أكتوبر 2021.</p>
               <p>الحفظ ليس تبرئة: إنه قرار إداري <strong>بعدم المتابعة</strong>. ومع ذلك فقد جمع التحقيق عناصر دامغة.</p>
               <div class="pull">كيف يُغلَق بهذه السرعة ملفٌ أسّسته الشرطة نفسها بأدلّتها؟</div>`,
-        speak:"الصمت الأول. بعد أيام قليلة من نتائج التحقيق، يُحفظ الملف دون متابعة. الحفظ ليس تبرئة: إنه قرار إداري بعدم المتابعة. ومع ذلك فقد جمع التحقيق عناصر دامغة. كيف يُغلَق بهذه السرعة ملفٌ أسّسته الشرطة نفسها بأدلّتها؟"},
-      {date:"2022", title:"حُرّاس التركة",
-        html:`<p>تُعيَّن <strong>وكيلة قضائية</strong> لإدارة التركة، إلى جانب <strong>مكتب توثيق</strong>.</p>
+        speak:"الصمت الأول. في الرابع والعشرين من سبتمبر 2021، تُحفظ القضية دون متابعة من طرف النيابة. ويصل التبليغ عبر بريد إلكتروني بسيط من المحكمة في العشرين من أكتوبر 2021. الحفظ ليس تبرئة: إنه قرار إداري بعدم المتابعة. ومع ذلك فقد جمع التحقيق عناصر دامغة. كيف يُغلَق بهذه السرعة ملفٌ أسّسته الشرطة نفسها بأدلّتها؟"},
+      {date:"31 يناير 2022", title:"حُرّاس التركة",
+        html:`<p>في <strong>31 يناير 2022</strong>، تُعيَّن <strong>وكيلة قضائية</strong> لإدارة التركة بقرار من المحكمة — بمبادرة، لا من الورثة، بل من <strong>سانديك العمارة</strong>. ثم يُعهَد بتسوية التركة إلى <strong>مكتب توثيق</strong>.</p>
+              <p>لهذا المكتب ماضٍ غريب: فبموجب <strong>قرار صادر في 27 ديسمبر 2017</strong> ومنشور بالجريدة الرسمية، كانت الموثقة قد أُعلنت <strong>مستقيلة حكماً</strong> وأُلغي مكتبها. ومع ذلك تظهر من جديد، بعد سنوات، في قلب هذه التركة.</p>
               <p>منذ تلك اللحظة، تُدار الأملاك بعيدًا عن أعين أحد الورثة. تُباع شقة. وتتحرّك أموال.</p>
-              <div class="pull">من اقترح اسم هذه الوكيلة، وبأي معايير؟</div>`,
-        speak:"حُرّاس التركة. تُعيَّن وكيلة قضائية لإدارة التركة، إلى جانب مكتب توثيق. منذ تلك اللحظة، تُدار الأملاك بعيدًا عن أعين أحد الورثة. تُباع شقة. وتتحرّك أموال. من اقترح اسم هذه الوكيلة، وبأي معايير؟"},
-      {date:"2025 — 2026", title:"اليقظة",
-        html:`<p>أحد الورثة يرفض الصمت. وبتجاوز قرار الحفظ، ينجح في <strong>فتح تحقيق جنائي</strong> يُعهَد به إلى قاضٍ.</p>
-              <p>يعتمد الأمر القضائي أخطر التوصيفات — <strong>الاغتيال مع سبق الإصرار</strong> — ويستند إلى نصٍّ يستهدف تحديدًا <strong>المكلّفين بمهمة مرفق عام</strong>.</p>
-              <div class="pull">لماذا أُدرِج هذا النص الخاص بأعوان الدولة منذ البداية، وبقلم القاضي نفسه؟</div>`,
-        speak:"اليقظة. أحد الورثة يرفض الصمت. وبتجاوز قرار الحفظ، ينجح في فتح تحقيق جنائي يُعهَد به إلى قاضٍ. يعتمد الأمر القضائي أخطر التوصيفات، الاغتيال مع سبق الإصرار، ويستند إلى نصٍّ يستهدف تحديدًا المكلّفين بمهمة مرفق عام. لماذا أُدرِج هذا النص الخاص بأعوان الدولة منذ البداية، وبقلم القاضي نفسه؟"},
-      {date:"يونيو 2026", title:"التركة «الفارغة»",
-        html:`<p>بعد أيام قليلة فقط من إيداع شكوى تستهدف إدارة التركة، يُرسَل <strong>مشروع عقد رسمي</strong> إلى الوارث.</p>
-              <p>يُذكر فيه أنه <strong>«لا توجد أي أملاك»</strong> في التركة. غير أن تقريرًا مودَعًا لدى المحكمة يذكر، هو، حركات مالية حقيقية.</p>
-              <div class="pull">كيف يمكن لهاتين الوثيقتين، الموقّعتين من الأيدي نفسها، أن تتعايشا؟</div>`,
-        speak:"التركة الفارغة. بعد أيام قليلة فقط من إيداع شكوى تستهدف إدارة التركة، يُرسَل مشروع عقد رسمي إلى الوارث. يُذكر فيه أنه لا توجد أي أملاك في التركة. غير أن تقريرًا مودَعًا لدى المحكمة يذكر هو حركات مالية حقيقية. كيف يمكن لهاتين الوثيقتين، الموقّعتين من الأيدي نفسها، أن تتعايشا؟"},
+              <div class="pull">من اختار هاتين المهنيتين، وبأي معايير؟</div>`,
+        speak:"حُرّاس التركة. في الحادي والثلاثين من يناير 2022، تُعيَّن وكيلة قضائية لإدارة التركة بقرار من المحكمة، بمبادرة لا من الورثة بل من سانديك العمارة. ثم يُعهَد بتسوية التركة إلى مكتب توثيق. لهذا المكتب ماضٍ غريب: فبموجب قرار صادر في السابع والعشرين من ديسمبر 2017 ومنشور بالجريدة الرسمية، كانت الموثقة قد أُعلنت مستقيلة حكماً وأُلغي مكتبها. ومع ذلك تظهر من جديد، بعد سنوات، في قلب هذه التركة. منذ تلك اللحظة، تُدار الأملاك بعيدًا عن أعين أحد الورثة. تُباع شقة. وتتحرّك أموال. من اختار هاتين المهنيتين، وبأي معايير؟"},
+      {date:"2024 — 2026", title:"اليقظة",
+        html:`<p>أحد الورثة يرفض الصمت. في <strong>12 سبتمبر 2024</strong>، يودع <strong>شكوى مع الادّعاء بالحق المدني</strong>. وفي <strong>13 نوفمبر 2025</strong>، يصدر عميد قضاة التحقيق أمراً قضائياً: التوصيف المعتمد هو <strong>الاغتيال</strong> مع <strong>سبق الإصرار</strong>، عن أفعال ممتدة من يناير 2017 إلى سبتمبر 2024.</p>
+              <p>تُحدَّد كفالة قضائية بمبلغ <strong>2 500 يورو</strong> قبل 9 يناير 2026. وتُدفع: <strong>التحقيق الجنائي يُستأنف رسمياً</strong> — هناك حيث كانت النيابة قد حفظت الملف.</p>
+              <div class="pull">قاضٍ يرى أن ثمة ما يستوجب التحقيق في اغتيال. فماذا ننتظر؟</div>`,
+        speak:"اليقظة. أحد الورثة يرفض الصمت. في الثاني عشر من سبتمبر 2024، يودع شكوى مع الادّعاء بالحق المدني. وفي الثالث عشر من نوفمبر 2025، يصدر عميد قضاة التحقيق أمراً قضائياً: التوصيف المعتمد هو الاغتيال مع سبق الإصرار، عن أفعال ممتدة من يناير 2017 إلى سبتمبر 2024. تُحدَّد كفالة قضائية بمبلغ ألفين وخمسمائة يورو ثم تُدفع: التحقيق الجنائي يُستأنف رسمياً، هناك حيث كانت النيابة قد حفظت الملف. قاضٍ يرى أن ثمة ما يستوجب التحقيق في اغتيال. فماذا ننتظر؟"},
+      {date:"2 يونيو 2026", title:"التركة «الفارغة»",
+        html:`<p>بعد أيام قليلة من إيداع شكاوى جديدة تستهدف إدارة التركة، يُرسَل إلى الورثة عبر البريد الإلكتروني، في <strong>2 يونيو 2026</strong>، <strong>مشروع عقد إشهاد</strong> — ملف <strong>وورد قابل للتعديل، دون تاريخ</strong>.</p>
+              <p>يُذكر فيه أنه <strong>«لا توجد أي أملاك»</strong> في التركة. غير أن <strong>تقرير المهمة</strong> المودَع لدى المحكمة من طرف الوكيلة نفسها يفصّل حركات مالية حقيقية. وفي <strong>3 يونيو 2026</strong>، يبلّغ الوارث <strong>رفضه</strong> التوقيع.</p>
+              <div class="pull">كيف يمكن لهاتين الوثيقتين، الصادرتين عن الأيدي نفسها، أن تتعايشا؟</div>`,
+        speak:"التركة الفارغة. بعد أيام قليلة من إيداع شكاوى جديدة تستهدف إدارة التركة، يُرسَل إلى الورثة عبر البريد الإلكتروني، في الثاني من يونيو 2026، مشروع عقد إشهاد. ملف وورد قابل للتعديل، دون تاريخ. يُذكر فيه أنه لا توجد أي أملاك في التركة. غير أن تقرير المهمة المودَع لدى المحكمة من طرف الوكيلة نفسها يفصّل حركات مالية حقيقية. وفي الثالث من يونيو 2026، يبلّغ الوارث رفضه التوقيع. كيف يمكن لهاتين الوثيقتين، الصادرتين عن الأيدي نفسها، أن تتعايشا؟"},
       {date:"الوثائق", title:"الأرقام التي تتكلّم", ledger:true,
-        html:`<p>من جهة، <strong>الوثائق الرسمية</strong> للملف. ومن جهة أخرى، عقدٌ يؤكّد أنه <strong>لا شيء</strong>. وبينهما فارق يبلغ مئات آلاف اليوروهات.</p>
+        html:`<p>من جهة، <strong>الوثائق الرسمية</strong> للملف: بيع عقار في <strong>1 أغسطس 2025</strong>، ومداخيل محدّدة بمبلغ <strong>429 425 €</strong>، وحساب إدارة ما يزال يُظهر <strong>212 625,10 €</strong> في مارس 2026. ومن جهة أخرى، عقدٌ يؤكّد أنه <strong>لا شيء</strong>.</p>
+              <p>وتفصيلٌ ليس بالتفصيل: <strong>لم يمرّ أي من هذه المبالغ عبر صندوق الودائع والأمانات</strong>، وهو المسار الإلزامي لحماية أموال تركة متنازع عليها. كل شيء تحرّك من حساب خاص إلى حساب خاص.</p>
+              <p>بل إن بطاقة حساب الوكيلة تُظهر <strong>تحويلاً بمبلغ 200 000 €</strong> وصل من مكتب التوثيق في <strong>7 أكتوبر 2025</strong> إلى حسابها المهني… تلاه <strong>«عكسُ قيد»</strong> بالمبلغ نفسه. ذهابٌ وإياب لمائتي ألف يورو بين الموثقة والوكيلة، دون تفسير.</p>
+              <p>احسبوا معنا: <strong>300 000 € + 200 000 € + 129 000 € = 629 000 €</strong> خرجت من المسار القانوني. بينما ما كان مستحقاً فعلاً لا يتجاوز، وفق الوثائق، نحو <strong>24 000 €</strong> من رسوم العمارة و<strong>11 000 €</strong> من الضرائب. لم يمرّ شيء عبر صندوق الودائع. <strong>كل شيء اختفى.</strong></p>
               <div class="pull">الأرقام لا تتناقض. إنها مكتوبة، بالأبيض والأسود، في الوثائق المقدّمة للعدالة.</div>`,
-        speak:"الأرقام التي تتكلّم. من جهة، الوثائق الرسمية للملف. ومن جهة أخرى، عقدٌ يؤكّد أنه لا شيء. وبينهما فارق يبلغ مئات آلاف اليوروهات. الأرقام لا تتناقض. إنها مكتوبة، بالأبيض والأسود، في الوثائق المقدّمة للعدالة."},
+        speak:"الأرقام التي تتكلّم. من جهة، الوثائق الرسمية للملف: بيع عقار في الأول من أغسطس 2025، ومداخيل محددة بأربعمائة وتسعة وعشرين ألف يورو، وحساب إدارة ما يزال يُظهر أكثر من مائتي ألف يورو في مارس 2026. ومن جهة أخرى، عقدٌ يؤكّد أنه لا شيء. وتفصيلٌ ليس بالتفصيل: لم يمرّ أي من هذه المبالغ عبر صندوق الودائع والأمانات، وهو المسار الإلزامي لحماية أموال تركة متنازع عليها. كل شيء تحرّك من حساب خاص إلى حساب خاص. بل إن بطاقة حساب الوكيلة تُظهر تحويلاً بمبلغ مائتي ألف يورو وصل من مكتب التوثيق في السابع من أكتوبر 2025 إلى حسابها المهني، تلاه عكس قيد بالمبلغ نفسه. ذهاب وإياب لمائتي ألف يورو بين الموثقة والوكيلة، دون تفسير. احسبوا معنا: ثلاثمائة ألف زائد مائتي ألف زائد مائة وتسعة وعشرين ألفاً، أي ستمائة وتسعة وعشرون ألف يورو خرجت من المسار القانوني. بينما ما كان مستحقاً فعلاً لا يتجاوز نحو أربعة وعشرين ألف يورو من رسوم العمارة وأحد عشر ألف يورو من الضرائب. لم يمرّ شيء عبر صندوق الودائع. كل شيء اختفى. الأرقام لا تتناقض. إنها مكتوبة، بالأبيض والأسود، في الوثائق المقدّمة للعدالة."},
       {date:"البُعد الدولي", title:"أملاك المغرب",
-        html:`<p>التركة لا تتوقّف عند الحدود الفرنسية. فجزء من أملاك المتوفّى يوجد، فيما يبدو، <strong>في المغرب</strong> أيضًا.</p>
-              <p>وهناك كذلك، يُقال إن <strong>الدرك الملكي</strong> رصد عناصر معيّنة. ومع ذلك، فإن العقد الذي يُعلن التركة «فارغة» لا يذكر عنها كلمة واحدة.</p>
+        html:`<p>التركة لا تتوقّف عند الحدود الفرنسية. فـ<strong>شهادات الملكية الرسمية</strong> للمحافظة العقارية المغربية تُثبت وجود أملاك للمتوفّى <strong>في المغرب</strong> — وقد سُجّل هناك انتقالٌ للملكية عن طريق «البيع» في <strong>مارس 2017</strong>، أسابيع قليلة فقط بعد الوفاة.</p>
+              <p>ومن بين الوثائق: نسخة من <strong>عقد بيع</strong> شقة بالرباط (<strong>2 485 000 درهم</strong>) حيث خانة <strong>توقيع البائع فارغة</strong>. عقد بيع لم يوقّعه البائع.</p>
+              <p>الأمر يتعلّق بشقتين في مركّب <strong>«بريستيجيا رياض الأندلس»، حي الرياض بالرباط</strong> — والقصتان متشابهتان بغرابة:</p>
+              <p>الأولى — <strong>العمارة 7، الشقة 5</strong> — انتقلت إلى اسم <strong>نائب برلماني مغربي</strong> يدّعي أنه <strong>اشتراها سنة 2011</strong>. غير أن <strong>العمارة رقم 7 لم تكن موجودة أصلاً سنة 2011</strong>. و<strong>الإعلامات الضريبية المغربية لسنتي 2016 و2017</strong> ما تزال محرَّرة <strong>باسم المتوفّى</strong>، وفي هذا العنوان بالذات.</p>
+              <p>والثانية انتقلت إلى اسم <strong>وريثة شريكة</strong>، على أساس عقد بيع مؤرَّخ سنة <strong>2013</strong> — العقد الخالي من توقيع البائع المعروض أدناه. وهنا أيضاً، <strong>العمارة لم تكن موجودة سنة 2013</strong> في التاريخ المفترض للبيع. والعقد ليس بيعاً على التصميم: إنه يبيع عقاراً <strong>مكتملاً</strong>… لم يكن قد بُني بعد.</p>
+              <p>وفي المغرب، للعدالة رأي آخر: <strong>محضر رقم 72/3201/2018</strong> يتعلّق بأفعال <strong>قتل عمد مع سبق الإصرار والترصد</strong>، ومنذ 2017 طالبت شكوى باستخراج الجثة وتشريحها. ومع ذلك، فإن العقد الفرنسي الذي يُعلن التركة «فارغة» لا يذكر عن هذه الأملاك كلمة واحدة.</p>
               <p>وترتبط فرنسا والمغرب <strong>باتفاقيات للتعاون القضائي</strong>: يمكن لقاضٍ فرنسي أن يطلب من السلطات المغربية <strong>تحديد هذه الأملاك وتجميدها</strong>.</p>
-              <div class="pull">إذا كانت هناك أملاك على الضفة الأخرى من المتوسّط، فلماذا يتجاهلها العقد الرسمي تمامًا؟</div>`,
-        speak:"أملاك المغرب. التركة لا تتوقّف عند الحدود الفرنسية. فجزء من أملاك المتوفّى يوجد، فيما يبدو، في المغرب أيضًا. وهناك كذلك، يُقال إن الدرك الملكي رصد عناصر معيّنة. ومع ذلك، فإن العقد الذي يُعلن التركة فارغة لا يذكر عنها كلمة واحدة. وترتبط فرنسا والمغرب باتفاقيات للتعاون القضائي: يمكن لقاضٍ فرنسي أن يطلب من السلطات المغربية تحديد هذه الأملاك وتجميدها. إذا كانت هناك أملاك على الضفة الأخرى من المتوسّط، فلماذا يتجاهلها العقد الرسمي تمامًا؟"},
+              <div class="pull">«بيعان» مؤرَّخان في 2011 و2013 لشقتين في عمارة لم تكن موجودة — وظلّ الفيسك يُحرِّر ضرائبها باسم المتوفّى حتى 2017.</div>`,
+        speak:"أملاك المغرب. التركة لا تتوقّف عند الحدود الفرنسية. فشهادات الملكية الرسمية للمحافظة العقارية المغربية تُثبت وجود أملاك للمتوفّى في المغرب، وقد سُجّل هناك انتقال للملكية عن طريق البيع في مارس 2017، أسابيع قليلة فقط بعد الوفاة. ومن بين الوثائق: نسخة من عقد بيع شقة بالرباط بمليونين وأربعمائة وخمسة وثمانين ألف درهم، حيث خانة توقيع البائع فارغة. عقد بيع لم يوقّعه البائع. الأمر يتعلّق بشقتين في مركّب بريستيجيا رياض الأندلس بحي الرياض في الرباط، والقصتان متشابهتان بغرابة. الأولى، العمارة سبعة الشقة خمسة، انتقلت إلى اسم نائب برلماني مغربي يدّعي أنه اشتراها سنة 2011. غير أن العمارة رقم سبعة لم تكن موجودة أصلاً سنة 2011. والإعلامات الضريبية لسنتي 2016 و2017 ما تزال محررة باسم المتوفّى في هذا العنوان بالذات. والثانية انتقلت إلى اسم وريثة شريكة، على أساس عقد بيع مؤرخ سنة 2013، العقد الخالي من توقيع البائع. وهنا أيضاً، العمارة لم تكن موجودة سنة 2013 في التاريخ المفترض للبيع. والعقد ليس بيعاً على التصميم: إنه يبيع عقاراً مكتملاً لم يكن قد بُني بعد. وفي المغرب، محضر سنة 2018 يتعلّق بأفعال قتل عمد مع سبق الإصرار والترصد، ومنذ 2017 طالبت شكوى باستخراج الجثة وتشريحها. ومع ذلك، فإن العقد الفرنسي الذي يُعلن التركة فارغة لا يذكر عن هذه الأملاك كلمة واحدة. بيعان مؤرخان في 2011 و2013 لشقتين في عمارة لم تكن موجودة، وظل الفيسك يحرر ضرائبها باسم المتوفى حتى 2017."},
+      {date:"الحمايات", title:"ميدالية ذهبية… مقابل أي استحقاق؟",
+        html:`<p>الرجل الذي انتقلت إليه شقة حي الرياض ليس مجهولاً: إنه <strong>محمود عرشان</strong>، المفوّض السابق للشرطة الذي صار نائباً برلمانياً، والذي وصفته أكثر من عشر منظمات حقوقية (ASDHOM، AMDH، MRAP، FEMED…) بأنه <strong>«أحد كبار الجلادين في النظام المغربي»</strong> خلال سنوات الرصاص — مركز التعذيب <strong>«درب مولاي الشريف»</strong>، ومعارضون <strong>«عُذّبوا حتى الموت تحت إشرافه»</strong>، بحسب رسالتها المفتوحة.</p>
+              <p>ومع ذلك، فقد سلّمه السيناتور <strong>كريستيان كامبون</strong> — رئيس <strong>لجنة الشؤون الخارجية والدفاع بمجلس الشيوخ الفرنسي</strong> آنذاك — في <strong>14 أبريل 2018 بالرباط</strong>، <strong>الميدالية الذهبية لمجلس الشيوخ</strong>. وفي 4 يونيو 2018، وجّهت تلك المنظمات <strong>رسالة مفتوحة إلى رئيس مجلس الشيوخ</strong>: «منتخَب من الجمهورية يكافئ جلاداً على "خدماته المخلصة"». هذه الرسالة هي الوثيقة المعروضة أدناه.</p>
+              <p>ونطرح هنا أسئلة من حقّ كل مواطن — فرنسيّاً كان أو جزائرياً — أن يطرحها: لماذا تُكرِّم الجمهورية رجلاً يصفه المدافعون عن حقوق الإنسان بالجلاد؟ وحين تكون ضحية الاغتيال <strong>مواطناً جزائرياً</strong> تنتقل تركته، وفق الوثائق، إلى اسم هذا الرجل نفسه، <strong>فمن يحمي من؟</strong> وهل يمكن لصداقات سياسية في قمة الدولة أن تُثقل مسار تحقيق جنائي في نانتير؟</p>
+              <div class="pull">ميدالية من الجمهورية لرجلٍ تنتقل إلى اسمه تركة جزائريٍّ اغتيل: صدفة، أم حماية؟</div>`,
+        speak:"ميدالية ذهبية مقابل أي استحقاق؟ الرجل الذي انتقلت إليه شقة حي الرياض ليس مجهولاً: إنه محمود عرشان، المفوض السابق للشرطة الذي صار نائباً برلمانياً، والذي وصفته أكثر من عشر منظمات حقوقية بأنه أحد كبار الجلادين في النظام المغربي خلال سنوات الرصاص. مركز التعذيب درب مولاي الشريف، ومعارضون عذبوا حتى الموت تحت إشرافه، بحسب رسالتها المفتوحة. ومع ذلك، فقد سلمه السيناتور كريستيان كامبون، رئيس لجنة الشؤون الخارجية والدفاع بمجلس الشيوخ الفرنسي آنذاك، في الرابع عشر من أبريل 2018 بالرباط، الميدالية الذهبية لمجلس الشيوخ. وفي الرابع من يونيو 2018، وجهت تلك المنظمات رسالة مفتوحة إلى رئيس مجلس الشيوخ: منتخب من الجمهورية يكافئ جلاداً على خدماته المخلصة. ونطرح هنا أسئلة من حق كل مواطن، فرنسياً كان أو جزائرياً، أن يطرحها: لماذا تكرم الجمهورية رجلاً يصفه المدافعون عن حقوق الإنسان بالجلاد؟ وحين تكون ضحية الاغتيال مواطناً جزائرياً تنتقل تركته، وفق الوثائق، إلى اسم هذا الرجل نفسه، فمن يحمي من؟ وهل يمكن لصداقات سياسية في قمة الدولة أن تثقل مسار تحقيق جنائي في نانتير؟ ميدالية من الجمهورية لرجل تنتقل إلى اسمه تركة جزائري اغتيل: صدفة أم حماية؟"},
       {date:"اليوم", title:"الأسئلة التي نطرحها",
         html:`<p>نحن لا نتّهم أحدًا. قرينة البراءة حقٌّ للجميع. لكننا نطلب أمرًا واحدًا: <strong>أن تُكشف الحقيقة</strong>.</p>
               <p>من حقّ مواطن فرنسي-جزائري أن يعرف <strong>كيف مات والده</strong>، و<strong>أين ذهبت تركته</strong>. فلتتحاور عدالات فرنسا والمغرب والجزائر، ولتُجِب.</p>
@@ -471,20 +527,28 @@ const I18N = {
         speak:"الأسئلة التي نطرحها. نحن لا نتّهم أحدًا. قرينة البراءة حقٌّ للجميع. لكننا نطلب أمرًا واحدًا: أن تُكشف الحقيقة. من حقّ مواطن فرنسي جزائري أن يعرف كيف مات والده، وأين ذهبت تركته. فلتتحاور عدالات فرنسا والمغرب والجزائر، ولتُجِب. لماذا يتقدّم ملف اغتيال موثَّق ببطء شديد؟ ولماذا تُعلَن فارغةً تركةٌ تقول الحسابات إنها مليئة؟"}
     ],
     ledger:[
-      {k:"بيع عقار (وفق الوثائق)", v:"≈ 300 000 €", contra:false},
-      {k:"أموال حُوّلت إلى الإدارة", v:"≈ 220 000 €", contra:false},
-      {k:"حساب مذكور في تقرير", v:"≈ 129 000 €", contra:false},
-      {k:"ما يُعلنه العقد الرسمي", v:"«لا أملاك»", contra:true}
+      {k:"بيع العقار (1 أغسطس 2025)", v:"≈ 300 000 €", contra:false},
+      {k:"المداخيل المحدّدة في الوثائق", v:"429 425 €", contra:false},
+      {k:"رصيد حساب الإدارة (مارس 2026)", v:"212 625,10 €", contra:false},
+      {k:"دُفع للسانديك — مقابل دين حقيقي ≈ 14 651 €", v:"56 192,55 €", contra:false},
+      {k:"ما مرّ عبر صندوق الودائع (الإلزامي)", v:"0 €", contra:true},
+      {k:"ما يُعلنه مشروع العقد الرسمي", v:"«لا أملاك»", contra:true}
     ],
     timeline:[
-      {d:"فبراير 2017", t:"وفاة الأب، حامل الجنسيتين الفرنسية والجزائرية."},
+      {d:"16 فبراير 2017", t:"وفاة الأب بنويي-سور-سين (الشهادة رقم 160). الصحافة العربية تطرح فرضية التسميم."},
+      {d:"مارس 2017", t:"في المغرب، تسجيل انتقال ملكية عقارية عن طريق «البيع» — أسابيع بعد الوفاة."},
+      {d:"27 ديسمبر 2017", t:"إعلان استقالة الموثقة حكماً بقرار منشور في الجريدة الرسمية، وإلغاء مكتبها."},
+      {d:"14 أبريل 2018", t:"في الرباط، السيناتور كامبون يسلّم الميدالية الذهبية لمجلس الشيوخ إلى محمود عرشان. وفي 4 يونيو، منظمات حقوقية تحتجّ برسالة مفتوحة إلى رئيس مجلس الشيوخ."},
+      {d:"2018 — 2019", t:"في المغرب، محضر رقم 72/3201/2018 يتعلّق بقتل عمد مع سبق الإصرار والترصد."},
       {d:"10 سبتمبر 2021", t:"تقرير شرطة نويي: فرضية الاغتيال مدعومة بالأدلة."},
-      {d:"سبتمبر 2021", t:"حفظ الملف دون متابعة."},
-      {d:"2022", t:"تعيين وكيلة قضائية للتركة."},
-      {d:"27 مايو 2026", t:"إيداع وثيقة مفصلية ضمن التحقيق الجنائي."},
-      {d:"1 يونيو 2026", t:"إيداع شكوى تستهدف إدارة التركة."},
-      {d:"4–5 يونيو 2026", t:"استلام مشروع عقد يُعلن التركة «فارغة» — دون تاريخ."},
-      {d:"الملف المغربي", t:"ظهور أملاك في المغرب وعناصر رصدها الدرك الملكي — غائبة عن العقد «الفارغ»."}
+      {d:"24 سبتمبر 2021", t:"حفظ الملف دون متابعة من طرف النيابة (تبليغ في 20 أكتوبر)."},
+      {d:"31 يناير 2022", t:"تعيين وكيلة قضائية للتركة — بمبادرة من سانديك العمارة."},
+      {d:"12 سبتمبر 2024", t:"الوارث يودع شكوى مع الادّعاء بالحق المدني."},
+      {d:"1 أغسطس 2025", t:"بيع العقار (≈ 300 000 €) — خارج صندوق الودائع."},
+      {d:"7 أكتوبر 2025", t:"تحويل 200 000 € من مكتب التوثيق إلى الحساب المهني للوكيلة — ثم «عكس القيد» بالمبلغ نفسه."},
+      {d:"13 نوفمبر 2025", t:"أمر عميد قضاة التحقيق: التوصيف اغتيال، وتحديد كفالة دُفعت — التحقيق يُستأنف."},
+      {d:"2 يونيو 2026", t:"استلام مشروع عقد يُعلن التركة «فارغة» — ملف قابل للتعديل، دون تاريخ. الرفض بُلّغ في 3 يونيو."},
+      {d:"اليوم", t:"ثلاث عدالات معنيّة — فرنسا والمغرب والجزائر. والأسئلة ما تزال مطروحة."}
     ]
   }
 };
@@ -528,12 +592,14 @@ function render(){
     // Chaque chapitre peut avoir PLUSIEURS documents.
     let figHtml = "";
     const docMap = {
-      1:["docs/police-2021.jpg"],
+      1:["docs/police-2021.jpg","docs/presse-essabah.jpg"],
       2:["docs/classement-2021.jpg"],
+      3:["docs/destitution-2017.jpg"],
       4:["docs/ordonnance-2026.jpg"],
       5:["docs/acte-notoriete-2026.jpg"],
-      6:["docs/releve-vente-300k.jpg","docs/rapport-mission-220k.jpg","docs/releve-compte-129k.jpg"],
-      7:["docs/gendarmerie-maroc.jpg"]
+      6:["docs/releve-vente-300k.jpg","docs/rapport-mission-220k.jpg","docs/releve-compte-129k.jpg","docs/releve-mandataire-200k.jpg"],
+      7:["docs/gendarmerie-maroc.jpg","docs/faux-contrat-maroc.jpg","docs/faux-contrat-maroc-2.jpg","docs/taxes-foncieres-2016.jpg","docs/taxes-foncieres-2017.jpg"],
+      8:["docs/protestation-cambon.jpg"]
     };
     if(docMap[i+1]){
       figHtml = docMap[i+1].map(src=>{
