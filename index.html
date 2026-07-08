@@ -186,6 +186,22 @@ figure.doc .tag{display:inline-block;background:var(--bg);border:1px solid var(-
 .doc-placeholder{aspect-ratio:1.5/1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#3a3f48;gap:10px;background:repeating-linear-gradient(45deg,#0a0b0d,#0a0b0d 12px,#0c0e11 12px,#0c0e11 24px)}
 .doc-placeholder svg{width:42px;height:42px;opacity:.5}
 .doc-placeholder span{font-size:.8rem;letter-spacing:.08em}
+/* menu déroulant des documents d'un chapitre */
+.doc-group{margin:34px 0}
+.doc-group figure.doc{margin:12px 0 0}
+.doc-picker{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.doc-picker svg{width:18px;height:18px;color:var(--gold-soft);flex:none}
+.doc-picker label{color:var(--ink-dim);font-size:.8rem;letter-spacing:.04em}
+.doc-picker label b{color:var(--gold-soft);font-weight:600}
+.doc-select{flex:1;min-width:180px;appearance:none;-webkit-appearance:none;
+  background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;
+  padding:9px 34px 9px 12px;font:inherit;font-size:.85rem;font-weight:300;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23e0c489' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center}
+body[dir="rtl"] .doc-select{padding:9px 12px 9px 34px;background-position:left 12px center}
+.doc-select:focus{outline:none;border-color:var(--gold)}
+.doc-select option{background:var(--bg);color:var(--ink)}
 
 /* ============ TIMELINE ============ */
 .timeline-sec{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:80px 22px}
@@ -329,6 +345,7 @@ const I18N = {
     disclaimer:"<strong>Présomption d'innocence.</strong> Ce site ne désigne aucune personne nommément et n'affirme la culpabilité de personne. Il rapporte des faits issus de pièces officielles et pose des questions d'intérêt public. Toute personne évoquée est présumée innocente tant qu'elle n'a pas été définitivement jugée.",
     footNote:'© <span id="year2"></span> — Récit citoyen à visée d\'intérêt public.',
     docTag:"Pièce du dossier",
+    docPicker:"Documents de ce chapitre",
     docPlaceholder:"Déposez ici le document caviardé",
     docCaptions:{
       "docs/police-2021.jpg":"Procès-verbal de la police de Neuilly-sur-Seine — enquête sur le décès",
@@ -346,7 +363,71 @@ const I18N = {
       "docs/releve-mandataire-200k.jpg":"Fiche de compte de la mandataire : 200 000 € reçus de l'office notarial (07/10/2025), puis CONTREPASSATION du même montant",
       "docs/taxes-foncieres-2016.jpg":"Avis d'imposition marocain 2016 — établi au nom du défunt (Hay Riad, Rabat)",
       "docs/taxes-foncieres-2017.jpg":"Avis d'imposition marocain 2017 — toujours au nom du défunt",
-      "docs/protestation-cambon.jpg":"Lettre ouverte au Président du Sénat (Paris, 4 juin 2018) — signée par ASDHOM, AMDH, MRAP, FEMED et d'autres organisations des droits humains"
+      "docs/protestation-cambon.jpg":"Lettre ouverte au Président du Sénat (Paris, 4 juin 2018) — signée par ASDHOM, AMDH, MRAP, FEMED et d'autres organisations des droits humains",
+      "docs/presse-essabah-article.jpg":"Article intérieur du journal Essabah — empoisonnement supposé et enregistrements téléphoniques évoqués",
+      "docs/acte-deces-160.jpg":"Acte de décès n° 160 (copie intégrale) — Neuilly-sur-Seine, 16 février 2017",
+      "docs/pv-police-p1.jpg":"Procès-verbal de la police de Neuilly-sur-Seine — page 1",
+      "docs/pv-police-p2.jpg":"Procès-verbal de police — page 2 (mentions du Maroc, gendarmerie de Témara)",
+      "docs/pv-police-p3.jpg":"Procès-verbal de police — page 3 (autopsie, procureur général du Roi)",
+      "docs/pv-police-p4.jpg":"Procès-verbal de police — page 4 (questions d'héritage)",
+      "docs/pv-police-ar.jpg":"Procès-verbal de police (Neuilly-sur-Seine) — traduction arabe",
+      "docs/plainte-rabat-2017.jpg":"Plainte déposée à Rabat en 2017 — empoisonnement, demande d'exhumation et d'autopsie",
+      "docs/classement-email-fr.jpg":"Courriel du tribunal judiciaire de Nanterre (20 octobre 2021) — plainte classée sans suite le 24 septembre 2021",
+      "docs/classement-email-ar.jpg":"Courriel de classement sans suite — traduction arabe",
+      "docs/constitution-pc-fr.jpg":"Lettre de constitution de partie civile au Doyen des juges d'instruction — 25 septembre 2024",
+      "docs/constitution-pc-ar.jpg":"Constitution de partie civile — traduction arabe",
+      "docs/destitution-jo-2.jpg":"Arrêté de destitution de la notaire (Journal officiel) — second extrait",
+      "docs/ordonnance-ar.jpg":"Ordonnance du 13 novembre 2025 (qualification : ASSASSINAT) — traduction arabe",
+      "docs/lettre-juge-blee.jpg":"Lettre au juge d'instruction — demande d'accès au dossier par la partie civile",
+      "docs/plainte-creteil.jpg":"Plainte au Procureur de Créteil — abus de confiance aggravé, détournement de fonds successoraux",
+      "docs/email-abecassis.jpg":"Courriel de l'étude notariale (2 juin 2026) — envoi du projet d'acte de notoriété aux héritiers",
+      "docs/email-refus-acte.jpg":"Courriel de refus du projet d'acte de notoriété — 3 juin 2026",
+      "docs/lettre-vente-gentilly.jpg":"Lettre de la mandataire (4 août 2025) — bien de Gentilly vendu le 1er août 2025",
+      "docs/jugement-creteil.jpg":"Jugement du tribunal judiciaire de Créteil (18 décembre 2023) — copropriété c/ la mandataire et les héritiers",
+      "docs/rapport-mission-1.jpg":"Rapport de mission de la mandataire (17 décembre 2025) — page 1",
+      "docs/rapport-mission-2.jpg":"Rapport de mission de la mandataire — page 2",
+      "docs/rapport-mission-3.jpg":"Rapport de mission de la mandataire — page 3",
+      "docs/rapport-mission-4.jpg":"Rapport de mission de la mandataire — page 4",
+      "docs/rapport-mission-5.jpg":"Rapport de mission de la mandataire — page 5",
+      "docs/rapport-mission-6.jpg":"Rapport de mission de la mandataire — page 6",
+      "docs/lettre-hcl-honoraires.jpg":"Lettre de la mandataire (27 mars 2026) — demande d'honoraires : 9 047,98 € TTC",
+      "docs/lettre-hcl-solde-212k.jpg":"Lettre de la mandataire — solde du compte d'administration : 212 625,10 €",
+      "docs/fiche-compte-1.jpg":"Fiche de compte de la succession — flux en euros (annotée), 1/6",
+      "docs/fiche-compte-2.jpg":"Fiche de compte de la succession — flux en euros (annotée), 2/6",
+      "docs/fiche-compte-3.jpg":"Fiche de compte de la succession — flux en euros (annotée), 3/6",
+      "docs/fiche-compte-4.jpg":"Fiche de compte de la succession — flux en euros (annotée), 4/6",
+      "docs/fiche-compte-5.jpg":"Fiche de compte de la succession — flux en euros (annotée), 5/6",
+      "docs/fiche-compte-6.jpg":"Fiche de compte de la succession — flux en euros (annotée), 6/6",
+      "docs/releve-atrium-1.jpg":"Relevé du syndic (Atrium Gestion) 2018-2020 — solde 14 651,05 €, page 1",
+      "docs/releve-atrium-2.jpg":"Relevé du syndic (Atrium Gestion) — page 2",
+      "docs/releve-usdt-1.jpg":"Relevé USDT — 1er juin 2026",
+      "docs/releve-usdt-2.jpg":"Relevé USDT — 23 juin 2026",
+      "docs/releve-sol.jpg":"Relevé de compte (SOL) — 18 février 2026",
+      "docs/releve-etude-abecassis.jpg":"Relevé de compte de l'étude notariale affiché à l'écran",
+      "docs/acte-vente-rabat-fr.jpg":"Expédition d'acte de vente à Rabat — appartement « Ryad Al Andalous », T.F. n° 87.555/52",
+      "docs/acte-vente-rabat-ar.jpg":"Acte de vente à Rabat — version arabe",
+      "docs/fiche-notaire-rabat.jpg":"Fiche d'identification de la notaire de Rabat (données publiques)",
+      "docs/kechouf-1.jpg":"Certificat de propriété (ANCFCC, Maroc) — au nom du défunt, T.F. 38/36391 (13/04/2017)",
+      "docs/kechouf-2.jpg":"Certificat de propriété (ANCFCC, Maroc) — conservation foncière",
+      "docs/kechouf-3.jpg":"Certificat de propriété (ANCFCC, Maroc) — conservation foncière",
+      "docs/kechouf-4.jpg":"Certificat de propriété (ANCFCC) — villa « Sidi El Abed », T.F. 38/49876 (07/03/2017)",
+      "docs/kechouf-5.jpg":"Certificat de propriété (ANCFCC, Maroc) — conservation foncière",
+      "docs/kechouf-6.jpg":"Certificat de propriété (ANCFCC, Maroc) — T.F. 38/36391",
+      "docs/kechouf-7.jpg":"Certificat de propriété (ANCFCC, Maroc) — conservation foncière",
+      "docs/kechouf-8.jpg":"Certificat de propriété (ANCFCC, Maroc) — conservation foncière",
+      "docs/avis-imposition-1.jpg":"Avis d'imposition / certificat foncier marocain — au nom du défunt (Rabat)",
+      "docs/avis-imposition-2.jpg":"Certificat de propriété (ANCFCC) — au nom d'Imane Mansouri, T.F. 50/26993 (20/04/2017)",
+      "docs/avis-imposition-3.jpg":"Avis d'imposition / certificat foncier marocain — au nom du défunt (Rabat)",
+      "docs/avis-imposition-4.jpg":"Avis d'imposition / certificat foncier marocain — au nom du défunt (Rabat)",
+      "docs/gendarmerie-pv-1.jpg":"Système judiciaire marocain — PV n° 72/3201/2018, meurtre prémédité avec guet-apens",
+      "docs/gendarmerie-pv-2.jpg":"Système judiciaire marocain — suite du PV n° 72/3201/2018",
+      "docs/communique-presse-fr.jpg":"Communiqué de presse — déclaration officielle (2 pages)",
+      "docs/communique-presse-ar.jpg":"Communiqué de presse — version arabe",
+      "docs/plainte-annaba-fr.jpg":"Plainte au Procureur de la République près le Tribunal d'Annaba — 23 mai 2026",
+      "docs/plainte-annaba-ar.jpg":"Plainte au Procureur d'Annaba — version arabe",
+      "docs/plainte-annaba-longue-ar.jpg":"Plainte pénale détaillée au Procureur d'Annaba (arabe) — demande d'ouverture d'instruction",
+      "docs/plainte-blanchiment-fr.jpg":"Plainte — blanchiment en bande organisée, détournement, faux, abus de confiance aggravé",
+      "docs/plainte-blanchiment-ar.jpg":"Plainte pour blanchiment — version arabe"
     },
     chapters:[
       {date:"16 février 2017", title:"L'origine du drame",
@@ -451,6 +532,7 @@ const I18N = {
     disclaimer:"<strong>قرينة البراءة.</strong> لا يذكر هذا الموقع أي شخص بالاسم ولا يؤكّد إدانة أحد. إنه ينقل وقائع مستمدّة من وثائق رسمية ويطرح أسئلة ذات مصلحة عامة. كل شخص يُشار إليه بريء حتى تثبت إدانته بحكم نهائي.",
     footNote:'© <span id="year2"></span> — سرد مواطن ذو مصلحة عامة.',
     docTag:"وثيقة من الملف",
+    docPicker:"وثائق هذا الفصل",
     docPlaceholder:"ضع هنا الوثيقة بعد حجب المعلومات الحساسة",
     docCaptions:{
       "docs/police-2021.jpg":"محضر شرطة نويي-سور-سين — التحقيق في الوفاة",
@@ -468,7 +550,71 @@ const I18N = {
       "docs/releve-mandataire-200k.jpg":"بطاقة حساب الوكيلة: 200 000 € وصلت من مكتب التوثيق (07/10/2025)، ثم «عكس القيد» بالمبلغ نفسه",
       "docs/taxes-foncieres-2016.jpg":"إعلام ضريبي مغربي 2016 — باسم المتوفّى (حي الرياض، الرباط)",
       "docs/taxes-foncieres-2017.jpg":"إعلام ضريبي مغربي 2017 — ما يزال باسم المتوفّى",
-      "docs/protestation-cambon.jpg":"رسالة مفتوحة إلى رئيس مجلس الشيوخ الفرنسي (باريس، 4 يونيو 2018) — موقَّعة من منظمات حقوقية عدّة"
+      "docs/protestation-cambon.jpg":"رسالة مفتوحة إلى رئيس مجلس الشيوخ الفرنسي (باريس، 4 يونيو 2018) — موقَّعة من منظمات حقوقية عدّة",
+      "docs/presse-essabah-article.jpg":"مقال داخلي من جريدة الصباح — الإشارة إلى التسميم المزعوم وتسجيلات هاتفية",
+      "docs/acte-deces-160.jpg":"عقد وفاة رقم 160 (نسخة كاملة) — نويي-سور-سين، 16 فبراير 2017",
+      "docs/pv-police-p1.jpg":"محضر شرطة نويي-سور-سين — الصفحة 1",
+      "docs/pv-police-p2.jpg":"محضر الشرطة — الصفحة 2 (إشارات إلى المغرب ودرك تمارة)",
+      "docs/pv-police-p3.jpg":"محضر الشرطة — الصفحة 3 (التشريح، الوكيل العام للملك)",
+      "docs/pv-police-p4.jpg":"محضر الشرطة — الصفحة 4 (مسائل الإرث)",
+      "docs/pv-police-ar.jpg":"محضر الشرطة (نويي-سور-سين) — الترجمة العربية",
+      "docs/plainte-rabat-2017.jpg":"شكاية مودعة بالرباط سنة 2017 — التسميم وطلب إخراج الجثة وتشريحها",
+      "docs/classement-email-fr.jpg":"بريد إلكتروني من محكمة نانتير (20 أكتوبر 2021) — حفظ الشكاية دون متابعة في 24 سبتمبر 2021",
+      "docs/classement-email-ar.jpg":"بريد الحفظ دون متابعة — الترجمة العربية",
+      "docs/constitution-pc-fr.jpg":"رسالة الادعاء المدني إلى عميد قضاة التحقيق — 25 سبتمبر 2024",
+      "docs/constitution-pc-ar.jpg":"الادعاء المدني — الترجمة العربية",
+      "docs/destitution-jo-2.jpg":"قرار عزل الموثقة (الجريدة الرسمية) — مقتطف ثانٍ",
+      "docs/ordonnance-ar.jpg":"أمر 13 نوفمبر 2025 (التوصيف: اغتيال) — الترجمة العربية",
+      "docs/lettre-juge-blee.jpg":"رسالة إلى قاضي التحقيق — طلب الاطلاع على الملف من الطرف المدني",
+      "docs/plainte-creteil.jpg":"شكاية إلى وكيل الجمهورية بكريتاي — خيانة أمانة مشدّدة واختلاس أموال التركة",
+      "docs/email-abecassis.jpg":"بريد مكتب التوثيق (2 يونيو 2026) — إرسال مشروع عقد الإشهاد إلى الورثة",
+      "docs/email-refus-acte.jpg":"بريد رفض مشروع عقد الإشهاد — 3 يونيو 2026",
+      "docs/lettre-vente-gentilly.jpg":"رسالة الوكيلة (4 أغسطس 2025) — عقار جونتيي بيع في 1 أغسطس 2025",
+      "docs/jugement-creteil.jpg":"حكم محكمة كريتاي (18 ديسمبر 2023) — اتحاد الملاك ضد الوكيلة والورثة",
+      "docs/rapport-mission-1.jpg":"تقرير مهمة الوكيلة (17 ديسمبر 2025) — الصفحة 1",
+      "docs/rapport-mission-2.jpg":"تقرير مهمة الوكيلة — الصفحة 2",
+      "docs/rapport-mission-3.jpg":"تقرير مهمة الوكيلة — الصفحة 3",
+      "docs/rapport-mission-4.jpg":"تقرير مهمة الوكيلة — الصفحة 4",
+      "docs/rapport-mission-5.jpg":"تقرير مهمة الوكيلة — الصفحة 5",
+      "docs/rapport-mission-6.jpg":"تقرير مهمة الوكيلة — الصفحة 6",
+      "docs/lettre-hcl-honoraires.jpg":"رسالة الوكيلة (27 مارس 2026) — طلب أتعاب: 9 047,98 € شاملة الضريبة",
+      "docs/lettre-hcl-solde-212k.jpg":"رسالة الوكيلة — رصيد حساب الإدارة: 212 625,10 €",
+      "docs/fiche-compte-1.jpg":"بطاقة حساب التركة — التدفقات باليورو (مع تعليقات)، 1/6",
+      "docs/fiche-compte-2.jpg":"بطاقة حساب التركة — التدفقات باليورو (مع تعليقات)، 2/6",
+      "docs/fiche-compte-3.jpg":"بطاقة حساب التركة — التدفقات باليورو (مع تعليقات)، 3/6",
+      "docs/fiche-compte-4.jpg":"بطاقة حساب التركة — التدفقات باليورو (مع تعليقات)، 4/6",
+      "docs/fiche-compte-5.jpg":"بطاقة حساب التركة — التدفقات باليورو (مع تعليقات)، 5/6",
+      "docs/fiche-compte-6.jpg":"بطاقة حساب التركة — التدفقات باليورو (مع تعليقات)، 6/6",
+      "docs/releve-atrium-1.jpg":"كشف حساب الشركة المسيّرة (Atrium Gestion) 2018-2020 — رصيد 14 651,05 €، الصفحة 1",
+      "docs/releve-atrium-2.jpg":"كشف حساب الشركة المسيّرة (Atrium Gestion) — الصفحة 2",
+      "docs/releve-usdt-1.jpg":"كشف USDT — 1 يونيو 2026",
+      "docs/releve-usdt-2.jpg":"كشف USDT — 23 يونيو 2026",
+      "docs/releve-sol.jpg":"كشف حساب (SOL) — 18 فبراير 2026",
+      "docs/releve-etude-abecassis.jpg":"كشف حساب مكتب التوثيق معروضاً على الشاشة",
+      "docs/acte-vente-rabat-fr.jpg":"نسخة عقد بيع بالرباط — شقة «رياض الأندلس»، الرسم العقاري 87.555/52",
+      "docs/acte-vente-rabat-ar.jpg":"عقد البيع بالرباط — النسخة العربية",
+      "docs/fiche-notaire-rabat.jpg":"بطاقة تعريف الموثقة بالرباط (معطيات عمومية)",
+      "docs/kechouf-1.jpg":"شهادة ملكية (الوكالة الوطنية للمحافظة العقارية، المغرب) — باسم المتوفّى، الرسم العقاري 38/36391 (13/04/2017)",
+      "docs/kechouf-2.jpg":"شهادة ملكية (المحافظة العقارية، المغرب)",
+      "docs/kechouf-3.jpg":"شهادة ملكية (المحافظة العقارية، المغرب)",
+      "docs/kechouf-4.jpg":"شهادة ملكية — فيلا «سيدي العابد»، الرسم العقاري 38/49876 (07/03/2017)",
+      "docs/kechouf-5.jpg":"شهادة ملكية (المحافظة العقارية، المغرب)",
+      "docs/kechouf-6.jpg":"شهادة ملكية (المحافظة العقارية، المغرب) — الرسم العقاري 38/36391",
+      "docs/kechouf-7.jpg":"شهادة ملكية (المحافظة العقارية، المغرب)",
+      "docs/kechouf-8.jpg":"شهادة ملكية (المحافظة العقارية، المغرب)",
+      "docs/avis-imposition-1.jpg":"إشعار ضريبي / شهادة عقارية مغربية — باسم المتوفّى (الرباط)",
+      "docs/avis-imposition-2.jpg":"شهادة ملكية — باسم إيمان منصوري، الرسم العقاري 50/26993 (20/04/2017)",
+      "docs/avis-imposition-3.jpg":"إشعار ضريبي / شهادة عقارية مغربية — باسم المتوفّى (الرباط)",
+      "docs/avis-imposition-4.jpg":"إشعار ضريبي / شهادة عقارية مغربية — باسم المتوفّى (الرباط)",
+      "docs/gendarmerie-pv-1.jpg":"النظام القضائي المغربي — محضر رقم 72/3201/2018، قتل عمد مع سبق الإصرار والترصد",
+      "docs/gendarmerie-pv-2.jpg":"النظام القضائي المغربي — تتمة المحضر رقم 72/3201/2018",
+      "docs/communique-presse-fr.jpg":"بلاغ صحفي — تصريح رسمي (صفحتان)",
+      "docs/communique-presse-ar.jpg":"بلاغ صحفي — النسخة العربية",
+      "docs/plainte-annaba-fr.jpg":"شكاية إلى وكيل الجمهورية لدى محكمة عنابة — 23 مايو 2026",
+      "docs/plainte-annaba-ar.jpg":"شكاية إلى وكيل الجمهورية بعنابة — النسخة العربية",
+      "docs/plainte-annaba-longue-ar.jpg":"شكاية جنائية مفصّلة إلى وكيل الجمهورية بعنابة — طلب فتح تحقيق",
+      "docs/plainte-blanchiment-fr.jpg":"شكاية — تبييض أموال في إطار عصابة إجرامية واختلاس وتزوير وخيانة أمانة مشدّدة",
+      "docs/plainte-blanchiment-ar.jpg":"شكاية بشأن تبييض الأموال — النسخة العربية"
     },
     chapters:[
       {date:"16 فبراير 2017", title:"أصل المأساة",
@@ -560,6 +706,30 @@ let LANG = "fr";
 const $ = s=>document.querySelector(s);
 const $$ = s=>[...document.querySelectorAll(s)];
 
+/* ---------- documents par chapitre (menu déroulant) ---------- */
+let DOC_STATE = {}; // { [chapitre]: [{src, cap}, ...] } — reconstruit à chaque render
+// Markup <img> avec repli sur un placeholder si le fichier manque.
+function docImgHtml(src, ph){
+  return `<img src="${src}" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;doc-placeholder&quot;><svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;><path d=&quot;M7 3h7l5 5v13H7z&quot;/><path d=&quot;M14 3v5h5&quot;/></svg><span>${ph}</span></div>'">`;
+}
+// Libellé court d'option : partie avant le tiret cadratin de la légende.
+function docLabel(cap){
+  const s = String(cap).split(" — ")[0].trim();
+  return s.length>64 ? s.slice(0,63)+"…" : s;
+}
+// Bascule l'image + la légende affichées quand on change le menu déroulant.
+function swapDoc(sel){
+  const ch = sel.dataset.ch, list = DOC_STATE[ch];
+  if(!list) return;
+  const it = list[+sel.value];
+  if(!it) return;
+  const d = I18N[LANG];
+  const frame = document.getElementById("docframe-"+ch);
+  const cap = document.getElementById("doccap-"+ch);
+  if(frame) frame.innerHTML = docImgHtml(it.src, d.docPlaceholder);
+  if(cap) cap.innerHTML = `<span class="tag">${d.docTag}</span><br>${it.cap}`;
+}
+
 function render(){
   const d = I18N[LANG];
   document.documentElement.lang = LANG;
@@ -578,6 +748,7 @@ function render(){
   // chapters
   const story = $("#story");
   story.innerHTML = "";
+  DOC_STATE = {};
   d.chapters.forEach((c,i)=>{
     const sec = document.createElement("section");
     sec.className = "chapter";
@@ -589,30 +760,48 @@ function render(){
       ).join("") + `</div>`;
     }
     // documents par chapitre (placeholders – dépose les fichiers caviardés dans /docs)
-    // Chaque chapitre peut avoir PLUSIEURS documents.
+    // Chaque chapitre peut avoir PLUSIEURS documents : ils sont proposés via un
+    // menu déroulant, et le 1er s'affiche par défaut. swapDoc() bascule l'image.
     let figHtml = "";
     const docMap = {
-      1:["docs/police-2021.jpg","docs/presse-essabah.jpg"],
-      2:["docs/classement-2021.jpg"],
-      3:["docs/destitution-2017.jpg"],
-      4:["docs/ordonnance-2026.jpg"],
-      5:["docs/acte-notoriete-2026.jpg"],
-      6:["docs/releve-vente-300k.jpg","docs/rapport-mission-220k.jpg","docs/releve-compte-129k.jpg","docs/releve-mandataire-200k.jpg"],
-      7:["docs/gendarmerie-maroc.jpg","docs/faux-contrat-maroc.jpg","docs/faux-contrat-maroc-2.jpg","docs/taxes-foncieres-2016.jpg","docs/taxes-foncieres-2017.jpg"],
-      8:["docs/protestation-cambon.jpg"]
+      1:["docs/police-2021.jpg","docs/presse-essabah.jpg","docs/presse-essabah-article.jpg","docs/acte-deces-160.jpg","docs/pv-police-p1.jpg","docs/pv-police-p2.jpg","docs/pv-police-p3.jpg","docs/pv-police-p4.jpg","docs/pv-police-ar.jpg","docs/plainte-rabat-2017.jpg"],
+      2:["docs/classement-2021.jpg","docs/classement-email-fr.jpg","docs/classement-email-ar.jpg","docs/constitution-pc-fr.jpg","docs/constitution-pc-ar.jpg"],
+      3:["docs/destitution-2017.jpg","docs/destitution-jo-2.jpg"],
+      4:["docs/ordonnance-2026.jpg","docs/ordonnance-ar.jpg","docs/lettre-juge-blee.jpg","docs/plainte-creteil.jpg"],
+      5:["docs/acte-notoriete-2026.jpg","docs/email-abecassis.jpg","docs/email-refus-acte.jpg","docs/lettre-vente-gentilly.jpg"],
+      6:["docs/releve-vente-300k.jpg","docs/rapport-mission-220k.jpg","docs/releve-compte-129k.jpg","docs/releve-mandataire-200k.jpg","docs/jugement-creteil.jpg","docs/rapport-mission-1.jpg","docs/rapport-mission-2.jpg","docs/rapport-mission-3.jpg","docs/rapport-mission-4.jpg","docs/rapport-mission-5.jpg","docs/rapport-mission-6.jpg","docs/lettre-hcl-honoraires.jpg","docs/lettre-hcl-solde-212k.jpg","docs/fiche-compte-1.jpg","docs/fiche-compte-2.jpg","docs/fiche-compte-3.jpg","docs/fiche-compte-4.jpg","docs/fiche-compte-5.jpg","docs/fiche-compte-6.jpg","docs/releve-atrium-1.jpg","docs/releve-atrium-2.jpg","docs/releve-usdt-1.jpg","docs/releve-usdt-2.jpg","docs/releve-sol.jpg","docs/releve-etude-abecassis.jpg"],
+      7:["docs/gendarmerie-maroc.jpg","docs/faux-contrat-maroc.jpg","docs/faux-contrat-maroc-2.jpg","docs/taxes-foncieres-2016.jpg","docs/taxes-foncieres-2017.jpg","docs/acte-vente-rabat-fr.jpg","docs/acte-vente-rabat-ar.jpg","docs/fiche-notaire-rabat.jpg","docs/kechouf-1.jpg","docs/kechouf-2.jpg","docs/kechouf-3.jpg","docs/kechouf-4.jpg","docs/kechouf-5.jpg","docs/kechouf-6.jpg","docs/kechouf-7.jpg","docs/kechouf-8.jpg","docs/avis-imposition-1.jpg","docs/avis-imposition-2.jpg","docs/avis-imposition-3.jpg","docs/avis-imposition-4.jpg","docs/gendarmerie-pv-1.jpg","docs/gendarmerie-pv-2.jpg"],
+      8:["docs/protestation-cambon.jpg","docs/communique-presse-fr.jpg","docs/communique-presse-ar.jpg","docs/plainte-annaba-fr.jpg","docs/plainte-annaba-ar.jpg","docs/plainte-annaba-longue-ar.jpg","docs/plainte-blanchiment-fr.jpg","docs/plainte-blanchiment-ar.jpg"]
     };
-    if(docMap[i+1]){
-      figHtml = docMap[i+1].map(src=>{
-        const cap = (d.docCaptions && d.docCaptions[src]) ? d.docCaptions[src] : (c.date+" — "+c.title);
-        return `
-      <figure class="doc">
-        <div class="frame">
-          <img src="${src}" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;doc-placeholder&quot;><svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;><path d=&quot;M7 3h7l5 5v13H7z&quot;/><path d=&quot;M14 3v5h5&quot;/></svg><span>${d.docPlaceholder}</span></div>'">
-          <!-- exemple de caviardage cosmétique : <div class="redact" style="top:20%;left:12%;width:40%;height:6%"></div> -->
-        </div>
-        <figcaption><span class="tag">${d.docTag}</span><br>${cap}</figcaption>
-      </figure>`;
-      }).join("");
+    const chDocs = docMap[i+1] || [];
+    if(chDocs.length){
+      const ch = i+1;
+      const items = chDocs.map(src=>({
+        src,
+        cap:(d.docCaptions && d.docCaptions[src]) ? d.docCaptions[src] : (c.date+" — "+c.title)
+      }));
+      DOC_STATE[ch] = items;
+      const first = items[0];
+      let pickerHtml = "";
+      if(items.length>1){
+        const opts = items.map((it,di)=>
+          `<option value="${di}">${di+1} · ${docLabel(it.cap)}</option>`
+        ).join("");
+        pickerHtml = `
+      <div class="doc-picker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg>
+        <label for="docsel-${ch}">${d.docPicker} · <b>${items.length}</b></label>
+        <select id="docsel-${ch}" class="doc-select" data-ch="${ch}" onchange="swapDoc(this)">${opts}</select>
+      </div>`;
+      }
+      figHtml = `
+      <div class="doc-group">
+        ${pickerHtml}
+        <figure class="doc">
+          <div class="frame" id="docframe-${ch}">${docImgHtml(first.src, d.docPlaceholder)}</div>
+          <figcaption id="doccap-${ch}"><span class="tag">${d.docTag}</span><br>${first.cap}</figcaption>
+        </figure>
+      </div>`;
     }
     sec.innerHTML = `
       <div class="ch-head">
