@@ -1031,5 +1031,145 @@ window.addEventListener("beforeunload", ()=>synth.cancel());
 
 render();
 </script>
+
+<!-- ============================================================
+     ASSISTANT IA — Q/R sur l'affaire (FR/AR)
+     Backend gratuit : https://api.tchipa.co.uk/verite/ask
+     ============================================================ -->
+<style>
+#ai-fab{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#1a1206;border:none;cursor:pointer;
+  padding:13px 18px;border-radius:40px;font:inherit;font-weight:600;font-size:.9rem;
+  box-shadow:0 8px 26px rgba(200,163,90,.4)}
+#ai-fab svg{width:20px;height:20px}
+#ai-fab .lbl{white-space:nowrap}
+body[dir="rtl"] #ai-fab{right:auto;left:22px}
+#ai-panel{position:fixed;bottom:22px;right:22px;z-index:10000;width:min(410px,calc(100vw - 32px));
+  height:min(620px,calc(100vh - 44px));display:none;flex-direction:column;overflow:hidden;
+  background:var(--panel);border:1px solid var(--line);border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.55)}
+body[dir="rtl"] #ai-panel{right:auto;left:22px}
+#ai-panel.open{display:flex}
+.ai-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);
+  background:var(--bg-soft)}
+.ai-head .dot{width:9px;height:9px;border-radius:50%;background:#4ccf7e;box-shadow:0 0 8px #4ccf7e;flex:none}
+.ai-head h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold-soft);font-weight:600;flex:1}
+body[dir="rtl"] .ai-head h4{font-family:'Amiri',serif}
+.ai-head button{background:none;border:none;color:var(--ink-dim);cursor:pointer;font-size:1.4rem;line-height:1;padding:2px 6px}
+.ai-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.ai-intro{color:var(--ink-dim);font-size:.86rem;line-height:1.6}
+.ai-sugg{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.ai-sugg button{background:var(--bg);border:1px solid var(--line);color:var(--gold-soft);cursor:pointer;
+  font:inherit;font-size:.76rem;padding:7px 11px;border-radius:20px;text-align:start}
+.ai-sugg button:hover{border-color:var(--gold)}
+.ai-msg{max-width:88%;padding:10px 13px;border-radius:13px;font-size:.88rem;line-height:1.6;white-space:pre-wrap;word-wrap:break-word}
+.ai-msg.user{align-self:flex-end;background:var(--gold);color:#1a1206;border-bottom-right-radius:4px}
+body[dir="rtl"] .ai-msg.user{border-bottom-right-radius:13px;border-bottom-left-radius:4px}
+.ai-msg.bot{align-self:flex-start;background:var(--bg);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px}
+.ai-msg.bot strong{color:var(--gold-soft)}
+.ai-msg.typing{color:var(--ink-dim);font-style:italic}
+.ai-foot{padding:11px;border-top:1px solid var(--line);background:var(--bg-soft)}
+.ai-inrow{display:flex;gap:8px;align-items:flex-end}
+#ai-input{flex:1;resize:none;max-height:110px;background:var(--bg);color:var(--ink);border:1px solid var(--line);
+  border-radius:12px;padding:10px 12px;font:inherit;font-size:.88rem;font-weight:300;line-height:1.5}
+#ai-input:focus{outline:none;border-color:var(--gold)}
+#ai-send{background:var(--gold);border:none;color:#1a1206;cursor:pointer;border-radius:12px;padding:0 15px;height:42px;font:inherit;font-weight:600}
+#ai-send:disabled{opacity:.5;cursor:default}
+.ai-disc{color:var(--ink-dim);font-size:.68rem;margin-top:7px;text-align:center;opacity:.8}
+</style>
+
+<button id="ai-fab" aria-label="assistant">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 0 0-9 9 8.9 8.9 0 0 0 1.4 4.8L3 21l4.4-1.3A9 9 0 1 0 12 3z"/><path d="M8 11h8M8 14h5" stroke-linecap="round"/></svg>
+  <span class="lbl"></span>
+</button>
+
+<div id="ai-panel" role="dialog" aria-modal="false">
+  <div class="ai-head"><span class="dot"></span><h4></h4><button id="ai-close" aria-label="fermer">×</button></div>
+  <div class="ai-body" id="ai-body"></div>
+  <div class="ai-foot">
+    <div class="ai-inrow">
+      <textarea id="ai-input" rows="1"></textarea>
+      <button id="ai-send"></button>
+    </div>
+    <div class="ai-disc"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const API = "https://api.tchipa.co.uk/verite/ask";
+  const T = {
+    fr:{ fab:"Poser une question", head:"Assistant — Vérité & Justice",
+      intro:"Posez votre question sur l'affaire — dates, montants, pièces, personnes. Réponses en français ou en arabe, du début à la fin du dossier.",
+      ph:"Écrivez votre question…", send:"Envoyer",
+      sugg:["Qui est la victime ?","Combien d'argent a été détourné ?","Où en est la justice aujourd'hui ?","Que s'est-il passé au Maroc ?"],
+      disc:"Réponses générées à partir des pièces du dossier · présomption d'innocence.",
+      err:"Une erreur est survenue. Réessayez.", think:"réflexion…" },
+    ar:{ fab:"اطرح سؤالاً", head:"المساعد — الحقيقة والعدالة",
+      intro:"اطرح سؤالك حول القضية — التواريخ، المبالغ، الوثائق، الأشخاص. الأجوبة بالعربية أو الفرنسية، من بداية الملف إلى نهايته.",
+      ph:"اكتب سؤالك…", send:"إرسال",
+      sugg:["من هو الضحية؟","كم المبلغ الذي تم اختلاسه؟","أين وصلت العدالة اليوم؟","ماذا حدث في المغرب؟"],
+      disc:"الأجوبة مستمدة من وثائق الملف · قرينة البراءة مكفولة.",
+      err:"حدث خطأ. أعد المحاولة.", think:"يفكّر…" }
+  };
+  const L = () => (typeof LANG !== "undefined" && T[LANG]) ? LANG : "fr";
+  const $id = id => document.getElementById(id);
+  const fab=$id("ai-fab"), panel=$id("ai-panel"), body=$id("ai-body"),
+        input=$id("ai-input"), send=$id("ai-send"), closeBtn=$id("ai-close");
+  let history=[], busy=false, started=false;
+
+  function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+  function fmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\n/g,"<br>");}
+
+  function applyLang(){
+    const t=T[L()];
+    fab.querySelector(".lbl").textContent=t.fab;
+    panel.querySelector(".ai-head h4").textContent=t.head;
+    input.placeholder=t.ph; send.textContent=t.send;
+    panel.querySelector(".ai-disc").textContent=t.disc;
+    if(!started) renderIntro();
+  }
+  function renderIntro(){
+    const t=T[L()];
+    body.innerHTML=`<div class="ai-intro" dir="auto">${esc(t.intro)}</div>
+      <div class="ai-sugg">${t.sugg.map(q=>`<button type="button" dir="auto">${esc(q)}</button>`).join("")}</div>`;
+    body.querySelectorAll(".ai-sugg button").forEach(b=>b.addEventListener("click",()=>ask(b.textContent)));
+  }
+  function addMsg(text,cls){
+    const d=document.createElement("div");
+    d.className="ai-msg "+cls; d.setAttribute("dir","auto");
+    d.innerHTML=cls==="bot"?fmt(text):esc(text);
+    body.appendChild(d); body.scrollTop=body.scrollHeight; return d;
+  }
+  async function ask(q){
+    q=(q||"").trim(); if(!q||busy) return;
+    if(!started){started=true; body.innerHTML="";}
+    busy=true; send.disabled=true;
+    addMsg(q,"user"); input.value=""; input.style.height="auto";
+    const typing=addMsg(T[L()].think,"bot typing");
+    try{
+      const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({question:q,history:history.slice(-6)})});
+      const data=await r.json();
+      const ans=data.answer||T[L()].err;
+      typing.remove(); addMsg(ans,"bot");
+      history.push({role:"user",content:q},{role:"assistant",content:ans});
+    }catch(e){ typing.remove(); addMsg(T[L()].err,"bot"); }
+    busy=false; send.disabled=false; input.focus();
+  }
+  function toggle(open){
+    panel.classList.toggle("open",open);
+    fab.style.display=open?"none":"flex";
+    if(open){ applyLang(); input.focus(); }
+  }
+  fab.addEventListener("click",()=>toggle(true));
+  closeBtn.addEventListener("click",()=>toggle(false));
+  send.addEventListener("click",()=>ask(input.value));
+  input.addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();ask(input.value);} });
+  input.addEventListener("input",()=>{ input.style.height="auto"; input.style.height=Math.min(input.scrollHeight,110)+"px"; });
+  document.querySelectorAll(".lang-switch button").forEach(b=>b.addEventListener("click",()=>setTimeout(applyLang,0)));
+  applyLang();
+})();
+</script>
 </body>
 </html>
