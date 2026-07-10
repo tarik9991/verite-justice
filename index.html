@@ -115,6 +115,15 @@ body[dir="rtl"] h3{font-family:'Amiri',serif;font-weight:700}
 .hero .sub{
   color:var(--ink-dim);max-width:560px;font-size:1.08rem;margin:18px auto 0;
 }
+.hero .accusation{
+  max-width:780px;margin:22px auto 0;padding:18px 0;
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(1.12rem,3.1vw,1.62rem);line-height:1.5;
+  color:#f4e7c9;letter-spacing:.005em;
+  border-top:1px solid rgba(197,160,89,.35);
+  border-bottom:1px solid rgba(197,160,89,.35);
+}
+body[dir="rtl"] .hero .accusation{font-family:'Amiri',serif;font-weight:700}
 .hero .lead-q{
   margin-top:46px;max-width:620px;font-family:'Playfair Display',serif;
   font-style:italic;font-size:clamp(1.2rem,3.4vw,1.7rem);color:var(--gold-soft);
@@ -261,6 +270,7 @@ footer .legal strong{color:var(--gold-soft)}
 <header class="hero">
   <div class="eyebrow" data-i="eyebrow">Un dossier. Des faits. Des questions.</div>
   <h1 data-i="title">Vérité &amp; Justice</h1>
+  <p class="accusation" data-i="accusation">L'assassinat d'un riche homme d'affaires algérien,<br>prouvé par la police française et la gendarmerie royale marocaine,<br>couvert par des officiels français et marocains.</p>
   <p class="sub" data-i="sub">L'histoire d'une succession, d'un silence,<br>et de questions restées sans réponse.</p>
   <p class="lead-q" data-i="leadq">« Comment une succession peut-elle être déclarée <em>vide</em>, quand les comptes, eux, parlent ? »</p>
   <div class="listen-hero">
@@ -332,6 +342,7 @@ const I18N = {
     listenAll:"Écouter", listenStory:"Écouter l'histoire", readStory:"Lire l'histoire",
     eyebrow:"Un dossier. Des faits. Des questions.",
     title:"Vérité & Justice",
+    accusation:"L'assassinat d'un riche homme d'affaires algérien,<br>prouvé par la police française et la gendarmerie royale marocaine,<br>couvert par des officiels français et marocains.",
     sub:"L'histoire d'une succession, d'un silence,<br>et de questions restées sans réponse.",
     leadq:"« Comment une succession peut-elle être déclarée <em>vide</em>, quand les comptes, eux, parlent ? »",
     scroll:"Faites défiler",
@@ -372,7 +383,7 @@ const I18N = {
       "docs/pv-police-p4.jpg":"Procès-verbal de police — page 4 (questions d'héritage)",
       "docs/pv-police-ar.jpg":"Procès-verbal de police (Neuilly-sur-Seine) — traduction arabe",
       "docs/plainte-rabat-2017.jpg":"Plainte déposée à Rabat en 2017 — empoisonnement, demande d'exhumation et d'autopsie",
-      "docs/portrait-defunt.jpg":"Abdelkrim Mansouri — le défunt, binational franco-algérien, ancien conservateur d'un palais du Golfe",
+      "docs/portrait-defunt.jpg":"Abdelkrim Mansouri — le défunt, algérien, ancien conservateur d'un palais du Golfe",
       "docs/defunt-bureau-emirats.jpg":"Reportage télévisé — dans son bureau, sous les portraits des dirigeants des Émirats arabes unis",
       "docs/defunt-dubai.jpg":"Abdelkrim Mansouri à Dubaï — au temps où il servait dans le Golfe",
       "docs/defunt-jeune.jpg":"Abdelkrim Mansouri, plus jeune",
@@ -446,10 +457,10 @@ const I18N = {
     },
     chapters:[
       {date:"16 février 2017", title:"L'origine du drame",
-        html:`<p>Un homme, père de huit enfants, <strong>binational franco-algérien</strong>, ancien <strong>conservateur d'un palais du Golfe</strong>, meurt le <strong>16 février 2017 à Neuilly-sur-Seine</strong> (acte de décès n° 160). La famille croit d'abord à une mort ordinaire.</p>
+        html:`<p>Un homme, père de huit enfants, <strong>algérien</strong>, ancien <strong>conservateur d'un palais du Golfe</strong>, meurt le <strong>16 février 2017 à Neuilly-sur-Seine</strong> (acte de décès n° 160). La famille croit d'abord à une mort ordinaire.</p>
               <p>Mais selon les conclusions d'un <strong>rapport d'enquête de la police de Neuilly-sur-Seine</strong>, la thèse retenue serait celle d'un <strong>assassinat</strong>. La presse arabe s'interroge en une : <em>« Le conservateur des palais émiratis a-t-il été tué par empoisonnement ? »</em>. Dès 2017, une plainte déposée au Maroc demandait l'<strong>exhumation et l'autopsie</strong>.</p>
               <div class="pull">Si une enquête officielle documente un crime, pourquoi le dossier n'a-t-il pas immédiatement suivi son cours ?</div>`,
-        speak:"L'origine du drame. Un homme, père de huit enfants, binational franco-algérien, ancien conservateur d'un palais du Golfe, meurt le 16 février 2017 à Neuilly-sur-Seine. La famille croit d'abord à une mort ordinaire. Mais selon les conclusions d'un rapport d'enquête de la police de Neuilly-sur-Seine, la thèse retenue serait celle d'un assassinat. La presse arabe s'interroge en une : le conservateur des palais émiratis a-t-il été tué par empoisonnement ? Dès 2017, une plainte déposée au Maroc demandait l'exhumation et l'autopsie. Si une enquête officielle documente un crime, pourquoi le dossier n'a-t-il pas immédiatement suivi son cours ?"},
+        speak:"L'origine du drame. Un homme, père de huit enfants, algérien, ancien conservateur d'un palais du Golfe, meurt le 16 février 2017 à Neuilly-sur-Seine. La famille croit d'abord à une mort ordinaire. Mais selon les conclusions d'un rapport d'enquête de la police de Neuilly-sur-Seine, la thèse retenue serait celle d'un assassinat. La presse arabe s'interroge en une : le conservateur des palais émiratis a-t-il été tué par empoisonnement ? Dès 2017, une plainte déposée au Maroc demandait l'exhumation et l'autopsie. Si une enquête officielle documente un crime, pourquoi le dossier n'a-t-il pas immédiatement suivi son cours ?"},
       {date:"24 septembre 2021", title:"Le premier silence",
         html:`<p>Le <strong>24 septembre 2021</strong>, l'affaire est <strong>classée sans suite</strong> par le parquet (plainte n° 20 174 000239). La notification arrive par un simple courriel du tribunal, le 20 octobre 2021.</p>
               <p>Un classement n'est pas un acquittement : c'est une décision administrative de <strong>ne pas poursuivre</strong>. L'enquête, elle, avait pourtant réuni des éléments.</p>
@@ -496,10 +507,10 @@ const I18N = {
               <div class="pull">Une médaille de la République à l'homme au nom duquel passe l'héritage d'un Algérien assassiné : coïncidence, ou protection ?</div>`,
         speak:"Une médaille d'or pour quel mérite ? L'homme au nom duquel serait passé l'appartement de Hay Riad n'est pas un inconnu : Mahmoud Archane, ex-commissaire de police devenu député, désigné par une douzaine d'organisations de défense des droits humains comme l'un des grands chefs tortionnaires du régime marocain des années de plomb. Le centre de torture de Derb Moulay Cherif, des opposants torturés à mort sous sa direction, selon leur lettre ouverte. C'est pourtant à lui que le sénateur Christian Cambon, alors président de la Commission des affaires étrangères et de la défense du Sénat, a remis, le 14 avril 2018 à Rabat, une médaille d'or du Sénat. Le 4 juin 2018, ces organisations ont adressé une lettre ouverte au Président du Sénat : un élu de la République récompense un tortionnaire pour ses loyaux services. Nous posons alors des questions que tout citoyen, français ou algérien, a le droit de poser : pourquoi la République honore-t-elle un homme que les défenseurs des droits humains désignent comme tortionnaire ? Et quand la victime d'un assassinat est un citoyen algérien dont l'héritage se retrouve, selon les pièces, au nom de ce même homme, qui protège qui ? Des amitiés politiques au sommet de l'État peuvent-elles peser sur le cours d'une instruction criminelle à Nanterre ? Une médaille de la République à l'homme au nom duquel passe l'héritage d'un Algérien assassiné : coïncidence, ou protection ?"},
       {date:"Aujourd'hui", title:"Les questions que nous posons",
-        html:`<p>Nous n'accusons personne. La présomption d'innocence appartient à tous. Mais nous demandons une seule chose : <strong>que la lumière soit faite</strong>.</p>
-              <p>Un citoyen franco-algérien a le droit de savoir <strong>comment est mort son père</strong>, et <strong>où est passé son héritage</strong>. Que les justices de France, du Maroc et d'Algérie se parlent, et répondent.</p>
+        html:`<p>La présomption d'innocence appartient à tous. Mais nous demandons une seule chose : <strong>que la lumière soit faite</strong>.</p>
+              <p>Un citoyen algérien a le droit de savoir <strong>comment est mort son père</strong>, et <strong>où est passé son héritage</strong>. Que les justices de France, du Maroc et d'Algérie se parlent, et répondent.</p>
               <div class="pull">Pourquoi un dossier d'assassinat documenté avance-t-il si lentement ? Pourquoi déclarer vide ce que les comptes disent plein ?</div>`,
-        speak:"Les questions que nous posons. Nous n'accusons personne. La présomption d'innocence appartient à tous. Mais nous demandons une seule chose : que la lumière soit faite. Un citoyen franco-algérien a le droit de savoir comment est mort son père, et où est passé son héritage. Que les justices de France, du Maroc et d'Algérie se parlent, et répondent. Pourquoi un dossier d'assassinat documenté avance-t-il si lentement ? Pourquoi déclarer vide ce que les comptes disent plein ?"}
+        speak:"Les questions que nous posons. La présomption d'innocence appartient à tous. Mais nous demandons une seule chose : que la lumière soit faite. Un citoyen algérien a le droit de savoir comment est mort son père, et où est passé son héritage. Que les justices de France, du Maroc et d'Algérie se parlent, et répondent. Pourquoi un dossier d'assassinat documenté avance-t-il si lentement ? Pourquoi déclarer vide ce que les comptes disent plein ?"}
     ],
     ledger:[
       {k:"Vente du bien immobilier (1ᵉʳ août 2025)", v:"≈ 300 000 €", contra:false},
@@ -535,6 +546,7 @@ const I18N = {
     listenAll:"استماع", listenStory:"استمع إلى القصة", readStory:"اقرأ القصة",
     eyebrow:"ملف. وقائع. أسئلة.",
     title:"الحقيقة والعدالة",
+    accusation:"اغتيال رجل أعمال جزائري ثري،<br>أثبتته الشرطة الفرنسية والدرك الملكي المغربي،<br>ويُغطّيه مسؤولون فرنسيون ومغاربة.",
     sub:"قصة تركة، وصمت،<br>وأسئلة بقيت بلا جواب.",
     leadq:"«كيف يمكن أن تُعلَن تركة <em>فارغة</em>، بينما الحسابات المصرفية تنطق بعكس ذلك؟»",
     scroll:"مرّر للأسفل",
@@ -575,7 +587,7 @@ const I18N = {
       "docs/pv-police-p4.jpg":"محضر الشرطة — الصفحة 4 (مسائل الإرث)",
       "docs/pv-police-ar.jpg":"محضر الشرطة (نويي-سور-سين) — الترجمة العربية",
       "docs/plainte-rabat-2017.jpg":"شكاية مودعة بالرباط سنة 2017 — التسميم وطلب إخراج الجثة وتشريحها",
-      "docs/portrait-defunt.jpg":"عبد الكريم منصوري — الفقيد، مزدوج الجنسية فرنسي-جزائري، محافظ سابق لأحد قصور الخليج",
+      "docs/portrait-defunt.jpg":"عبد الكريم منصوري — الفقيد، جزائري، محافظ سابق لأحد قصور الخليج",
       "docs/defunt-bureau-emirats.jpg":"تقرير تلفزيوني — في مكتبه، تحت صور قادة دولة الإمارات العربية المتحدة",
       "docs/defunt-dubai.jpg":"عبد الكريم منصوري في دبي — أيام عمله في الخليج",
       "docs/defunt-jeune.jpg":"عبد الكريم منصوري في شبابه",
@@ -649,10 +661,10 @@ const I18N = {
     },
     chapters:[
       {date:"16 فبراير 2017", title:"أصل المأساة",
-        html:`<p>رجل، أبٌ لثمانية أبناء، <strong>يحمل الجنسيتين الفرنسية والجزائرية</strong>، كان <strong>محافظاً لقصر في الخليج</strong>، يتوفّى في <strong>16 فبراير 2017 بنويي-سور-سين</strong> (شهادة الوفاة رقم 160). تظنّ العائلة في البداية أنها وفاة عادية.</p>
+        html:`<p>رجل، أبٌ لثمانية أبناء، <strong>جزائري</strong>، كان <strong>محافظاً لقصر في الخليج</strong>، يتوفّى في <strong>16 فبراير 2017 بنويي-سور-سين</strong> (شهادة الوفاة رقم 160). تظنّ العائلة في البداية أنها وفاة عادية.</p>
               <p>لكن وفق استنتاجات <strong>تقرير تحقيق لشرطة نويي-سور-سين</strong>، فإن الفرضية المعتمدة هي <strong>الاغتيال</strong>. وتساءلت الصحافة العربية على صفحتها الأولى: <em>«هل قُتل محافظ القصور الإماراتية مسموماً؟»</em>. ومنذ 2017، طالبت شكوى مودعة بالمغرب <strong>باستخراج الجثة وتشريحها</strong>.</p>
               <div class="pull">إذا وثّق تحقيق رسمي وقوع جريمة، فلماذا لم يأخذ الملف مجراه على الفور؟</div>`,
-        speak:"أصل المأساة. رجل، أبٌ لثمانية أبناء، يحمل الجنسيتين الفرنسية والجزائرية، كان محافظاً لقصر في الخليج، يتوفّى في السادس عشر من فبراير 2017 بنويي سور سين. تظنّ العائلة في البداية أنها وفاة عادية. لكن وفق استنتاجات تقرير تحقيق لشرطة نويي سور سين، فإن الفرضية المعتمدة هي الاغتيال. وتساءلت الصحافة العربية: هل قُتل محافظ القصور الإماراتية مسموماً؟ ومنذ 2017، طالبت شكوى مودعة بالمغرب باستخراج الجثة وتشريحها. إذا وثّق تحقيق رسمي وقوع جريمة، فلماذا لم يأخذ الملف مجراه على الفور؟"},
+        speak:"أصل المأساة. رجل، أبٌ لثمانية أبناء، جزائري، كان محافظاً لقصر في الخليج، يتوفّى في السادس عشر من فبراير 2017 بنويي سور سين. تظنّ العائلة في البداية أنها وفاة عادية. لكن وفق استنتاجات تقرير تحقيق لشرطة نويي سور سين، فإن الفرضية المعتمدة هي الاغتيال. وتساءلت الصحافة العربية: هل قُتل محافظ القصور الإماراتية مسموماً؟ ومنذ 2017، طالبت شكوى مودعة بالمغرب باستخراج الجثة وتشريحها. إذا وثّق تحقيق رسمي وقوع جريمة، فلماذا لم يأخذ الملف مجراه على الفور؟"},
       {date:"24 سبتمبر 2021", title:"الصمت الأول",
         html:`<p>في <strong>24 سبتمبر 2021</strong>، تُحفظ القضية <strong>دون متابعة</strong> من طرف النيابة (الشكوى رقم 20 174 000239). ويصل التبليغ عبر بريد إلكتروني بسيط من المحكمة في 20 أكتوبر 2021.</p>
               <p>الحفظ ليس تبرئة: إنه قرار إداري <strong>بعدم المتابعة</strong>. ومع ذلك فقد جمع التحقيق عناصر دامغة.</p>
@@ -699,10 +711,10 @@ const I18N = {
               <div class="pull">ميدالية من الجمهورية لرجلٍ تنتقل إلى اسمه تركة جزائريٍّ اغتيل: صدفة، أم حماية؟</div>`,
         speak:"ميدالية ذهبية مقابل أي استحقاق؟ الرجل الذي انتقلت إليه شقة حي الرياض ليس مجهولاً: إنه محمود عرشان، المفوض السابق للشرطة الذي صار نائباً برلمانياً، والذي وصفته أكثر من عشر منظمات حقوقية بأنه أحد كبار الجلادين في النظام المغربي خلال سنوات الرصاص. مركز التعذيب درب مولاي الشريف، ومعارضون عذبوا حتى الموت تحت إشرافه، بحسب رسالتها المفتوحة. ومع ذلك، فقد سلمه السيناتور كريستيان كامبون، رئيس لجنة الشؤون الخارجية والدفاع بمجلس الشيوخ الفرنسي آنذاك، في الرابع عشر من أبريل 2018 بالرباط، الميدالية الذهبية لمجلس الشيوخ. وفي الرابع من يونيو 2018، وجهت تلك المنظمات رسالة مفتوحة إلى رئيس مجلس الشيوخ: منتخب من الجمهورية يكافئ جلاداً على خدماته المخلصة. ونطرح هنا أسئلة من حق كل مواطن، فرنسياً كان أو جزائرياً، أن يطرحها: لماذا تكرم الجمهورية رجلاً يصفه المدافعون عن حقوق الإنسان بالجلاد؟ وحين تكون ضحية الاغتيال مواطناً جزائرياً تنتقل تركته، وفق الوثائق، إلى اسم هذا الرجل نفسه، فمن يحمي من؟ وهل يمكن لصداقات سياسية في قمة الدولة أن تثقل مسار تحقيق جنائي في نانتير؟ ميدالية من الجمهورية لرجل تنتقل إلى اسمه تركة جزائري اغتيل: صدفة أم حماية؟"},
       {date:"اليوم", title:"الأسئلة التي نطرحها",
-        html:`<p>نحن لا نتّهم أحدًا. قرينة البراءة حقٌّ للجميع. لكننا نطلب أمرًا واحدًا: <strong>أن تُكشف الحقيقة</strong>.</p>
-              <p>من حقّ مواطن فرنسي-جزائري أن يعرف <strong>كيف مات والده</strong>، و<strong>أين ذهبت تركته</strong>. فلتتحاور عدالات فرنسا والمغرب والجزائر، ولتُجِب.</p>
+        html:`<p>قرينة البراءة حقٌّ للجميع. لكننا نطلب أمرًا واحدًا: <strong>أن تُكشف الحقيقة</strong>.</p>
+              <p>من حقّ مواطن جزائري أن يعرف <strong>كيف مات والده</strong>، و<strong>أين ذهبت تركته</strong>. فلتتحاور عدالات فرنسا والمغرب والجزائر، ولتُجِب.</p>
               <div class="pull">لماذا يتقدّم ملف اغتيال موثَّق ببطء شديد؟ ولماذا تُعلَن فارغةً تركةٌ تقول الحسابات إنها مليئة؟</div>`,
-        speak:"الأسئلة التي نطرحها. نحن لا نتّهم أحدًا. قرينة البراءة حقٌّ للجميع. لكننا نطلب أمرًا واحدًا: أن تُكشف الحقيقة. من حقّ مواطن فرنسي جزائري أن يعرف كيف مات والده، وأين ذهبت تركته. فلتتحاور عدالات فرنسا والمغرب والجزائر، ولتُجِب. لماذا يتقدّم ملف اغتيال موثَّق ببطء شديد؟ ولماذا تُعلَن فارغةً تركةٌ تقول الحسابات إنها مليئة؟"}
+        speak:"الأسئلة التي نطرحها. قرينة البراءة حقٌّ للجميع. لكننا نطلب أمرًا واحدًا: أن تُكشف الحقيقة. من حقّ مواطن جزائري أن يعرف كيف مات والده، وأين ذهبت تركته. فلتتحاور عدالات فرنسا والمغرب والجزائر، ولتُجِب. لماذا يتقدّم ملف اغتيال موثَّق ببطء شديد؟ ولماذا تُعلَن فارغةً تركةٌ تقول الحسابات إنها مليئة؟"}
     ],
     ledger:[
       {k:"بيع العقار (1 أغسطس 2025)", v:"≈ 300 000 €", contra:false},
