@@ -95,12 +95,70 @@ body[dir="rtl"] h3{font-family:'Amiri',serif;font-weight:700}
 }
 .lang-switch button.active{background:var(--gold);color:#000}
 
+/* ============ MÉMORIAL (diptyque d'ouverture) ============ */
+/* Les deux sources ont des formats incompatibles (portrait 1039x500, tombe 646x1400).
+   docs/hero-*.jpg sont des recadrages 4/3 dédiés ; les originaux restent intacts
+   dans la galerie du chapitre 1. */
+.memorial{
+  /* la topbar est en position:fixed — il faut dégager sa hauteur, sinon les photos passent dessous */
+  padding:96px 22px 0;
+  background:radial-gradient(ellipse at 50% -10%, #1e232b 0%, var(--bg) 62%);
+}
+@media (pointer:coarse){ .memorial{padding-top:108px} }
+.memorial-inner{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.mem-fig{
+  position:relative;margin:0;overflow:hidden;border-radius:14px;
+  border:1px solid rgba(200,163,90,.22);background:#0a0b0d;
+  aspect-ratio:4/3;
+  box-shadow:0 26px 60px rgba(0,0,0,.5);
+  animation:memIn .9s ease both;
+}
+.mem-fig:nth-child(2){animation-delay:.14s}
+.mem-fig img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.93) contrast(1.04)}
+/* fondu bas + vignette : les photos se fondent dans la page au lieu de rester deux rectangles collés */
+.mem-fig::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to top, rgba(13,15,18,.94) 0%, rgba(13,15,18,0) 46%),
+    radial-gradient(ellipse at 50% 42%, rgba(0,0,0,0) 48%, rgba(0,0,0,.45) 100%);
+}
+.mem-fig figcaption{
+  position:absolute;inset-inline:0;bottom:0;z-index:2;padding:0 18px 14px;
+  color:var(--gold-soft);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+}
+.memorial-id{text-align:center;padding:30px 22px 0;animation:memIn .9s .26s ease both}
+.mem-name{
+  font-family:'Playfair Display',serif;font-weight:600;letter-spacing:.02em;
+  font-size:clamp(1.55rem,4.6vw,2.4rem);color:#f2e6c8;
+}
+body[dir="rtl"] .mem-name{font-family:'Amiri',serif;font-weight:700}
+.mem-rule{width:70px;height:1px;margin:15px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.mem-years{
+  font-family:'Playfair Display',serif;color:var(--gold);
+  font-size:clamp(1.05rem,2.6vw,1.35rem);letter-spacing:.22em;
+}
+body[dir="rtl"] .mem-years{font-family:'Amiri',serif;letter-spacing:.12em}
+.mem-dates{color:var(--ink-dim);font-size:.84rem;letter-spacing:.13em;text-transform:uppercase;margin-top:9px}
+body[dir="rtl"] .mem-dates{letter-spacing:0;text-transform:none;font-size:.95rem}
+.mem-role{color:var(--ink-dim);font-size:.95rem;margin:12px auto 0;max-width:520px}
+@keyframes memIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media(max-width:620px){
+  .memorial-inner{grid-template-columns:1fr;gap:12px}
+  .mem-fig{aspect-ratio:5/4}
+}
+
 /* ============ HERO ============ */
 .hero{
-  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  align-items:center;text-align:center;padding:120px 22px 80px;
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:center;text-align:center;
+  /* le padding-bas doit dégager .scroll-cue (position:absolute, bottom:30px),
+     sinon il chevauche les boutons depuis que le hero n'est plus en 100vh */
+  padding:64px 22px 152px;
   position:relative;
-  background:radial-gradient(ellipse at 50% 0%, #1a1e25 0%, var(--bg) 60%);
+  background:var(--bg);
 }
 .hero .eyebrow{
   color:var(--gold);letter-spacing:.32em;font-size:.72rem;
@@ -192,7 +250,8 @@ figure.doc img{max-width:100%;display:block;filter:saturate(.9)}
 .redact.blur{background:rgba(10,10,10,.2);backdrop-filter:blur(9px)}
 figure.doc figcaption{padding:14px 18px;color:var(--ink-dim);font-size:.85rem;border-top:1px solid var(--line)}
 figure.doc .tag{display:inline-block;background:var(--bg);border:1px solid var(--line);color:var(--gold-soft);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:5px;margin-bottom:8px}
-.doc-placeholder{aspect-ratio:1.5/1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#3a3f48;gap:10px;background:repeating-linear-gradient(45deg,#0a0b0d,#0a0b0d 12px,#0c0e11 12px,#0c0e11 24px)}
+/* le libellé était à #3a3f48 sur #0a0b0d, soit 1,86:1 — illisible quand un scan manque */
+.doc-placeholder{aspect-ratio:1.5/1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink-dim);gap:10px;background:repeating-linear-gradient(45deg,#0a0b0d,#0a0b0d 12px,#0c0e11 12px,#0c0e11 24px)}
 .doc-placeholder svg{width:42px;height:42px;opacity:.5}
 .doc-placeholder span{font-size:.8rem;letter-spacing:.08em}
 /* menu déroulant des documents d'un chapitre */
@@ -209,7 +268,7 @@ figure.doc .tag{display:inline-block;background:var(--bg);border:1px solid var(-
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23e0c489' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 12px center}
 body[dir="rtl"] .doc-select{padding:9px 12px 9px 34px;background-position:left 12px center}
-.doc-select:focus{outline:none;border-color:var(--gold)}
+.doc-select:hover{border-color:var(--gold)}
 .doc-select option{background:var(--bg);color:var(--ink)}
 
 /* ============ TIMELINE ============ */
@@ -247,6 +306,35 @@ footer .legal strong{color:var(--gold-soft)}
 
 /* utility */
 .hidden{display:none!important}
+
+/* ============ ACCESSIBILITE ============ */
+/* Anneau de focus clavier unique pour tout le site. :focus-visible ne se déclenche
+   pas au clic souris, donc l'anneau n'apparaît que pour qui navigue au clavier. */
+:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:2px;
+  border-radius:4px;
+}
+.doc-select:focus-visible,#ai-input:focus-visible{border-color:var(--gold)}
+
+/* Cibles tactiles : 44px minimum sur écran tactile uniquement, pour ne pas
+   épaissir la barre de navigation au pointeur fin. */
+@media (pointer:coarse){
+  .btn,.lang-switch button{min-height:44px}
+  .btn{padding-inline:16px}
+  .doc-select{min-height:44px}
+}
+
+/* Respect de « réduire les animations » (iOS/Android/Windows/macOS). */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+  .brand .dot{box-shadow:none}
+}
 </style>
 </head>
 <body dir="ltr" lang="fr">
@@ -265,6 +353,31 @@ footer .legal strong{color:var(--gold-soft)}
     </div>
   </div>
 </div>
+
+<!-- ===================== MÉMORIAL (diptyque d'ouverture) ===================== -->
+<section class="memorial" aria-labelledby="mem-name">
+  <div class="memorial-inner">
+    <figure class="mem-fig">
+      <img src="docs/hero-portrait.jpg" width="900" height="675" fetchpriority="high" decoding="async"
+           data-i-alt="memAltPortrait"
+           alt="Portrait d'Abdelkrim Mansouri devant le drapeau algérien">
+      <figcaption data-i="memCapPortrait">Le défunt</figcaption>
+    </figure>
+    <figure class="mem-fig">
+      <img src="docs/hero-tombe.jpg" width="900" height="675" decoding="async"
+           data-i-alt="memAltTombe"
+           alt="La tombe d'Abdelkrim Mansouri, stèle de marbre gravée en arabe">
+      <figcaption data-i="memCapTombe">Sa tombe</figcaption>
+    </figure>
+  </div>
+  <div class="memorial-id">
+    <div class="mem-name" id="mem-name" data-i="memName">Abdelkrim Mansouri</div>
+    <div class="mem-rule" aria-hidden="true"></div>
+    <div class="mem-years" data-i="memYears">1946 — 2017</div>
+    <div class="mem-dates" data-i="memDates">Mort le 16 février 2017 à Neuilly-sur-Seine</div>
+    <p class="mem-role" data-i="memRole">Citoyen algérien, père de huit enfants, ancien conservateur d'un palais du Golfe.</p>
+  </div>
+</section>
 
 <!-- ===================== HERO ===================== -->
 <header class="hero">
@@ -337,6 +450,14 @@ const I18N = {
     dir:"ltr", code:"fr-FR",
     brand:"Vérité & Justice",
     listenAll:"Écouter", listenStory:"Écouter l'histoire", readStory:"Lire l'histoire",
+    memName:"Abdelkrim Mansouri",
+    memYears:"1946 — 2017",
+    memDates:"Mort le 16 février 2017 à Neuilly-sur-Seine",
+    memRole:"Citoyen algérien, père de huit enfants, ancien conservateur d'un palais du Golfe.",
+    memCapPortrait:"Le défunt",
+    memCapTombe:"Sa tombe",
+    memAltPortrait:"Portrait d'Abdelkrim Mansouri, homme âgé en costume sombre, devant le drapeau algérien",
+    memAltTombe:"La tombe d'Abdelkrim Mansouri : stèle de marbre blanc gravée en arabe, dans un cimetière ensoleillé",
     eyebrow:"Un dossier. Des faits. Des questions.",
     title:"Vérité & Justice",
     accusation:"L'assassinat d'un riche homme d'affaires algérien,<br>prouvé par la police française et la gendarmerie royale marocaine,<br>couvert par des officiels français et marocains.",
@@ -446,6 +567,28 @@ const I18N = {
       "docs/communique-presse-fr.jpg":"Communiqué de presse — déclaration officielle (2 pages)",
       "docs/communique-presse-ar.jpg":"Communiqué de presse — version arabe",
       "docs/plainte-annaba-fr.jpg":"Plainte au Procureur de la République près le Tribunal d'Annaba — 23 mai 2026",
+      "docs/bnp-decouvert-2017.jpg":"BNP Paribas, agence de Gentilly, 23 janvier 2017 — compte débiteur en continu depuis le 14 décembre 2016, dépassement de la facilité de caisse autorisée",
+      "docs/huissier-aphp-2016.jpg":"Étude d'huissiers de Créteil, 8 décembre 2016 — « dernier avis avant saisie de votre compte bancaire » pour 85,60 € dus à l'AP-HP",
+      "docs/bulletin-sortie-tiflet-2019.jpg":"Bulletin de sortie de la prison locale de Tiflet 2 — incarcéré le 2 mars 2018, libéré le 2 septembre 2019 (écrou national S6493BZ)",
+      "docs/bulletin-sortie-tiflet-2019-bis.jpg":"Bulletin de sortie de Tiflet 2 — seconde prise de vue du même document",
+      "docs/arret-appel-rabat-2019-1.jpg":"Cour d'appel de Rabat, arrêt n° 227 du 21 mars 2019 (dossier 51/2612/2019) — page 1, composition de la chambre criminelle et identité",
+      "docs/arret-appel-rabat-2019-2.jpg":"Arrêt d'appel de Rabat — page 2 : qualification retenue (vol qualifié, agression nocturne, art. 509-441-608-400) et rappel des faits",
+      "docs/arret-appel-rabat-2019-3.jpg":"Arrêt d'appel de Rabat — page 3 : base légale et déclarations de la partie civile sur l'appartement de Hay Riad",
+      "docs/arret-appel-rabat-2019-4.jpg":"Arrêt d'appel de Rabat — page 4 : auditions du gardien, du syndic et de l'intermédiaire",
+      "docs/arret-appel-rabat-2019-5.jpg":"Arrêt d'appel de Rabat — page 5 : déclaration de l'accusé, venu au Maroc chercher les biens de son père décédé le 14 février 2017",
+      "docs/arret-appel-rabat-2019-6.jpg":"Arrêt d'appel de Rabat — page 6 : l'accusé déclare les plaintes montées de toutes pièces pour le faire emprisonner et s'emparer de l'héritage",
+      "docs/arret-appel-rabat-2019-7.jpg":"Arrêt d'appel de Rabat — page 7 : phase d'instruction, il déclare être entré de bonne foi en présence du syndic",
+      "docs/arret-appel-rabat-2019-8.jpg":"Arrêt d'appel de Rabat — page 8 : audition des parties civiles et du témoin",
+      "docs/arret-appel-rabat-2019-9.jpg":"Arrêt d'appel de Rabat — page 9 : la cour juge que « la peine était sévère », la réduit et l'assortit d'un sursis partiel pour absence totale d'antécédents",
+      "docs/certificat-non-recours-2019.jpg":"Certificat de non-opposition, non-appel et non-cassation — greffe de la Cour d'appel de Rabat, 25 juin 2019",
+      "docs/jugement-rabat-2018-1.jpg":"Chambre criminelle de Rabat, arrêt n° 817 du 29 novembre 2018 (dossier 610/2610/18) — page 1 : identité de l'accusé, « en état d'arrestation depuis le 4 mars 2018 »",
+      "docs/jugement-rabat-2018-2.jpg":"Jugement de Rabat du 29 novembre 2018 — page 2 : exposé des faits et procès-verbaux de la police judiciaire",
+      "docs/jugement-rabat-2018-3.jpg":"Jugement de Rabat du 29 novembre 2018 — page 3 : déclarations de l'accusé sur la recherche des biens de son père",
+      "docs/jugement-rabat-2018-4.jpg":"Jugement de Rabat du 29 novembre 2018 — page 4 : il déclare avoir déposé plainte pour l'empoisonnement de son père, plainte pendante devant la Cour d'appel de Rabat",
+      "docs/jugement-rabat-2018-5.jpg":"Jugement de Rabat du 29 novembre 2018 — page 5 : auditions des parties civiles et du témoin de voisinage",
+      "docs/jugement-rabat-2018-6.jpg":"Jugement de Rabat du 29 novembre 2018 — page 6 : débats à l'audience et demandes d'indemnisation (2 500 000 et 300 000 dirhams)",
+      "docs/jugement-rabat-2018-7.jpg":"Jugement de Rabat du 29 novembre 2018 — page 7 : motivation sur la qualification et les circonstances atténuantes",
+      "docs/jugement-rabat-2018-8.jpg":"Jugement de Rabat du 29 novembre 2018 — page 8 : dispositif — trois ans de prison ferme, 50 000 DH et 10 000 DH de dommages-intérêts",
       "docs/plainte-annaba-ar.jpg":"Plainte au Procureur d'Annaba — version arabe",
       "docs/plainte-annaba-longue-ar.jpg":"Plainte pénale détaillée au Procureur d'Annaba (arabe) — demande d'ouverture d'instruction",
       "docs/plainte-blanchiment-fr.jpg":"Plainte — blanchiment en bande organisée, détournement, faux, abus de confiance aggravé",
@@ -496,6 +639,24 @@ const I18N = {
               <p>La France et le Maroc sont liés par des <strong>conventions d'entraide judiciaire</strong> : un juge français peut demander aux autorités marocaines de <strong>localiser et geler</strong> ces biens.</p>
               <div class="pull">Deux « ventes » datées de 2011 et 2013 pour des appartements dans un immeuble qui n'existait pas — et dont le fisc facturait encore les taxes au défunt en 2017.</div>`,
         speak:"Les biens du Maroc. L'héritage ne s'arrête pas aux frontières françaises. Les certificats de propriété officiels de la conservation foncière marocaine attestent d'un patrimoine du défunt au Maroc, et une mutation par vente y est enregistrée en mars 2017, quelques semaines à peine après le décès. Parmi les pièces : l'expédition d'un acte de vente d'un appartement à Rabat, deux millions quatre cent quatre-vingt-cinq mille dirhams, où l'emplacement de la signature du vendeur est vide. Un acte de vente que le vendeur n'a pas signé. Deux appartements du complexe Prestigia Ryad Al Andalous, à Hay Riad, Rabat, sont concernés, et les deux histoires se ressemblent étrangement. Le premier, immeuble sept, appartement cinq, serait passé au nom d'un député marocain qui affirme l'avoir acheté en 2011. Or l'immeuble numéro sept n'existait pas encore en 2011. Et les avis d'imposition marocains de 2016 et de 2017 sont toujours établis au nom du défunt, à cette adresse exacte. Le second serait passé au nom d'une cohéritière, sur la base d'un acte de vente daté de 2013, l'acte sans signature du vendeur. Là encore, l'immeuble n'existait pas en 2013 à la date supposée de la vente. Et l'acte n'est pas une vente sur plan : il vend un bien achevé qui n'était pas construit. Au Maroc, un procès-verbal de 2018 vise des faits de meurtre prémédité avec guet-apens, et dès 2017 une plainte demandait l'exhumation et l'autopsie. Pourtant, l'acte français qui déclare la succession vide ne dit pas un mot de ce patrimoine. Deux ventes datées de 2011 et 2013 pour des appartements dans un immeuble qui n'existait pas, et dont le fisc facturait encore les taxes au défunt en 2017."},
+      {date:"Le mobile", title:"Ruinée en janvier, propriétaire au printemps", ledger:"ledgerMobile",
+        html:`<p>Une question simple se pose : <strong>à qui profite la spoliation</strong> ? Deux pièces bancaires, versées au dossier, situent la personne qui revendique l'appartement de Rabat dans les <strong>semaines qui précèdent le décès</strong>.</p>
+              <p>Cette personne est <strong>Imane Mansouri</strong>. Elle n'est pas un tiers dans ce dossier : elle est, avec sa mère <strong>Amal El Baid</strong>, visée par la <strong>plainte pour empoisonnement</strong> déposée par le fils du défunt — une plainte que le <strong>jugement marocain lui-même</strong> mentionne noir sur blanc comme <strong>« toujours pendante devant la cour d'appel de Rabat »</strong>. Elle est aussi la partie civile au nom de laquelle ce même fils a été condamné et incarcéré.</p>
+              <p>Le <strong>8 décembre 2016</strong>, une étude d'huissiers de Créteil lui adresse un <strong>« dernier avis avant saisie de votre compte bancaire »</strong> pour le compte du Trésor public. Le montant réclamé : <strong>85,60 €</strong>. Quatre-vingt-cinq euros — le reliquat d'une consultation hospitalière de mai 2016.</p>
+              <p>Le <strong>23 janvier 2017</strong>, sa banque lui écrit à son tour : son compte est <strong>débiteur en continu depuis le 14 décembre 2016</strong>, au-delà de la durée de facilité de caisse autorisée par le Code de la consommation. La banque l'invite à <strong>régulariser sans tarder</strong>.</p>
+              <p><strong>Vingt-quatre jours plus tard, le père meurt.</strong> Dès le mois de <strong>mars 2017</strong>, une mutation par « vente » est enregistrée au Maroc sur son patrimoine. Et la même personne se retrouve à revendiquer, sur la foi d'un acte daté de <strong>2013</strong> et <strong>dépourvu de la signature du vendeur</strong>, un appartement de <strong>2 485 000 dirhams</strong> dans un immeuble qui <strong>n'était pas encore construit</strong> à la date supposée de la vente.</p>
+              <p>Nous n'affirmons pas ce que les pièces ne disent pas. Nous constatons une <strong>chronologie</strong> : une personne poursuivie pour 85 € en décembre, à découvert en janvier, devient au printemps propriétaire déclarée d'un patrimoine de <strong>plusieurs centaines de milliers d'euros</strong>. Cette chronologie, une instruction peut la vérifier en quelques semaines — relevés bancaires à l'appui.</p>
+              <div class="pull">Quatre-vingt-cinq euros réclamés par huissier en décembre. Deux millions quatre cent mille dirhams revendiqués au printemps. Entre les deux : un mort.</div>`,
+        speak:"Ruinée en janvier, propriétaire au printemps. Une question simple se pose : à qui profite la spoliation ? Deux pièces bancaires, versées au dossier, situent la personne qui revendique l'appartement de Rabat dans les semaines qui précèdent le décès. Le 8 décembre 2016, une étude d'huissiers de Créteil lui adresse un dernier avis avant saisie de son compte bancaire, pour le compte du Trésor public. Le montant réclamé : quatre-vingt-cinq euros et soixante centimes. Le reliquat d'une consultation hospitalière de mai 2016. Le 23 janvier 2017, sa banque lui écrit à son tour : son compte est débiteur en continu depuis le 14 décembre 2016, au-delà de la durée de facilité de caisse autorisée par le Code de la consommation. Vingt-quatre jours plus tard, le père meurt. Dès le mois de mars 2017, une mutation par vente est enregistrée au Maroc sur son patrimoine. Et la même personne se retrouve à revendiquer, sur la foi d'un acte daté de 2013 et dépourvu de la signature du vendeur, un appartement de deux millions quatre cent quatre-vingt-cinq mille dirhams dans un immeuble qui n'était pas encore construit à la date supposée de la vente. Nous n'affirmons pas ce que les pièces ne disent pas. Nous constatons une chronologie : une personne poursuivie pour quatre-vingt-cinq euros en décembre, à découvert en janvier, devient au printemps propriétaire déclarée d'un patrimoine de plusieurs centaines de milliers d'euros. Cette chronologie, une instruction peut la vérifier en quelques semaines, relevés bancaires à l'appui. Quatre-vingt-cinq euros réclamés par huissier en décembre. Deux millions quatre cent mille dirhams revendiqués au printemps. Entre les deux : un mort."},
+      {date:"Le prix payé", title:"Dix-huit mois de prison pour être entré chez son père",
+        html:`<p>Le fils qui réclame aujourd'hui la vérité a <strong>payé sa recherche de dix-huit mois de prison</strong> — au Maroc, dans l'affaire même de l'appartement spolié.</p>
+              <p>En avril 2017, deux mois après le décès, il se rend à Rabat pour retrouver les biens de son père. Il apprend qu'un des appartements <strong>vient d'être mis au nom d'un tiers</strong>. Il se présente à l'immeuble, interroge le <strong>syndic</strong> et le <strong>gardien</strong>, fait venir un serrurier <strong>en leur présence</strong>, ouvre le logement de son père et fait transporter des affaires. Le jugement lui-même consigne sa version : il est entré <strong>de bonne foi, croyant l'appartement dans la succession de son père</strong>.</p>
+              <p>Il est incarcéré le <strong>2 mars 2018</strong> à la <strong>prison locale de Tiflet 2</strong>. Le <strong>29 novembre 2018</strong>, la chambre criminelle de Rabat le condamne à <strong>trois ans de prison ferme</strong>, plus <strong>50 000 dirhams</strong> de dommages-intérêts à <strong>Imane Mansouri</strong> et <strong>10 000 dirhams</strong> à sa mère <strong>Amal El Baid</strong>. La qualification retenue est lourde : <strong>vol qualifié et agression nocturne au domicile d'autrui</strong> — pour l'appartement de son propre père.</p>
+              <p>En appel, la cour de Rabat écrit elle-même, dans son arrêt n° 227 du <strong>21 mars 2019</strong>, que <strong>« la peine était sévère »</strong> (<span lang="ar" dir="rtl">العقوبة جاءت قاسية</span>) et la réduit, en assortissant une partie du sursis — motif retenu : <strong>l'absence totale d'antécédents judiciaires</strong>. Il sort de Tiflet 2 le <strong>2 septembre 2019</strong>.</p>
+              <p>Reste la question que ce dossier pose aux autorités marocaines. Les avis d'imposition marocains de <strong>2016 et 2017</strong> établissaient encore les taxes de cet appartement <strong>au nom du défunt</strong>. L'immeuble n'existait pas à la date de l'acte de vente invoqué. Le vendeur n'avait pas signé. Ces éléments figurent dans les registres de la conservation foncière et du fisc marocains — <strong>consultables par les mêmes autorités qui ont poursuivi, jugé et incarcéré</strong>.</p>
+              <p>Nous l'affirmons : <strong>les autorités marocaines ne pouvaient pas ne pas savoir.</strong> L'immeuble inexistant à la date de l'acte, l'absence de signature du vendeur, les taxes encore établies au nom du défunt en 2016 et 2017 — tout cela était inscrit dans leurs propres registres, à leur portée immédiate. Elles ont choisi de poursuivre, de juger et d'incarcérer l'héritier pendant dix-huit mois, <strong>sans jamais instruire la spoliation qu'il venait dénoncer</strong>. Ce n'est pas une négligence : c'est une <strong>complicité par abstention</strong>, et elle a transformé la justice marocaine en instrument du dépouillement.</p>
+              <div class="pull">La cour qui l'a condamné a écrit que la peine était sévère. Il avait déjà passé un an derrière les barreaux quand elle l'a écrit.</div>`,
+        speak:"Dix-huit mois de prison pour être entré chez son père. Le fils qui réclame aujourd'hui la vérité a payé sa recherche de dix-huit mois de prison, au Maroc, dans l'affaire même de l'appartement spolié. En avril 2017, deux mois après le décès, il se rend à Rabat pour retrouver les biens de son père. Il apprend qu'un des appartements vient d'être mis au nom d'un tiers. Il se présente à l'immeuble, interroge le syndic et le gardien, fait venir un serrurier en leur présence, ouvre le logement de son père et fait transporter des affaires. Le jugement lui-même consigne sa version : il est entré de bonne foi, croyant l'appartement dans la succession de son père. Il est incarcéré le 2 mars 2018 à la prison locale de Tiflet 2. Le 29 novembre 2018, la chambre criminelle de Rabat le condamne à trois ans de prison ferme, plus cinquante mille dirhams de dommages-intérêts à Imane Mansouri et dix mille dirhams à sa mère Amal El Baid. La qualification retenue est lourde : vol qualifié et agression nocturne au domicile d'autrui, pour l'appartement de son propre père. En appel, la cour de Rabat écrit elle-même, dans son arrêt numéro 227 du 21 mars 2019, que la peine était sévère, et la réduit en assortissant une partie du sursis. Motif retenu : l'absence totale d'antécédents judiciaires. Il sort de Tiflet 2 le 2 septembre 2019. Reste la question que ce dossier pose aux autorités marocaines. Les avis d'imposition marocains de 2016 et 2017 établissaient encore les taxes de cet appartement au nom du défunt. L'immeuble n'existait pas à la date de l'acte de vente invoqué. Le vendeur n'avait pas signé. Ces éléments figurent dans les registres de la conservation foncière et du fisc marocains, consultables par les mêmes autorités qui ont poursuivi, jugé et incarcéré. Nous l'affirmons : les autorités marocaines ne pouvaient pas ne pas savoir. L'immeuble inexistant à la date de l'acte, l'absence de signature du vendeur, les taxes encore établies au nom du défunt en 2016 et 2017, tout cela était inscrit dans leurs propres registres, à leur portée immédiate. Elles ont choisi de poursuivre, de juger et d'incarcérer l'héritier pendant dix-huit mois, sans jamais instruire la spoliation qu'il venait dénoncer. Ce n'est pas une négligence : c'est une complicité par abstention, et elle a transformé la justice marocaine en instrument du dépouillement. La cour qui l'a condamné a écrit que la peine était sévère. Il avait déjà passé un an derrière les barreaux quand elle l'a écrit."},
       {date:"Les protections", title:"Une médaille d'or pour quel mérite ?",
         html:`<p>L'homme au nom duquel serait passé l'appartement de Hay Riad n'est pas un inconnu : <strong>Mahmoud Archane</strong>, ex-commissaire de police devenu député, désigné par une douzaine d'organisations de défense des droits humains (ASDHOM, AMDH, MRAP, FEMED…) comme <strong>« l'un des grands chefs tortionnaires du régime marocain »</strong> des années de plomb — le centre de torture de <strong>Derb Moulay Cherif</strong>, des opposants <strong>« torturés à mort sous sa direction »</strong>, selon leur lettre ouverte.</p>
               <p>C'est pourtant à lui que le sénateur <strong>Christian Cambon</strong> — alors président de la <strong>Commission des affaires étrangères et de la défense du Sénat</strong> — a remis, le <strong>14 avril 2018 à Rabat</strong>, une <strong>médaille d'or du Sénat</strong>. Le 4 juin 2018, ces organisations ont adressé une <strong>lettre ouverte au Président du Sénat</strong> : « un élu de la République récompense un tortionnaire pour ses "loyaux services" ». Cette lettre est la pièce affichée ci-dessous.</p>
@@ -518,12 +679,27 @@ const I18N = {
       {k:"Passé par la Caisse des Dépôts (obligatoire)", v:"0 €", contra:true},
       {k:"Ce que déclare le projet d'acte officiel", v:"« aucun bien »", contra:true}
     ],
+    ledgerMobile:[
+      {k:"Réclamé par huissier, avant saisie du compte (8 déc. 2016)", v:"85,60 €", contra:false},
+      {k:"État du compte bancaire (23 janv. 2017)", v:"débiteur", contra:true},
+      {k:"Décès du père", v:"16 fév. 2017", contra:false},
+      {k:"Mutation par « vente » enregistrée au Maroc", v:"mars 2017", contra:true},
+      {k:"Appartement de Rabat revendiqué", v:"2 485 000 DH", contra:true},
+      {k:"Signature du vendeur sur l'acte invoqué", v:"absente", contra:true},
+      {k:"Peine prononcée contre le fils (29 nov. 2018)", v:"3 ans ferme", contra:true},
+      {k:"Détention effective à Tiflet 2", v:"18 mois", contra:true}
+    ],
     timeline:[
       {d:"16 fév. 2017", t:"Décès du père à Neuilly-sur-Seine (acte n° 160). La presse arabe évoque un empoisonnement."},
       {d:"Mars 2017", t:"Au Maroc, une mutation immobilière par « vente » est enregistrée — quelques semaines après le décès."},
       {d:"27 déc. 2017", t:"La notaire est déclarée démissionnaire d'office par arrêté publié au Journal officiel ; son office est supprimé."},
       {d:"14 avr. 2018", t:"À Rabat, le sénateur Cambon remet la médaille d'or du Sénat à Mahmoud Archane. Le 4 juin, des ONG des droits humains protestent par lettre ouverte au Président du Sénat."},
+      {d:"8 déc. 2016 — 23 janv. 2017", t:"Avant le décès : la cohéritière qui revendiquera l'appartement de Rabat reçoit un dernier avis d'huissier avant saisie de son compte (85,60 €), puis une mise en garde de sa banque pour découvert prolongé."},
+      {d:"2 mars 2018", t:"Le fils du défunt est incarcéré à la prison locale de Tiflet 2, au Maroc, dans l'affaire de l'appartement de Hay Riad."},
       {d:"2018 — 2019", t:"Au Maroc, un procès-verbal (n° 72/3201/2018) vise un meurtre prémédité avec guet-apens."},
+      {d:"29 nov. 2018", t:"La chambre criminelle de Rabat le condamne à trois ans de prison ferme et à des dommages-intérêts envers les deux parties civiles."},
+      {d:"21 mars 2019", t:"En appel, la cour de Rabat juge que « la peine était sévère », la réduit et l'assortit d'un sursis partiel pour absence totale d'antécédents."},
+      {d:"2 sept. 2019", t:"Libération de Tiflet 2, après dix-huit mois de détention effective."},
       {d:"10 sept. 2021", t:"Rapport d'enquête de la police de Neuilly : la thèse de l'assassinat est étayée."},
       {d:"24 sept. 2021", t:"Classement sans suite par le parquet (notifié le 20 octobre)."},
       {d:"31 janv. 2022", t:"Désignation d'une mandataire judiciaire — à l'initiative du syndic de copropriété."},
@@ -540,6 +716,14 @@ const I18N = {
     dir:"rtl", code:"ar-SA",
     brand:"الحقيقة والعدالة",
     listenAll:"استماع", listenStory:"استمع إلى القصة", readStory:"اقرأ القصة",
+    memName:"عبد الكريم منصوري",
+    memYears:"<bdi>1946 — 2017</bdi>",
+    memDates:"تُوفِّي في 16 فبراير 2017 بنويي سور سين",
+    memRole:"مواطن جزائري، أب لثمانية أبناء، محافظ سابق لأحد قصور الخليج.",
+    memCapPortrait:"الفقيد",
+    memCapTombe:"قبره",
+    memAltPortrait:"صورة عبد الكريم منصوري، رجل مسنّ ببذلة داكنة، أمام العلم الجزائري",
+    memAltTombe:"قبر عبد الكريم منصوري: شاهدة من الرخام الأبيض منقوشة بالعربية، في مقبرة تحت الشمس",
     eyebrow:"ملف. وقائع. أسئلة.",
     title:"الحقيقة والعدالة",
     accusation:"اغتيال رجل أعمال جزائري ثري،<br>أثبتته الشرطة الفرنسية والدرك الملكي المغربي،<br>ويُغطّيه مسؤولون فرنسيون ومغاربة.",
@@ -649,6 +833,28 @@ const I18N = {
       "docs/communique-presse-fr.jpg":"بلاغ صحفي — تصريح رسمي (صفحتان)",
       "docs/communique-presse-ar.jpg":"بلاغ صحفي — النسخة العربية",
       "docs/plainte-annaba-fr.jpg":"شكاية إلى وكيل الجمهورية لدى محكمة عنابة — 23 مايو 2026",
+      "docs/bnp-decouvert-2017.jpg":"بنك BNP Paribas، وكالة جونتيي، <bdi>23 يناير 2017</bdi> — حساب مدين بصفة متواصلة منذ <bdi>14 دجنبر 2016</bdi>، وتجاوز المدة المسموح بها لتسهيلات الصندوق",
+      "docs/huissier-aphp-2016.jpg":"مكتب المفوضين القضائيين بكريتاي، <bdi>8 دجنبر 2016</bdi> — «آخر إشعار قبل الحجز على حسابكم البنكي» من أجل <bdi>85,60&nbsp;€</bdi> مستحقة لمستشفيات باريس",
+      "docs/bulletin-sortie-tiflet-2019.jpg":"بطاقة الخروج من السجن المحلي تيفلت 2 — الاعتقال في <bdi>2 مارس 2018</bdi> والإفراج في <bdi>2 سبتمبر 2019</bdi> (رقم الاعتقال <bdi>S6493BZ</bdi>)",
+      "docs/bulletin-sortie-tiflet-2019-bis.jpg":"بطاقة الخروج من تيفلت 2 — لقطة ثانية للوثيقة نفسها",
+      "docs/arret-appel-rabat-2019-1.jpg":"محكمة الاستئناف بالرباط، القرار عدد <bdi>227</bdi> بتاريخ <bdi>21 مارس 2019</bdi> (الملف <bdi>51/2612/2019</bdi>) — الصفحة 1: تشكيلة غرفة الجنايات وهوية المتهم",
+      "docs/arret-appel-rabat-2019-2.jpg":"قرار الاستئناف بالرباط — الصفحة 2: التكييف المعتمد (السرقة الموصوفة والهجوم ليلاً، الفصول <bdi>509-441-608-400</bdi>) وعرض الوقائع",
+      "docs/arret-appel-rabat-2019-3.jpg":"قرار الاستئناف بالرباط — الصفحة 3: الأساس القانوني وتصريحات المشتكية بخصوص شقة حي الرياض",
+      "docs/arret-appel-rabat-2019-4.jpg":"قرار الاستئناف بالرباط — الصفحة 4: الاستماع إلى حارس العمارة والسانديك والوسيط",
+      "docs/arret-appel-rabat-2019-5.jpg":"قرار الاستئناف بالرباط — الصفحة 5: تصريح المتهم بقدومه إلى المغرب بحثاً عن أملاك والده المتوفى في <bdi>14 فبراير 2017</bdi>",
+      "docs/arret-appel-rabat-2019-6.jpg":"قرار الاستئناف بالرباط — الصفحة 6: المتهم يصرّح بأن الشكايات كيدية أُريد بها الزجّ به في السجن والاستيلاء على التركة",
+      "docs/arret-appel-rabat-2019-7.jpg":"قرار الاستئناف بالرباط — الصفحة 7: مرحلة التحقيق، يصرّح بأنه دخل بحسن نية بحضور السانديك",
+      "docs/arret-appel-rabat-2019-8.jpg":"قرار الاستئناف بالرباط — الصفحة 8: الاستماع إلى المطالبتين بالحق المدني وإلى الشاهد",
+      "docs/arret-appel-rabat-2019-9.jpg":"قرار الاستئناف بالرباط — الصفحة 9: المحكمة تقرّ بأن «العقوبة جاءت قاسية»، فتخفّضها وتجعل جزءاً منها موقوف التنفيذ لانعدام السوابق",
+      "docs/certificat-non-recours-2019.jpg":"شهادة بعدم التعرض والاستئناف أو النقض — كتابة الضبط بمحكمة الاستئناف بالرباط، <bdi>25 يونيو 2019</bdi>",
+      "docs/jugement-rabat-2018-1.jpg":"غرفة الجنايات الابتدائية بالرباط، القرار عدد <bdi>817</bdi> بتاريخ <bdi>29 نونبر 2018</bdi> (الملف <bdi>610/2610/18</bdi>) — الصفحة 1: هوية المتهم، «في حالة اعتقال منذ <bdi>4 مارس 2018</bdi>»",
+      "docs/jugement-rabat-2018-2.jpg":"حكم الرباط بتاريخ <bdi>29 نونبر 2018</bdi> — الصفحة 2: عرض الوقائع ومحاضر الضابطة القضائية",
+      "docs/jugement-rabat-2018-3.jpg":"حكم الرباط بتاريخ <bdi>29 نونبر 2018</bdi> — الصفحة 3: تصريحات المتهم بخصوص البحث عن أملاك والده",
+      "docs/jugement-rabat-2018-4.jpg":"حكم الرباط بتاريخ <bdi>29 نونبر 2018</bdi> — الصفحة 4: يصرّح بأنه رفع شكاية من أجل تسميم والده، ولا تزال جارية بمحكمة الاستئناف بالرباط",
+      "docs/jugement-rabat-2018-5.jpg":"حكم الرباط بتاريخ <bdi>29 نونبر 2018</bdi> — الصفحة 5: الاستماع إلى المطالبتين بالحق المدني وإلى شاهد من الحيّ",
+      "docs/jugement-rabat-2018-6.jpg":"حكم الرباط بتاريخ <bdi>29 نونبر 2018</bdi> — الصفحة 6: المناقشات بالجلسة وطلبات التعويض (<bdi>2&nbsp;500&nbsp;000</bdi> و<bdi>300&nbsp;000</bdi> درهم)",
+      "docs/jugement-rabat-2018-7.jpg":"حكم الرباط بتاريخ <bdi>29 نونبر 2018</bdi> — الصفحة 7: التعليل بخصوص التكييف وظروف التخفيف",
+      "docs/jugement-rabat-2018-8.jpg":"حكم الرباط بتاريخ <bdi>29 نونبر 2018</bdi> — الصفحة 8: المنطوق — ثلاث سنوات حبساً نافذاً، و<bdi>50&nbsp;000</bdi> درهم و<bdi>10&nbsp;000</bdi> درهم تعويضاً",
       "docs/plainte-annaba-ar.jpg":"شكاية إلى وكيل الجمهورية بعنابة — النسخة العربية",
       "docs/plainte-annaba-longue-ar.jpg":"شكاية جنائية مفصّلة إلى وكيل الجمهورية بعنابة — طلب فتح تحقيق",
       "docs/plainte-blanchiment-fr.jpg":"شكاية — تبييض أموال في إطار عصابة إجرامية واختلاس وتزوير وخيانة أمانة مشدّدة",
@@ -699,6 +905,24 @@ const I18N = {
               <p>وترتبط فرنسا والمغرب <strong>باتفاقيات للتعاون القضائي</strong>: يمكن لقاضٍ فرنسي أن يطلب من السلطات المغربية <strong>تحديد هذه الأملاك وتجميدها</strong>.</p>
               <div class="pull">«بيعان» مؤرَّخان في 2011 و2013 لشقتين في عمارة لم تكن موجودة — وظلّ الفيسك يُحرِّر ضرائبها باسم المتوفّى حتى 2017.</div>`,
         speak:"أملاك المغرب. التركة لا تتوقّف عند الحدود الفرنسية. فشهادات الملكية الرسمية للمحافظة العقارية المغربية تُثبت وجود أملاك للمتوفّى في المغرب، وقد سُجّل هناك انتقال للملكية عن طريق البيع في مارس 2017، أسابيع قليلة فقط بعد الوفاة. ومن بين الوثائق: نسخة من عقد بيع شقة بالرباط بمليونين وأربعمائة وخمسة وثمانين ألف درهم، حيث خانة توقيع البائع فارغة. عقد بيع لم يوقّعه البائع. الأمر يتعلّق بشقتين في مركّب بريستيجيا رياض الأندلس بحي الرياض في الرباط، والقصتان متشابهتان بغرابة. الأولى، العمارة سبعة الشقة خمسة، انتقلت إلى اسم نائب برلماني مغربي يدّعي أنه اشتراها سنة 2011. غير أن العمارة رقم سبعة لم تكن موجودة أصلاً سنة 2011. والإعلامات الضريبية لسنتي 2016 و2017 ما تزال محررة باسم المتوفّى في هذا العنوان بالذات. والثانية انتقلت إلى اسم وريثة شريكة، على أساس عقد بيع مؤرخ سنة 2013، العقد الخالي من توقيع البائع. وهنا أيضاً، العمارة لم تكن موجودة سنة 2013 في التاريخ المفترض للبيع. والعقد ليس بيعاً على التصميم: إنه يبيع عقاراً مكتملاً لم يكن قد بُني بعد. وفي المغرب، محضر سنة 2018 يتعلّق بأفعال قتل عمد مع سبق الإصرار والترصد، ومنذ 2017 طالبت شكوى باستخراج الجثة وتشريحها. ومع ذلك، فإن العقد الفرنسي الذي يُعلن التركة فارغة لا يذكر عن هذه الأملاك كلمة واحدة. بيعان مؤرخان في 2011 و2013 لشقتين في عمارة لم تكن موجودة، وظل الفيسك يحرر ضرائبها باسم المتوفى حتى 2017."},
+      {date:"الدافع", title:"مُفلِسة في يناير، مالكة في الربيع", ledger:"ledgerMobile",
+        html:`<p>يُطرح سؤال بسيط: <strong>لمن تعود منفعة الاستيلاء</strong>؟ وثيقتان بنكيتان، ضمن ملف القضية، تُحدِّدان وضع من تدّعي ملكية شقة الرباط في <strong>الأسابيع السابقة للوفاة</strong>.</p>
+              <p>هذه الشخص هي <strong>إيمان المنصوري</strong>. وهي ليست طرفاً أجنبياً عن الملف: فهي، رفقة والدتها <strong>أمال البيض</strong>، مُستهدَفة بـ<strong>شكاية التسميم</strong> التي رفعها ابن الهالك — وهي شكاية يُثبتها <strong>الحكم المغربي نفسه</strong> بوضوح على أنها <strong>«لا تزال جارية بمحكمة الاستئناف بالرباط»</strong>. وهي في الوقت ذاته المطالِبة بالحق المدني التي بموجب شكايتها أُدين هذا الابن وسُجن.</p>
+              <p>في <strong>8 دجنبر 2016</strong>، وجّه إليها مكتب للمفوضين القضائيين بكريتاي <strong>«آخِر إشعار قبل الحجز على حسابكم البنكي»</strong> لفائدة الخزينة العامة. المبلغ المطلوب: <strong>85,60 أورو</strong>. خمسة وثمانون أورو — باقي مستحقات استشارة استشفائية تعود إلى ماي 2016.</p>
+              <p>وفي <strong>23 يناير 2017</strong>، كتب إليها بنكها بدوره: حسابها <strong>مدين بصفة متواصلة منذ 14 دجنبر 2016</strong>، متجاوزاً المدة المسموح بها لتسهيلات الصندوق طبقاً لقانون الاستهلاك. ودعاها البنك إلى <strong>تسوية وضعيتها دون تأخير</strong>.</p>
+              <p><strong>بعد أربعة وعشرين يوماً، تُوفِّي الأب.</strong> ومنذ <strong>مارس 2017</strong>، سُجِّل بالمغرب تفويت بـ«البيع» على ممتلكاته. وإذا بالشخص نفسه يدّعي ملكية شقة بـ<strong>2.485.000 درهم</strong>، استناداً إلى عقد مؤرَّخ في <strong>2013</strong> <strong>خالٍ من توقيع البائع</strong>، داخل عمارة <strong>لم تكن قد شُيِّدت بعد</strong> في التاريخ المفترض للبيع.</p>
+              <p>نحن لا نؤكّد ما لا تقوله الوثائق. نحن نُسجِّل <strong>تسلسلاً زمنياً</strong>: شخص مُتابَع من أجل 85 أورو في دجنبر، ومكشوف الحساب في يناير، يصبح في الربيع مالكاً مُعلَناً لثروة تُقدَّر بـ<strong>مئات آلاف الأورو</strong>. هذا التسلسل يمكن لتحقيق قضائي أن يتحقّق منه في أسابيع، بالاستناد إلى الكشوف البنكية.</p>
+              <div class="pull">خمسة وثمانون أورو يُطالِب بها مفوَّض قضائي في دجنبر. ومليونان وأربعمائة ألف درهم تُدَّعى ملكيتها في الربيع. وبينهما: ميّت.</div>`,
+        speak:"مفلسة في يناير، مالكة في الربيع. يطرح سؤال بسيط: لمن تعود منفعة الاستيلاء؟ وثيقتان بنكيتان ضمن ملف القضية تحددان وضع من تدعي ملكية شقة الرباط في الأسابيع السابقة للوفاة. هذه الشخص هي إيمان المنصوري. وهي ليست طرفا أجنبيا عن الملف، فهي رفقة والدتها أمال البيض مستهدفة بشكاية التسميم التي رفعها ابن الهالك، وهي شكاية يثبتها الحكم المغربي نفسه على أنها لا تزال جارية بمحكمة الاستئناف بالرباط. وهي في الوقت ذاته المطالبة بالحق المدني التي بموجب شكايتها أدين هذا الابن وسجن. في الثامن من دجنبر 2016، وجه إليها مكتب للمفوضين القضائيين بكريتاي آخر إشعار قبل الحجز على حسابها البنكي لفائدة الخزينة العامة. المبلغ المطلوب: خمسة وثمانون أورو وستون سنتيما، باقي مستحقات استشارة استشفائية تعود إلى ماي 2016. وفي الثالث والعشرين من يناير 2017، كتب إليها بنكها بدوره: حسابها مدين بصفة متواصلة منذ الرابع عشر من دجنبر 2016، متجاوزا المدة المسموح بها لتسهيلات الصندوق. بعد أربعة وعشرين يوما، توفي الأب. ومنذ مارس 2017، سجل بالمغرب تفويت بالبيع على ممتلكاته. وإذا بالشخص نفسه يدعي ملكية شقة بمليونين وأربعمائة وخمسة وثمانين ألف درهم، استنادا إلى عقد مؤرخ في 2013 خال من توقيع البائع، داخل عمارة لم تكن قد شيدت بعد في التاريخ المفترض للبيع. نحن لا نؤكد ما لا تقوله الوثائق. نحن نسجل تسلسلا زمنيا: شخص متابع من أجل خمسة وثمانين أورو في دجنبر، ومكشوف الحساب في يناير، يصبح في الربيع مالكا معلنا لثروة تقدر بمئات آلاف الأورو. خمسة وثمانون أورو يطالب بها مفوض قضائي في دجنبر، ومليونان وأربعمائة ألف درهم تدعى ملكيتها في الربيع، وبينهما ميت."},
+      {date:"الثمن المدفوع", title:"ثمانية عشر شهراً من السجن لدخوله بيت أبيه",
+        html:`<p>الابن الذي يطالب اليوم بالحقيقة <strong>دفع ثمن بحثه ثمانية عشر شهراً من السجن</strong> — بالمغرب، وفي قضية الشقة المستولى عليها نفسها.</p>
+              <p>في أبريل 2017، أي بعد شهرين من الوفاة، توجّه إلى الرباط بحثاً عن ممتلكات والده. فعلم أن إحدى الشقق <strong>قد سُجِّلت للتوّ باسم الغير</strong>. فحضر إلى العمارة، واستفسر <strong>السانديك</strong> و<strong>حارس العمارة</strong>، وأحضر صانع مفاتيح <strong>بحضورهما</strong>، وفتح مسكن أبيه ونقل بعض الأغراض. والحكم نفسه يُدوِّن روايته: أنه دخل <strong>بحسن نية، معتقداً أن الشقة تعود لتركة والده</strong>.</p>
+              <p>اعتُقل في <strong>2 مارس 2018</strong> بـ<strong>السجن المحلي تيفلت 2</strong>. وفي <strong>29 نونبر 2018</strong>، حكمت عليه غرفة الجنايات بالرباط بـ<strong>ثلاث سنوات حبساً نافذاً</strong>، مع <strong>50.000 درهم</strong> تعويضاً لفائدة <strong>إيمان المنصوري</strong> و<strong>10.000 درهم</strong> لفائدة والدتها <strong>أمال البيض</strong>. والتكييف المعتمد ثقيل: <strong>السرقة الموصوفة والهجوم ليلاً على مسكن الغير</strong> — من أجل شقة أبيه هو.</p>
+              <p>وفي الاستئناف، كتبت محكمة الرباط بنفسها، في قرارها عدد 227 بتاريخ <strong>21 مارس 2019</strong>، أن <strong>«العقوبة جاءت قاسية»</strong>، وخفّضتها مع جعل جزء منها موقوف التنفيذ — والسبب المعتمد: <strong>انعدام السوابق القضائية تماماً</strong>. وخرج من تيفلت 2 في <strong>2 سبتمبر 2019</strong>.</p>
+              <p>ويبقى السؤال الذي يطرحه هذا الملف على السلطات المغربية. فالإشعارات الضريبية المغربية لسنتَي <strong>2016 و2017</strong> كانت لا تزال تُحرَّر ضرائب هذه الشقة <strong>باسم الهالك</strong>. والعمارة لم تكن قائمة في تاريخ عقد البيع المُحتجّ به. والبائع لم يوقّع. وهذه المعطيات مُضمَّنة في سجلات المحافظة العقارية والإدارة الضريبية المغربيتين — <strong>وهي في متناول السلطات نفسها التي تابعت وحاكمت وسجنت</strong>.</p>
+              <p>ونحن نؤكّدها صراحةً: <strong>لم يكن بوسع السلطات المغربية ألّا تعلم.</strong> فالعمارة غير القائمة في تاريخ العقد، وانعدام توقيع البائع، والضرائب التي كانت لا تزال تُحرَّر باسم الهالك سنتَي 2016 و2017 — كل ذلك كان مُدوَّناً في سجلاتها هي، وفي متناول يدها مباشرةً. ومع ذلك اختارت أن تُتابع وتُحاكم وتسجن الوارث ثمانية عشر شهراً، <strong>دون أن تحقّق قطّ في الاستيلاء الذي جاء يُبلِّغ عنه</strong>. وهذا ليس إهمالاً: إنه <strong>تواطؤ بالامتناع</strong>، حوّل القضاء المغربي إلى أداة في عملية السلب.</p>
+              <div class="pull">المحكمة التي أدانته كتبت أن العقوبة كانت قاسية. وكان قد قضى سنةً كاملة خلف القضبان حين كتبت ذلك.</div>`,
+        speak:"ثمانية عشر شهرا من السجن لدخوله بيت أبيه. الابن الذي يطالب اليوم بالحقيقة دفع ثمن بحثه ثمانية عشر شهرا من السجن، بالمغرب، وفي قضية الشقة المستولى عليها نفسها. في أبريل 2017، أي بعد شهرين من الوفاة، توجه إلى الرباط بحثا عن ممتلكات والده. فعلم أن إحدى الشقق قد سجلت للتو باسم الغير. فحضر إلى العمارة، واستفسر السانديك وحارس العمارة، وأحضر صانع مفاتيح بحضورهما، وفتح مسكن أبيه ونقل بعض الأغراض. والحكم نفسه يدون روايته: أنه دخل بحسن نية، معتقدا أن الشقة تعود لتركة والده. اعتقل في الثاني من مارس 2018 بالسجن المحلي تيفلت 2. وفي التاسع والعشرين من نونبر 2018، حكمت عليه غرفة الجنايات بالرباط بثلاث سنوات حبسا نافذا، مع خمسين ألف درهم تعويضا لفائدة إيمان المنصوري وعشرة آلاف درهم لفائدة والدتها أمال البيض. والتكييف المعتمد ثقيل: السرقة الموصوفة والهجوم ليلا على مسكن الغير، من أجل شقة أبيه هو. وفي الاستئناف، كتبت محكمة الرباط بنفسها، في قرارها عدد مئتين وسبعة وعشرين بتاريخ الحادي والعشرين من مارس 2019، أن العقوبة جاءت قاسية، وخفضتها مع جعل جزء منها موقوف التنفيذ، والسبب المعتمد: انعدام السوابق القضائية تماما. وخرج من تيفلت 2 في الثاني من سبتمبر 2019. ويبقى السؤال الذي يطرحه هذا الملف على السلطات المغربية. فالإشعارات الضريبية المغربية لسنتي 2016 و2017 كانت لا تزال تحرر ضرائب هذه الشقة باسم الهالك. والعمارة لم تكن قائمة في تاريخ عقد البيع المحتج به. والبائع لم يوقع. وهذه المعطيات مضمنة في سجلات المحافظة العقارية والإدارة الضريبية المغربيتين، وهي في متناول السلطات نفسها التي تابعت وحاكمت وسجنت. ونحن نؤكدها صراحة: لم يكن بوسع السلطات المغربية ألا تعلم. فالعمارة غير القائمة في تاريخ العقد، وانعدام توقيع البائع، والضرائب التي كانت لا تزال تحرر باسم الهالك سنتي 2016 و2017، كل ذلك كان مدونا في سجلاتها هي، وفي متناول يدها مباشرة. ومع ذلك اختارت أن تتابع وتحاكم وتسجن الوارث ثمانية عشر شهرا، دون أن تحقق قط في الاستيلاء الذي جاء يبلغ عنه. وهذا ليس إهمالا: إنه تواطؤ بالامتناع، حول القضاء المغربي إلى أداة في عملية السلب."},
       {date:"الحمايات", title:"ميدالية ذهبية… مقابل أي استحقاق؟",
         html:`<p>الرجل الذي انتقلت إليه شقة حي الرياض ليس مجهولاً: إنه <strong>محمود عرشان</strong>، المفوّض السابق للشرطة الذي صار نائباً برلمانياً، والذي وصفته أكثر من عشر منظمات حقوقية (ASDHOM، AMDH، MRAP، FEMED…) بأنه <strong>«أحد كبار الجلادين في النظام المغربي»</strong> خلال سنوات الرصاص — مركز التعذيب <strong>«درب مولاي الشريف»</strong>، ومعارضون <strong>«عُذّبوا حتى الموت تحت إشرافه»</strong>، بحسب رسالتها المفتوحة.</p>
               <p>ومع ذلك، فقد سلّمه السيناتور <strong>كريستيان كامبون</strong> — رئيس <strong>لجنة الشؤون الخارجية والدفاع بمجلس الشيوخ الفرنسي</strong> آنذاك — في <strong>14 أبريل 2018 بالرباط</strong>، <strong>الميدالية الذهبية لمجلس الشيوخ</strong>. وفي 4 يونيو 2018، وجّهت تلك المنظمات <strong>رسالة مفتوحة إلى رئيس مجلس الشيوخ</strong>: «منتخَب من الجمهورية يكافئ جلاداً على "خدماته المخلصة"». هذه الرسالة هي الوثيقة المعروضة أدناه.</p>
@@ -716,15 +940,32 @@ const I18N = {
       {k:"المداخيل المحدّدة في الوثائق", v:"<bdi>429&nbsp;425&nbsp;€</bdi>", contra:false},
       {k:"رصيد حساب الإدارة (مارس 2026)", v:"<bdi>212&nbsp;625,10&nbsp;€</bdi>", contra:false},
       {k:"دُفع للسانديك — مقابل دين حقيقي <bdi>≈&nbsp;14&nbsp;651&nbsp;€</bdi>", v:"<bdi>56&nbsp;192,55&nbsp;€</bdi>", contra:false},
+      {k:"ما خرج عن المسار القانوني (<bdi>300</bdi> ألف + <bdi>200</bdi> ألف + <bdi>129</bdi> ألف)", v:"<bdi>629&nbsp;000&nbsp;€</bdi>", contra:true},
+      {k:"المستحَق فعلاً (تكاليف <bdi>≈&nbsp;24</bdi> ألف € + ضرائب <bdi>≈&nbsp;11</bdi> ألف €)", v:"<bdi>≈&nbsp;35&nbsp;000&nbsp;€</bdi>", contra:false},
       {k:"ما مرّ عبر صندوق الودائع (الإلزامي)", v:"<bdi>0&nbsp;€</bdi>", contra:true},
       {k:"ما يُعلنه مشروع العقد الرسمي", v:"«لا أملاك»", contra:true}
+    ],
+    ledgerMobile:[
+      {k:"مطلوب من مفوَّض قضائي قبل الحجز على الحساب (8 دجنبر 2016)", v:"<bdi>85,60&nbsp;€</bdi>", contra:false},
+      {k:"وضعية الحساب البنكي (23 يناير 2017)", v:"مدين", contra:true},
+      {k:"وفاة الأب", v:"<bdi>16 فبراير 2017</bdi>", contra:false},
+      {k:"تفويت بـ«البيع» مسجَّل بالمغرب", v:"<bdi>مارس 2017</bdi>", contra:true},
+      {k:"شقة الرباط المُدَّعى ملكيتها", v:"<bdi>2&nbsp;485&nbsp;000&nbsp;درهم</bdi>", contra:true},
+      {k:"توقيع البائع على العقد المُحتجّ به", v:"منعدم", contra:true},
+      {k:"العقوبة الصادرة في حق الابن (29 نونبر 2018)", v:"<bdi>3 سنوات نافذة</bdi>", contra:true},
+      {k:"مدة الاعتقال الفعلية بتيفلت 2", v:"<bdi>18 شهراً</bdi>", contra:true}
     ],
     timeline:[
       {d:"16 فبراير 2017", t:"وفاة الأب بنويي-سور-سين (الشهادة رقم 160). الصحافة العربية تطرح فرضية التسميم."},
       {d:"مارس 2017", t:"في المغرب، تسجيل انتقال ملكية عقارية عن طريق «البيع» — أسابيع بعد الوفاة."},
       {d:"27 ديسمبر 2017", t:"إعلان استقالة الموثقة حكماً بقرار منشور في الجريدة الرسمية، وإلغاء مكتبها."},
       {d:"14 أبريل 2018", t:"في الرباط، السيناتور كامبون يسلّم الميدالية الذهبية لمجلس الشيوخ إلى محمود عرشان. وفي 4 يونيو، منظمات حقوقية تحتجّ برسالة مفتوحة إلى رئيس مجلس الشيوخ."},
+      {d:"8 دجنبر 2016 — 23 يناير 2017", t:"قبل الوفاة: من ستدّعي ملكية شقة الرباط تتوصّل بآخر إشعار من مفوَّض قضائي قبل الحجز على حسابها (85,60 أورو)، ثم بتنبيه من بنكها بسبب كشف حساب مُطوَّل."},
+      {d:"2 مارس 2018", t:"اعتقال ابن الهالك بالسجن المحلي تيفلت 2 بالمغرب، في قضية شقة حي الرياض."},
       {d:"2018 — 2019", t:"في المغرب، محضر رقم 72/3201/2018 يتعلّق بقتل عمد مع سبق الإصرار والترصد."},
+      {d:"29 نونبر 2018", t:"غرفة الجنايات بالرباط تحكم عليه بثلاث سنوات حبساً نافذاً وبتعويضات لفائدة المطالبتين بالحق المدني."},
+      {d:"21 مارس 2019", t:"في الاستئناف، محكمة الرباط تُقرّ بأن «العقوبة جاءت قاسية»، فتخفّضها وتجعل جزءاً منها موقوف التنفيذ لانعدام السوابق."},
+      {d:"2 سبتمبر 2019", t:"الإفراج من تيفلت 2، بعد ثمانية عشر شهراً من الاعتقال الفعلي."},
       {d:"10 سبتمبر 2021", t:"تقرير شرطة نويي: فرضية الاغتيال مدعومة بالأدلة."},
       {d:"24 سبتمبر 2021", t:"حفظ الملف دون متابعة من طرف النيابة (تبليغ في 20 أكتوبر)."},
       {d:"31 يناير 2022", t:"تعيين وكيلة قضائية للتركة — بمبادرة من سانديك العمارة."},
@@ -747,9 +988,18 @@ const $$ = s=>[...document.querySelectorAll(s)];
 
 /* ---------- documents par chapitre (menu déroulant) ---------- */
 let DOC_STATE = {}; // { [chapitre]: [{src, cap}, ...] } — reconstruit à chaque render
+// Texte alternatif d'un scan : la légende est déjà une description exacte de la
+// pièce, on la réutilise. On retire le balisage (<bdi> des légendes AR) et on
+// échappe les guillemets, sinon l'attribut alt="" se referme trop tôt.
+function docAlt(cap){
+  return String(cap)
+    .replace(/<[^>]*>/g,"").replace(/&nbsp;/g," ")
+    .replace(/&/g,"&amp;").replace(/"/g,"&quot;")
+    .trim();
+}
 // Markup <img> avec repli sur un placeholder si le fichier manque.
-function docImgHtml(src, ph){
-  return `<img src="${src}" alt="" onerror="this.parentNode.innerHTML='<div class=&quot;doc-placeholder&quot;><svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot;><path d=&quot;M7 3h7l5 5v13H7z&quot;/><path d=&quot;M14 3v5h5&quot;/></svg><span>${ph}</span></div>'">`;
+function docImgHtml(src, ph, cap){
+  return `<img src="${src}" alt="${docAlt(cap)}" loading="lazy" decoding="async" onerror="this.parentNode.innerHTML='<div class=&quot;doc-placeholder&quot;><svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.5&quot; aria-hidden=&quot;true&quot;><path d=&quot;M7 3h7l5 5v13H7z&quot;/><path d=&quot;M14 3v5h5&quot;/></svg><span>${ph}</span></div>'">`;
 }
 // Libellé court d'option : partie avant le tiret cadratin de la légende.
 // Les légendes AR isolent les nombres avec <bdi> (sinon le bidi RTL inverse les
@@ -769,7 +1019,7 @@ function swapDoc(sel){
   const d = I18N[LANG];
   const frame = document.getElementById("docframe-"+ch);
   const cap = document.getElementById("doccap-"+ch);
-  if(frame) frame.innerHTML = docImgHtml(it.src, d.docPlaceholder);
+  if(frame) frame.innerHTML = docImgHtml(it.src, d.docPlaceholder, it.cap);
   if(cap) cap.innerHTML = `<span class="tag">${d.docTag}</span><br>${it.cap}`;
 }
 
@@ -785,6 +1035,11 @@ function render(){
     const k = el.getAttribute("data-i");
     if(d[k]!==undefined) el.innerHTML = d[k];
   });
+  // textes alternatifs traduisibles (attribut alt, pas contenu)
+  $$("[data-i-alt]").forEach(el=>{
+    const k = el.getAttribute("data-i-alt");
+    if(d[k]!==undefined) el.setAttribute("alt", String(d[k]).replace(/<[^>]*>/g,""));
+  });
   // lang buttons
   $$(".lang-switch button").forEach(b=>b.classList.toggle("active", b.dataset.lang===LANG));
 
@@ -796,11 +1051,16 @@ function render(){
     const sec = document.createElement("section");
     sec.className = "chapter";
     sec.id = "ch"+(i+1);
+    // ledger:true  -> tableau global d.ledger (chapitre « Les chiffres qui parlent »)
+    // ledger:"nom" -> tableau d[nom], pour qu'un autre chapitre ait ses propres chiffres
     let ledgerHtml = "";
     if(c.ledger){
-      ledgerHtml = `<div class="ledger">` + d.ledger.map(l=>
-        `<div class="cell ${l.contra?'contra':''}"><div class="k">${l.k}</div><div class="v">${l.v}</div></div>`
-      ).join("") + `</div>`;
+      const rows = (typeof c.ledger === "string") ? d[c.ledger] : d.ledger;
+      if(Array.isArray(rows) && rows.length){
+        ledgerHtml = `<div class="ledger">` + rows.map(l=>
+          `<div class="cell ${l.contra?'contra':''}"><div class="k">${l.k}</div><div class="v">${l.v}</div></div>`
+        ).join("") + `</div>`;
+      }
     }
     // documents par chapitre (placeholders – dépose les fichiers caviardés dans /docs)
     // Chaque chapitre peut avoir PLUSIEURS documents : ils sont proposés via un
@@ -814,7 +1074,9 @@ function render(){
       5:["docs/projet-notoriete-absence.jpg","docs/projet-notoriete-1.jpg","docs/projet-notoriete-2.jpg","docs/projet-notoriete-3.jpg","docs/projet-notoriete-4.jpg","docs/projet-notoriete-5.jpg","docs/projet-notoriete-6.jpg","docs/projet-notoriete-7.jpg","docs/projet-notoriete-8.jpg","docs/projet-notoriete-9.jpg","docs/acte-notoriete-2026.jpg","docs/email-abecassis.jpg","docs/email-refus-acte.jpg","docs/lettre-vente-gentilly.jpg"],
       6:["docs/releve-vente-300k.jpg","docs/rapport-mission-220k.jpg","docs/releve-compte-129k.jpg","docs/releve-mandataire-200k.jpg","docs/jugement-creteil.jpg","docs/rapport-mission-1.jpg","docs/rapport-mission-2.jpg","docs/rapport-mission-3.jpg","docs/rapport-mission-4.jpg","docs/rapport-mission-5.jpg","docs/rapport-mission-6.jpg","docs/lettre-hcl-honoraires.jpg","docs/lettre-hcl-solde-212k.jpg","docs/fiche-compte-1.jpg","docs/fiche-compte-2.jpg","docs/fiche-compte-3.jpg","docs/fiche-compte-4.jpg","docs/fiche-compte-5.jpg","docs/fiche-compte-6.jpg","docs/releve-atrium-1.jpg","docs/releve-atrium-2.jpg","docs/releve-etude-abecassis.jpg"],
       7:["docs/gendarmerie-maroc.jpg","docs/faux-contrat-maroc.jpg","docs/faux-contrat-maroc-2.jpg","docs/taxes-foncieres-2016.jpg","docs/taxes-foncieres-2017.jpg","docs/acte-vente-rabat-fr.jpg","docs/acte-vente-rabat-ar.jpg","docs/fiche-notaire-rabat.jpg","docs/kechouf-1.jpg","docs/kechouf-2.jpg","docs/kechouf-3.jpg","docs/kechouf-4.jpg","docs/kechouf-5.jpg","docs/kechouf-6.jpg","docs/kechouf-7.jpg","docs/kechouf-8.jpg","docs/avis-imposition-1.jpg","docs/avis-imposition-2.jpg","docs/avis-imposition-3.jpg","docs/avis-imposition-4.jpg","docs/gendarmerie-pv-1.jpg","docs/gendarmerie-pv-2.jpg"],
-      8:["docs/protestation-cambon.jpg","docs/communique-presse-fr.jpg","docs/communique-presse-ar.jpg","docs/plainte-annaba-fr.jpg","docs/plainte-annaba-ar.jpg","docs/plainte-annaba-longue-ar.jpg","docs/plainte-blanchiment-fr.jpg","docs/plainte-blanchiment-ar.jpg"]
+      8:["docs/bnp-decouvert-2017.jpg","docs/huissier-aphp-2016.jpg"],
+      9:["docs/bulletin-sortie-tiflet-2019.jpg","docs/arret-appel-rabat-2019-9.jpg","docs/jugement-rabat-2018-8.jpg","docs/jugement-rabat-2018-1.jpg","docs/jugement-rabat-2018-2.jpg","docs/jugement-rabat-2018-3.jpg","docs/jugement-rabat-2018-4.jpg","docs/jugement-rabat-2018-5.jpg","docs/jugement-rabat-2018-6.jpg","docs/jugement-rabat-2018-7.jpg","docs/arret-appel-rabat-2019-1.jpg","docs/arret-appel-rabat-2019-2.jpg","docs/arret-appel-rabat-2019-3.jpg","docs/arret-appel-rabat-2019-4.jpg","docs/arret-appel-rabat-2019-5.jpg","docs/arret-appel-rabat-2019-6.jpg","docs/arret-appel-rabat-2019-7.jpg","docs/arret-appel-rabat-2019-8.jpg","docs/certificat-non-recours-2019.jpg","docs/bulletin-sortie-tiflet-2019-bis.jpg"],
+      10:["docs/protestation-cambon.jpg","docs/communique-presse-fr.jpg","docs/communique-presse-ar.jpg","docs/plainte-annaba-fr.jpg","docs/plainte-annaba-ar.jpg","docs/plainte-annaba-longue-ar.jpg","docs/plainte-blanchiment-fr.jpg","docs/plainte-blanchiment-ar.jpg"]
     };
     const chDocs = docMap[i+1] || [];
     if(chDocs.length){
@@ -841,7 +1103,7 @@ function render(){
       <div class="doc-group">
         ${pickerHtml}
         <figure class="doc">
-          <div class="frame" id="docframe-${ch}">${docImgHtml(first.src, d.docPlaceholder)}</div>
+          <div class="frame" id="docframe-${ch}">${docImgHtml(first.src, d.docPlaceholder, first.cap)}</div>
           <figcaption id="doccap-${ch}"><span class="tag">${d.docTag}</span><br>${first.cap}</figcaption>
         </figure>
       </div>`;
@@ -1099,8 +1361,10 @@ body[dir="rtl"] .ai-msg.user{border-bottom-right-radius:13px;border-bottom-left-
 .ai-inrow{display:flex;gap:8px;align-items:flex-end}
 #ai-input{flex:1;resize:none;max-height:110px;background:var(--bg);color:var(--ink);border:1px solid var(--line);
   border-radius:12px;padding:10px 12px;font:inherit;font-size:.88rem;font-weight:300;line-height:1.5}
-#ai-input:focus{outline:none;border-color:var(--gold)}
-#ai-send{background:var(--gold);border:none;color:#1a1206;cursor:pointer;border-radius:12px;padding:0 15px;height:42px;font:inherit;font-weight:600}
+/* outline:none supprimait l'anneau de focus clavier — on garde le liseré doré
+   au clic souris et l'anneau global reste visible au clavier (:focus-visible). */
+#ai-input:focus{border-color:var(--gold)}
+#ai-send{background:var(--gold);border:none;color:#1a1206;cursor:pointer;border-radius:12px;padding:0 15px;min-height:44px;font:inherit;font-weight:600}
 #ai-send:disabled{opacity:.5;cursor:default}
 .ai-disc{color:var(--ink-dim);font-size:.68rem;margin-top:7px;text-align:center;opacity:.8}
 </style>
