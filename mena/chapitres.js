@@ -119,6 +119,7 @@ window.CHAPITRES = [
    "L'appartement 5 de l'immeuble 7 est aujourd'hui au nom d'un député marocain, qui affirme l'avoir acheté au défunt en 2011.",
    "Premier élément : l'administration fiscale marocaine. En 2016 et en 2017, soit cinq et six ans après cette prétendue vente, la taxe d'habitation et de services communaux de cet appartement, 33 157 dirhams et 60 centimes en 2016, est toujours établie au nom d'Abdelkrim Mansouri. Même dans une vente sur plans, l'acquéreur devient redevable de ces taxes une fois le bien livré. Si la vente de 2011 avait existé, l'État n'aurait pas continué à taxer le vendeur.",
    "Deuxième élément : les images satellites historiques de Google Earth, issues des archives Maxar, pièce P11. Sur le bâtiment que nous avons identifié comme l'immeuble 7, face au studio de Medi 1 TV, on voit un chantier en mars 2010, un bâtiment en gros œuvre en mai puis en septembre 2011, et un immeuble achevé seulement fin 2012. En 2011, il n'y avait donc aucun appartement terminé à vendre. Une vente n'aurait pu être qu'une vente en l'état futur d'achèvement, encadrée au Maroc par la loi 44-00, avec un contrat de réservation et un acte spécifique.",
+   "Troisième élément : qui pouvait vendre en 2011 ? À cette époque, les appartements neufs de Ryad Al Andalous se vendaient sur plans, directement par le promoteur Prestigia : la presse économique rapporte qu'en mai 2011, cent appartements y ont été vendus en une seule journée. Pour qu'Abdelkrim Mansouri « revende » en 2011 un appartement d'un immeuble encore en chantier, il aurait fallu un contrat de vente sur plans à son nom, puis une cession de ce contrat. Le promoteur détient ces documents : contrats de réservation, paiements, et procès-verbal de remise des clés.",
    "Je dois être précise : l'identification de ce bâtiment comme l'immeuble 7 repose sur la cartographie publique et sur le témoignage de Tarik Mansouri ; elle doit être confirmée par le plan de lotissement du promoteur Prestigia. La partie civile demande donc que soient obtenus, par la voie de l'entraide judiciaire : l'acte de 2011, l'historique du titre foncier, et le permis d'habiter de l'immeuble. L'acte dira aussi si un usufruit avait été réservé au défunt, ce qui est la seule explication alternative au maintien des taxes à son nom."
   ],
   "faits": [
@@ -143,7 +144,21 @@ window.CHAPITRES = [
    "P10",
    "P11"
   ],
-  "satellite": "imm7"
+  "satellite": "imm7",
+  "sources": [
+   [
+    "FNH, 12/05/2011 — « Ryad Al Andalous : 100 ventes en une seule journée »",
+    "https://fnh.ma/article/actualite-entreprises/ryad-al-andalous-100-ventes-en-une-seule-journee"
+   ],
+   [
+    "La Vie Éco, 08/08/2013 — premières livraisons en novembre 2009, 1 400 logements livrés",
+    "https://www.lavieeco.com/affaires/haut-standing-au-maroc-prestigia-avance-surement-26267/"
+   ],
+   [
+    "Smap Immo, 02/07/2013 — contrat Prestigia–Bymaro (Bouygues), 760 appartements, 660 MDH",
+    "http://www.smapgroup.com/+Prestigia-signe-avec-Bymaro+.html"
+   ]
+  ]
  },
  {
   "id": 6,
@@ -154,7 +169,7 @@ window.CHAPITRES = [
    "Mais ce même certificat révèle un élément décisif : une hypothèque officielle a été inscrite sur cet appartement le 14 mars 2016, pour 200 447 dirhams, à la charge d'Abdelkrim Mansouri, au profit de la perception de Rabat Hay Riad. Autrement dit, en 2016, trois ans après la vente supposée de 2013, le Trésor marocain poursuivait encore le défunt sur ce bien.",
    "L'acte invoqué, attribué à la notaire Maître Sonia El Oufi, porte sur 2 485 000 dirhams. Selon la partie civile, l'emplacement de la signature du vendeur y est vide, et l'acte présente comme achevé un bien vendu en 2013, sans être une vente sur plans. Attention : la pièce P12 est une transcription dactylographiée établie à partir de photographies de l'acte ; l'original photographié doit être produit. Cette transcription mentionne le titre foncier 87.555/52, alors que la Conservation foncière indique 50/27592 ; cette discordance doit être vérifiée.",
    "Un point doit être vérifié avec soin. Devant la chambre criminelle de Rabat, en 2018, l'avocat de la défense a évoqué un acte de vente qui réserverait un droit d'usufruit au profit du père. Si c'est le cas, cela expliquerait que les taxes et l'hypothèque soient restées à son nom ; mais surtout, cet usufruit ne s'éteint qu'à la mort du père : c'est son décès qui fait de l'acquéreuse la pleine propriétaire. Nous y revenons au chapitre « Le mobile ». La partie civile demande la production de l'acte original.",
-   "Reste une question de date, décisive. L'acte présente l'appartement comme un bien achevé, et non comme une vente sur plans. Or au Maroc, un appartement n'obtient son titre foncier individuel qu'une fois l'immeuble achevé, doté de son permis d'habiter et placé sous le régime de la copropriété. La date de création du titre foncier 50/27592 et celle du permis d'habiter de l'immeuble 38 diront donc si un appartement pouvait légalement être vendu comme achevé en 2013. La partie civile demande que ces deux dates soient obtenues de la Conservation foncière et de la commune de Rabat."
+   "Reste une question de date, décisive. L'acte présente l'appartement comme un bien achevé, et non comme une vente sur plans. Or au Maroc, un appartement n'obtient son titre foncier individuel qu'une fois l'immeuble achevé, doté de son permis d'habiter et placé sous le régime de la copropriété. La date de création du titre foncier 50/27592 et celle du permis d'habiter de l'immeuble 38 diront donc si un appartement pouvait légalement être vendu comme achevé en 2013. La partie civile demande que ces deux dates soient obtenues de la Conservation foncière et de la commune de Rabat, ainsi que, auprès du promoteur Prestigia, le procès-verbal de livraison de cet appartement, qui donne la date réelle de remise des clés et l'identité de l'acquéreur initial. Prestigia savait d'ailleurs, dès avril 2017, que le défunt détenait deux appartements dans le complexe : le jugement marocain de 2018 le rapporte."
   ],
   "faits": [
    [
@@ -493,7 +508,7 @@ window.CHAPITRES = [
    "Pour terminer, voici les actes que la partie civile envisage de demander au juge d'instruction, sur le fondement de l'article 82-1 du code de procédure pénale. Je ne suis pas avocate : ces pistes sont à discuter avec votre conseil.",
    "Sur la cause de la mort : le dossier médical de l'hôpital de Neuilly-sur-Seine, et une expertise médico-légale et toxicologique, y compris, si nécessaire, une exhumation.",
    "Sur le patrimoine en France : un état hypothécaire au nom du défunt auprès de tous les services de publicité foncière, son dossier fiscal, et le fichier des comptes bancaires FICOBA ; ainsi que les relevés complets du compte de la succession, la justification de la contrepassation de 200 000 euros, et l'absence de consignation à la Caisse des dépôts.",
-   "Sur le Maroc, par une demande d'entraide pénale internationale : l'historique complet des titres fonciers, les actes de 2011 et de 2013 et leurs minutes, le plan de lotissement de Ryad Al Andalous, les permis d'habiter des immeubles 7 et 38 et la date de création des titres fonciers individuels de leurs appartements, dont le TF 50/27592, les rôles de la taxe d'habitation, l'hypothèque du Trésor de 2016, et le contenu du procès-verbal 72/3201/2018. Enfin, la certification par Maxar ou Google des images satellites datées."
+   "Sur le Maroc, par une demande d'entraide pénale internationale : l'historique complet des titres fonciers, les actes de 2011 et de 2013 et leurs minutes, le plan de lotissement de Ryad Al Andalous, les permis d'habiter des immeubles 7 et 38 et la date de création des titres fonciers individuels de leurs appartements, dont le TF 50/27592, les rôles de la taxe d'habitation, l'hypothèque du Trésor de 2016, et le contenu du procès-verbal 72/3201/2018. Auprès du promoteur Prestigia, filiale du groupe Addoha : les contrats de réservation et de vente sur plans, les paiements et les procès-verbaux de livraison des appartements de l'immeuble 7, appartement 5, et de l'immeuble 38. Enfin, la certification par Maxar ou Google des images satellites datées."
   ],
   "faits": [],
   "pieces": []
