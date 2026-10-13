@@ -63,6 +63,7 @@ aside{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 92px);di
 .toc button{display:flex;gap:10px;width:100%;text-align:left;background:none;border:0;color:var(--ink-dim);padding:8px 10px;border-radius:9px;font-size:.88rem;line-height:1.35}
 .toc button:hover{background:var(--bg-soft);color:var(--ink)}
 .toc button.on{background:var(--bg-soft);color:var(--gold-soft)}
+.toc-select{display:none;width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--gold);border-radius:12px;padding:12px 14px;font:inherit;font-size:1rem}
 .toc .n{flex:0 0 22px;font-variant-numeric:tabular-nums;color:var(--gold);opacity:.8}
 
 /* contenu */
@@ -156,9 +157,9 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
   .wrap{display:flex;flex-direction:column;gap:14px;padding:16px 16px 70px}
   .wrap>*,aside>*{min-width:0;max-width:100%}
   aside{display:contents}
-  .mena{order:1} .toc{order:2} main{order:3} .chat{order:4;margin-top:10px}
-  .toc{min-height:0;max-height:none;display:flex;overflow-x:auto;gap:4px;padding:6px}
-  .toc button{flex:0 0 auto;white-space:nowrap}
+  .mena{order:1} .toc,.toc-select{order:2} main{order:3} .chat{order:4;margin-top:10px}
+  .toc{display:none}
+  .toc-select{display:block}
   .chat{max-height:60vh}
   .top{padding:10px 16px}
   .top-actions .btn span{display:none}
@@ -194,6 +195,7 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
     </div>
 
     <nav class="toc" id="toc" aria-label="Chapitres"></nav>
+    <select class="toc-select" id="tocSel" aria-label="Choisir un chapitre"></select>
 
     <section class="chat" aria-label="Questions à Mena">
       <div class="chat-h">Posez votre question à Mena
@@ -291,6 +293,7 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
   }
   function openPiece(id){
     const p = byId[id]; if(!p) return;
+    if (window.matchMedia("(max-width:960px), (pointer:coarse)").matches) { window.open(p.pdf, "_blank", "noopener"); return; }
     $("#lbTitle").textContent = `${p.id} — ${p.titre}`;
     $("#lbBody").innerHTML = `<iframe src="${esc(p.pdf)}" title="${esc(p.titre)}"></iframe>`;
     $("#lb").classList.add("on"); $("#lbClose").focus();
@@ -310,6 +313,8 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
   function renderToc(){
     $("#toc").innerHTML = CH.map((c,i) => `<button data-ch="${i}" class="${i===cur?'on':''}"><span class="n">${i||"·"}</span><span>${esc(c.titre)}</span></button>`).join("");
     $("#toc").querySelectorAll("button").forEach(b => b.onclick = () => go(+b.dataset.ch, playing));
+    $("#tocSel").innerHTML = CH.map((c,i) => `<option value="${i}" ${i===cur?"selected":""}>${i ? "Chapitre " + i + " — " : ""}${esc(c.titre)}</option>`).join("");
+    $("#tocSel").onchange = e => { go(+e.target.value, playing); $("#chapter").scrollIntoView({behavior:"smooth"}); };
   }
   function render(){
     const c = CH[cur];
