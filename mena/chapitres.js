@@ -163,26 +163,26 @@ window.CHAPITRES = [
  {
   "id": 6,
   "titre": "L'immeuble 38",
-  "sous": "L'acte de 2013 et l'hypothèque de 2016",
+  "sous": "L'acte de 2013 et l'hypothèque de 2010, jamais levée",
   "recit": [
    "Le second appartement, au deuxième étage de l'immeuble 38 avec un garage en sous-sol, est inscrit au nom d'une cohéritière. Le certificat de la Conservation foncière d'Agdal-Riyad du 20 avril 2017 le confirme, sous le titre foncier 50/27592.",
-   "Mais ce même certificat révèle un élément décisif : une hypothèque officielle a été inscrite sur cet appartement le 14 mars 2016, pour 200 447 dirhams, à la charge d'Abdelkrim Mansouri, au profit de la perception de Rabat Hay Riad. Autrement dit, en 2016, trois ans après la vente supposée de 2013, le Trésor marocain poursuivait encore le défunt sur ce bien.",
+   "Ce même certificat révèle une hypothèque officielle inscrite sur cet appartement le 14 mars 2010, pour 200 447 dirhams, à la charge d'Abdelkrim Mansouri, au profit de la perception de Rabat Hay Riad. Elle enseigne deux choses. D'abord, dès mars 2010, alors que le terrain de l'immeuble 38 n'était encore qu'un terrassement, le défunt détenait déjà des droits sur cet appartement, acheté sur plans. Ensuite, cette hypothèque n'a jamais été levée : en avril 2017, elle grève toujours le bien. Une vente réelle en 2013 pour 2 485 000 dirhams aurait normalement servi à solder cette dette de 200 447 dirhams, et aucun notaire ne pouvait ignorer cette inscription. Son maintien interroge directement sur la réalité du prix payé.",
    "L'acte invoqué, attribué à la notaire Maître Sonia El Oufi, porte sur 2 485 000 dirhams. Selon la partie civile, l'emplacement de la signature du vendeur y est vide, et l'acte présente comme achevé un bien vendu en 2013, sans être une vente sur plans. Attention : la pièce P12 est une transcription dactylographiée établie à partir de photographies de l'acte ; l'original photographié doit être produit. Cette transcription mentionne le titre foncier 87.555/52, alors que la Conservation foncière indique 50/27592 ; cette discordance doit être vérifiée.",
-   "Un point doit être vérifié avec soin. Devant la chambre criminelle de Rabat, en 2018, l'avocat de la défense a évoqué un acte de vente qui réserverait un droit d'usufruit au profit du père. Si c'est le cas, cela expliquerait que les taxes et l'hypothèque soient restées à son nom ; mais surtout, cet usufruit ne s'éteint qu'à la mort du père : c'est son décès qui fait de l'acquéreuse la pleine propriétaire. Nous y revenons au chapitre « Le mobile ». La partie civile demande la production de l'acte original.",
+   "Un point doit être vérifié avec soin. Devant la chambre criminelle de Rabat, en 2018, l'avocat de la défense a évoqué un acte de vente qui réserverait un droit d'usufruit au profit du père. Si c'est le cas, cela pourrait expliquer que l'hypothèque soit restée inscrite ; mais surtout, cet usufruit ne s'éteint qu'à la mort du père : c'est son décès qui fait de l'acquéreuse la pleine propriétaire. Nous y revenons au chapitre « Le mobile ». La partie civile demande la production de l'acte original.",
    "Reste une question de date, décisive. L'acte présente l'appartement comme un bien achevé, et non comme une vente sur plans. Or au Maroc, un appartement n'obtient son titre foncier individuel qu'une fois l'immeuble achevé, doté de son permis d'habiter et placé sous le régime de la copropriété. La date de création du titre foncier 50/27592 et celle du permis d'habiter de l'immeuble 38 diront donc si un appartement pouvait légalement être vendu comme achevé en 2013. La partie civile demande que ces deux dates soient obtenues de la Conservation foncière et de la commune de Rabat, ainsi que, auprès du promoteur Prestigia, le procès-verbal de livraison de cet appartement, qui donne la date réelle de remise des clés et l'identité de l'acquéreur initial. Prestigia savait d'ailleurs, dès avril 2017, que le défunt détenait deux appartements dans le complexe : le jugement marocain de 2018 le rapporte."
   ],
   "faits": [
    [
-    "2013",
-    "Date de l'acte de vente invoqué (2 485 000 DH)"
+    "14/03/2010",
+    "Hypothèque du Trésor de 200 447 DH à la charge du défunt — le terrain n'est alors qu'un terrassement"
    ],
    [
-    "14/03/2016",
-    "Hypothèque du Trésor de 200 447 DH contre le défunt sur ce bien"
+    "2013",
+    "Date de l'acte de vente invoqué (2 485 000 DH) — l'hypothèque n'est pas levée"
    ],
    [
     "20/04/2017",
-    "Certificat de propriété — TF 50/27592, immeuble n° 38"
+    "Certificat de propriété — TF 50/27592, immeuble n° 38 : hypothèque toujours inscrite"
    ]
   ],
   "pieces": [
@@ -200,7 +200,7 @@ window.CHAPITRES = [
    "Les chapitres précédents montrent qu'à sa mort, Abdelkrim Mansouri laisse au Maroc un patrimoine considérable : trois villas encore à son seul nom, et deux appartements à Hay Riad. La partie civile estime l'ensemble à près de quatre millions d'euros. C'est ce patrimoine qui, selon elle, constitue le mobile de l'assassinat.",
    "Premier élément : la situation financière d'une cohéritière juste avant le décès. Le 8 décembre 2016, elle reçoit un dernier avis avant saisie pour une dette de 85 euros et 60 centimes. Le 23 janvier 2017, sa banque l'avertit que son compte est à découvert en continu depuis le 14 décembre. Vingt-quatre jours plus tard, son père meurt.",
    "Deuxième élément : l'appartement de l'immeuble 38. Il est présenté comme acheté en 2013 pour 2 485 000 dirhams, soit environ 230 000 euros, par cette même cohéritière, née en 1994 : elle avait dix-neuf ans et était étudiante. La question de l'origine des fonds se pose immédiatement.",
-   "Troisième élément, décisif : la défense a fait état, devant la justice marocaine, d'un acte réservant au père l'usufruit de cet appartement. Si cet usufruit existe, la cohéritière ne détenait qu'une nue-propriété : c'est la mort du père, et elle seule, qui lui a donné la pleine propriété du bien. Et cela explique que l'État marocain ait continué, jusqu'en 2016 et 2017, à imposer le père et à inscrire une hypothèque à sa charge.",
+   "Troisième élément, décisif : la défense a fait état, devant la justice marocaine, d'un acte réservant au père l'usufruit de cet appartement. Si cet usufruit existe, la cohéritière ne détenait qu'une nue-propriété : c'est la mort du père, et elle seule, qui lui a donné la pleine propriété du bien. Et l'hypothèque du Trésor inscrite à la charge du père en 2010 n'a jamais été levée : le prix de 2013, s'il avait été réellement payé, aurait dû la solder.",
    "Quatrième élément : dans les semaines qui suivent le décès, l'appartement est revendiqué, le fils qui cherche les biens de son père est poursuivi et incarcéré dix-huit mois, et en France la succession est déclarée vide de tout bien immobilier. Pour la partie civile, ces faits forment un ensemble cohérent : écarter le père, puis écarter l'héritier qui pose des questions.",
    "Ces éléments sont soumis au juge comme des indices. Les personnes mises en cause sont présumées innocentes, et c'est l'instruction qui doit établir les faits."
   ],
