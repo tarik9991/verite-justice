@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier Mansouri — Mena</title>
+<meta name="description" content="Mena présente, chapitre par chapitre, l'affaire Abdelkrim Mansouri : récit, pièces téléchargeables, traductions françaises et imagerie satellite.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f12; --bg-soft:#14171c; --panel:#181c22; --panel-2:#1e232b;
+  --ink:#e9e6df; --ink-dim:#a39e93; --line:#2a2f37;
+  --gold:#c8a35a; --gold-soft:#e0c489; --red:#c4554a; --ok:#6fae7d;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600;line-height:1.2}
+a{color:var(--gold-soft)}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ---- barre du haut ---- */
+.top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:12px;justify-content:space-between;
+  padding:12px 20px;background:rgba(13,15,18,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{font-family:'Playfair Display',serif;color:var(--gold-soft);letter-spacing:.04em;display:flex;align-items:center;gap:8px;text-decoration:none;font-size:1.02rem}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  padding:7px 13px;border-radius:999px;font-size:.84rem;text-decoration:none;white-space:nowrap;transition:border-color .2s,background .2s}
+.btn:hover{border-color:var(--gold)}
+.btn.gold{background:var(--gold);color:#16130c;border-color:var(--gold);font-weight:500}
+.btn.gold:hover{background:var(--gold-soft)}
+.btn svg{width:15px;height:15px}
+.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+
+/* ---- mise en page ---- */
+.wrap{display:grid;grid-template-columns:360px 1fr;gap:28px;max-width:1280px;margin:0 auto;padding:24px 20px 80px}
+aside{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 92px);display:flex;flex-direction:column;gap:14px}
+
+/* carte Mena */
+.mena{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:var(--radius);padding:16px;display:flex;gap:14px;align-items:center}
+.avatar{position:relative;flex:0 0 84px;height:84px}
+.avatar img{width:84px;height:84px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);display:block}
+.avatar::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--gold);opacity:0;transform:scale(.92)}
+.speaking .avatar::after{animation:pulse 1.6s ease-out infinite}
+@keyframes pulse{0%{opacity:.7;transform:scale(.92)}100%{opacity:0;transform:scale(1.18)}}
+.mena-txt b{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-soft);font-weight:600;display:block}
+.mena-txt span{font-size:.82rem;color:var(--ink-dim);display:block;line-height:1.45}
+.player{display:flex;align-items:center;gap:6px;margin-top:10px}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--bg-soft);color:var(--ink);display:grid;place-items:center}
+.icon-btn:hover{border-color:var(--gold)}
+.icon-btn.main{width:46px;height:46px;background:var(--gold);color:#16130c;border-color:var(--gold)}
+.icon-btn svg{width:18px;height:18px}
+.speed{margin-left:auto;font-size:.78rem;color:var(--ink-dim);background:none;border:1px solid var(--line);border-radius:999px;padding:4px 9px}
+
+/* sommaire */
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:8px;overflow:auto;min-height:120px}
+.toc button{display:flex;gap:10px;width:100%;text-align:left;background:none;border:0;color:var(--ink-dim);padding:8px 10px;border-radius:9px;font-size:.88rem;line-height:1.35}
+.toc button:hover{background:var(--bg-soft);color:var(--ink)}
+.toc button.on{background:var(--bg-soft);color:var(--gold-soft)}
+.toc-select{display:none;width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--gold);border-radius:12px;padding:12px 14px;font:inherit;font-size:1rem}
+.toc .n{flex:0 0 22px;font-variant-numeric:tabular-nums;color:var(--gold);opacity:.8}
+
+/* contenu */
+main{min-width:0}
+.hero{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:22px}
+.kicker{color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;font-weight:500}
+.hero h1{font-size:clamp(1.7rem,3.4vw,2.5rem);margin:6px 0 6px}
+.hero p{color:var(--ink-dim);max-width:70ch}
+.alert{margin-top:14px;border:1px solid #5a3a2a;background:#21170f;color:#e7c9a7;border-radius:10px;padding:10px 13px;font-size:.86rem}
+
+.ch-head .kicker{display:block}
+.ch-head h2{font-size:clamp(1.5rem,3vw,2.1rem);margin:4px 0 2px}
+.ch-head .sous{color:var(--ink-dim);font-style:italic;font-family:'Playfair Display',serif;font-size:1.08rem}
+.recit{margin:20px 0 6px;display:flex;flex-direction:column;gap:12px;max-width:74ch}
+.recit p{padding:10px 14px;border-left:3px solid transparent;border-radius:0 8px 8px 0;transition:background .3s,border-color .3s;cursor:pointer;font-size:1.02rem}
+.recit p:hover{background:rgba(255,255,255,.02)}
+.recit p.on{background:rgba(200,163,90,.09);border-left-color:var(--gold);color:#fff}
+
+h3.sec{font-size:1.12rem;margin:30px 0 12px;color:var(--gold-soft);display:flex;align-items:center;gap:10px}
+h3.sec::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.faits{list-style:none;border-left:2px solid var(--line);margin-left:6px}
+.faits li{position:relative;padding:4px 0 10px 18px;font-size:.93rem}
+.faits li::before{content:"";position:absolute;left:-6px;top:11px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
+.faits time{color:var(--gold-soft);font-weight:500;font-variant-numeric:tabular-nums;margin-right:8px}
+
+/* pièces */
+.pieces{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.piece{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.piece .thumb{height:150px;background:#0a0b0d center/cover no-repeat;border-bottom:1px solid var(--line);cursor:zoom-in;position:relative}
+.piece .thumb .id{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.75);color:var(--gold-soft);font-weight:600;font-size:.78rem;padding:2px 8px;border-radius:6px}
+.piece .body{padding:11px 13px 13px;display:flex;flex-direction:column;gap:8px;flex:1}
+.piece .t{font-size:.9rem;line-height:1.4;color:var(--ink)}
+.piece .m{font-size:.76rem;color:var(--ink-dim);display:flex;gap:6px;flex-wrap:wrap}
+.tag{border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+.tag.ar{border-color:#46607a;color:#9fc0de}
+.tag.warn{border-color:#6b4a2a;color:#e3b07a}
+.piece .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.piece .acts .btn{font-size:.78rem;padding:5px 10px}
+
+/* satellite */
+.sat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.sat-view{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sat figure{position:relative}
+.sat img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;display:block;background:#000}
+.sat figcaption{position:absolute;left:8px;top:8px;background:rgba(0,0,0,.75);padding:2px 9px;border-radius:6px;font-weight:600;font-size:.85rem;color:#fff}
+.sat .state{font-size:.88rem;color:var(--ink-dim);margin-top:8px;min-height:2.6em}
+.sat input[type=range]{width:100%;accent-color:var(--gold);margin-top:10px}
+.sat .ticks{display:flex;justify-content:space-between;font-size:.7rem;color:var(--ink-dim)}
+.sat .note{font-size:.8rem;color:#e3b07a;margin-top:8px}
+
+/* bordereau */
+table.bord{width:100%;border-collapse:collapse;font-size:.86rem}
+.bord th,.bord td{border-bottom:1px solid var(--line);padding:8px 8px;text-align:left;vertical-align:top}
+.bord th{color:var(--ink-dim);font-weight:500;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em}
+.bord td:first-child{color:var(--gold-soft);font-weight:600;white-space:nowrap}
+.bord .dl{white-space:nowrap}
+.bord .dl a{margin-right:8px}
+.tbl{overflow-x:auto}
+
+/* navigation chapitre */
+.chnav{display:flex;justify-content:space-between;gap:10px;margin-top:34px;padding-top:18px;border-top:1px solid var(--line)}
+
+/* chat */
+.chat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);display:flex;flex-direction:column;min-height:0;flex:1 1 auto;max-height:46vh}
+.chat-h{padding:10px 14px;border-bottom:1px solid var(--line);font-size:.86rem;color:var(--gold-soft);display:flex;justify-content:space-between;align-items:center}
+.chat-h label{color:var(--ink-dim);font-size:.75rem;display:flex;align-items:center;gap:5px}
+.msgs{padding:10px 12px;overflow:auto;display:flex;flex-direction:column;gap:8px;flex:1;min-height:80px}
+.msg{font-size:.86rem;line-height:1.5;padding:8px 11px;border-radius:12px;max-width:92%;white-space:pre-wrap}
+.msg.me{align-self:flex-end;background:var(--gold);color:#16130c}
+.msg.ai{align-self:flex-start;background:var(--bg-soft);border:1px solid var(--line)}
+.msg.wait{color:var(--ink-dim);font-style:italic}
+.chat form{display:flex;gap:6px;padding:9px;border-top:1px solid var(--line)}
+.chat input{flex:1;min-width:0;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px;color:var(--ink);padding:9px 13px;font:inherit;font-size:.88rem}
+.chat input:focus{border-color:var(--gold);outline:none}
+.sugg{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}
+.sugg button{font-size:.74rem;border:1px solid var(--line);background:none;color:var(--ink-dim);border-radius:999px;padding:3px 9px}
+.sugg button:hover{color:var(--ink);border-color:var(--gold)}
+
+/* visionneuse */
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:100;display:none;flex-direction:column}
+.lb.on{display:flex}
+.lb-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;color:var(--ink);font-size:.9rem}
+.lb-b{flex:1;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:14px;padding:0 12px 24px}
+.lb-b img{max-width:min(100%,1000px);border-radius:6px}
+.lb-b iframe{width:min(100%,1000px);flex:1;min-height:80vh;border:0;background:#fff;border-radius:6px}
+
+footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim);font-size:.8rem;border-top:1px solid var(--line)}
+
+@media (max-width:960px){
+  .wrap{display:flex;flex-direction:column;gap:14px;padding:16px 16px 70px}
+  .wrap>*,aside>*{min-width:0;max-width:100%}
+  aside{display:contents}
+  .mena{order:1} .toc,.toc-select{order:2} main{order:3} .chat{order:4;margin-top:10px}
+  .toc{display:none}
+  .toc-select{display:block}
+  .chat{max-height:60vh}
+  .top{padding:10px 16px}
+  .top-actions .btn span{display:none}
+}
+@media (max-width:560px){ .sat-view{grid-template-columns:1fr} .pieces{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){ .speaking .avatar::after{animation:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="../"><span class="dot"></span>Vérité &amp; Justice</a>
+  <nav class="top-actions">
+    <a class="btn" href="./"><span>← Résumé</span></a>
+    <a class="btn" href="#bordereau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span>Bordereau des pièces</span></a>
+    <a class="btn gold" href="dossier-complet-mansouri.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v3h16v-3"/></svg><span>Dossier complet (ZIP)</span></a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <aside>
+    <div class="mena" id="menaCard">
+      <div class="avatar"><img src="img/mena.jpg" loading="lazy" decoding="async" alt="Mena, l'assistante qui présente le dossier"></div>
+      <div class="mena-txt">
+        <b>Mena</b>
+        <span id="menaStatus">Je vous présente le dossier, chapitre par chapitre.</span>
+        <div class="player">
+          <button class="icon-btn" id="bPrev" aria-label="Chapitre précédent"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/></svg></button>
+          <button class="icon-btn main" id="bPlay" aria-label="Écouter Mena"><svg id="icoPlay" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+          <button class="icon-btn" id="bNext" aria-label="Chapitre suivant"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
+          <button class="speed" id="bSpeed" aria-label="Vitesse de lecture">1×</button>
+        </div>
+      </div>
+    </div>
+
+    <nav class="toc" id="toc" aria-label="Chapitres"></nav>
+    <select class="toc-select" id="tocSel" aria-label="Choisir un chapitre"></select>
+
+    <section class="chat" aria-label="Questions à Mena">
+      <div class="chat-h">Posez votre question à Mena
+        <label><input type="checkbox" id="voiceAns"> voix</label></div>
+      <div class="msgs" id="msgs">
+        <div class="msg ai">Je réponds à partir des pièces du dossier. Par exemple : « Pourquoi la vente de 2011 est-elle contestée ? »</div>
+      </div>
+      <div class="sugg" id="sugg"></div>
+      <form id="chatForm">
+        <input id="q" autocomplete="off" placeholder="Votre question…" maxlength="600" aria-label="Votre question">
+        <button class="icon-btn main" aria-label="Envoyer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></button>
+      </form>
+    </section>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <div class="kicker">Information judiciaire JI DOYEN 24000274 · TJ de Nanterre</div>
+      <h1>L'affaire Abdelkrim Mansouri</h1>
+      <p>Le dossier de la partie civile, raconté par Mena en treize chapitres : les faits, les pièces originales à télécharger et leurs traductions françaises.</p>
+      <div class="alert">Les traductions de l'arabe sont des <b>traductions libres, non assermentées</b>. Les analyses présentées sont celles de la partie civile ; les personnes mises en cause sont présumées innocentes.</div>
+    </div>
+    <article id="chapter" aria-live="polite"></article>
+
+    <h3 class="sec" id="bordereau">Bordereau des pièces</h3>
+    <div class="tbl"><table class="bord"><thead><tr><th>N°</th><th>Pièce</th><th>Date</th><th>Langue</th><th>Télécharger</th></tr></thead><tbody id="bordBody"></tbody></table></div>
+  </main>
+</div>
+
+<footer>
+  Dossier présenté par la partie civile, Tarik Mansouri. Mena est une assistante d'intelligence artificielle : elle peut se tromper, et ne remplace ni un avocat ni une décision de justice. Imagerie satellite : Google Earth, © Maxar Technologies / Airbus.
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visionneuse de pièce">
+  <div class="lb-h"><span id="lbTitle"></span><button class="btn" id="lbClose">Fermer ✕</button></div>
+  <div class="lb-b" id="lbBody"></div>
+</div>
+
+<script src="chapitres.js"></script>
+<script>
+(function(){
+  const API = "https://api.tchipa.co.uk/verite/ask";
+  const CH = window.CHAPITRES;
+  let PIECES = [], byId = {};
+  let cur = 0, para = 0, playing = false, rate = 1;
+  const audio = new Audio();
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  // ---------- satellite ----------
+  const SAT = {
+    imm7: { dates:["2010-03-27","2011-05-22","2011-09-27","2012-06-27","2012-12-28","2013-01-03","2013-05-23","2013-09-04","2014-02-07","2014-12-10","2015-08-20","2016-10-31","2017-03-29","2017-09-30","2025-11-22"],
+      etat: d => d < "2011-01-01" ? "Chantier : structure en béton en élévation." :
+                 d < "2012-01-01" ? "Gros œuvre en cours — aucun appartement achevé. C'est l'année de la vente alléguée." :
+                 d < "2012-12-01" ? "Image voilée ; bâtiment en voie d'achèvement." :
+                 "Bâtiment achevé.",
+      ref: "2011-05-22" }
+  };
+  function satHtml(key){
+    const s = SAT[key], i0 = s.dates.indexOf(s.ref);
+    return `<h3 class="sec">Images satellites datées — Google Earth / Maxar</h3>
+    <div class="sat" data-sat="${key}">
+      <div class="sat-view">
+        <figure><img id="satA" alt="Image satellite datée" src="satellite/${key}_${s.ref}.jpg"><figcaption id="satAc">${fr(s.ref)}</figcaption></figure>
+        <figure><img alt="Le même bâtiment en 2025" src="satellite/${key}_2025-11-22.jpg"><figcaption>${fr("2025-11-22")}</figcaption></figure>
+      </div>
+      <input type="range" id="satR" min="0" max="${s.dates.length-1}" value="${i0}" aria-label="Date de l'image">
+      <div class="ticks"><span>2010</span><span>2011</span><span>2013</span><span>2015</span><span>2017</span><span>2025</span></div>
+      <div class="state" id="satS">${s.etat(s.ref)}</div>
+      <div class="note">Cercle rouge : bâtiment « 7 » selon la cartographie publique (OpenStreetMap), face au studio Medi 1 TV. Identification à confirmer par le plan de lotissement.</div>
+    </div>`;
+  }
+  function fr(d){ const [y,m,j]=d.split("-"); return `${j}/${m}/${y}`; }
+  function bindSat(){
+    const r = $("#satR"); if(!r) return;
+    const key = r.closest(".sat").dataset.sat, s = SAT[key];
+    r.oninput = () => { const d = s.dates[r.value];
+      $("#satA").src = `satellite/${key}_${d}.jpg`; $("#satAc").textContent = fr(d); $("#satS").textContent = s.etat(d); };
+  }
+
+  // ---------- pièces ----------
+  function pieceCard(p){
+    const thumb = p.vignette ? `style="background-image:url('${esc(p.vignette)}')"` : "";
+    const tags = [`<span class="tag">${esc(p.date)}</span>`];
+    if (/AR/.test(p.langue)) tags.push(`<span class="tag ar">${esc(p.langue)}</span>`);
+    if (p.nature === "transcription") tags.push(`<span class="tag warn">transcription</span>`);
+    if (p.nature === "partie-civile") tags.push(`<span class="tag warn">établie par la partie civile</span>`);
+    const trad = p.trad ? (p.trad_pdf
+        ? `<a class="btn" href="${esc(p.trad_pdf)}" target="_blank" rel="noopener">Traduction FR</a>`
+        : `<span class="btn" aria-disabled="true">Traduction en cours</span>`) : "";
+    return `<div class="piece">
+      <div class="thumb" ${thumb} data-open="${p.id}" role="button" tabindex="0" aria-label="Voir la pièce ${p.id}"><span class="id">${p.id}</span></div>
+      <div class="body"><div class="t">${esc(p.titre)}</div><div class="m">${tags.join("")}</div>
+      <div class="acts"><a class="btn" href="${esc(p.pdf)}" target="_blank" rel="noopener">Original (PDF)</a>${trad}</div></div></div>`;
+  }
+  function openPiece(id){
+    const p = byId[id]; if(!p) return;
+    if (window.matchMedia("(max-width:960px), (pointer:coarse)").matches) { window.open(p.pdf, "_blank", "noopener"); return; }
+    $("#lbTitle").textContent = `${p.id} — ${p.titre}`;
+    $("#lbBody").innerHTML = `<iframe src="${esc(p.pdf)}" title="${esc(p.titre)}"></iframe>`;
+    $("#lb").classList.add("on"); $("#lbClose").focus();
+  }
+  $("#lbClose").onclick = () => { $("#lb").classList.remove("on"); $("#lbBody").innerHTML = ""; };
+  document.addEventListener("keydown", e => { if(e.key==="Escape") $("#lbClose").click(); });
+  document.addEventListener("click", e => { const t = e.target.closest("[data-open]"); if(t) openPiece(t.dataset.open); });
+  document.addEventListener("keydown", e => { const t = e.target.closest && e.target.closest("[data-open]"); if(t && (e.key==="Enter"||e.key===" ")){ e.preventDefault(); openPiece(t.dataset.open);} });
+
+  function renderBordereau(){
+    $("#bordBody").innerHTML = PIECES.map(p => `<tr><td>${p.id}</td><td>${esc(p.titre)}${p.nature==="transcription"?" <em>(transcription)</em>":p.nature==="partie-civile"?" <em>(établie par la partie civile)</em>":""}</td>
+      <td>${esc(p.date)}</td><td>${esc(p.langue)}</td>
+      <td class="dl"><a href="${esc(p.pdf)}" target="_blank" rel="noopener">Original</a>${p.trad_pdf?`<a href="${esc(p.trad_pdf)}" target="_blank" rel="noopener">Traduction FR</a>`:(p.trad?'<span style="color:var(--ink-dim)">trad. en cours</span>':"")}</td></tr>`).join("");
+  }
+
+  // ---------- chapitres ----------
+  function renderToc(){
+    $("#toc").innerHTML = CH.map((c,i) => `<button data-ch="${i}" class="${i===cur?'on':''}"><span class="n">${i||"·"}</span><span>${esc(c.titre)}</span></button>`).join("");
+    $("#toc").querySelectorAll("button").forEach(b => b.onclick = () => go(+b.dataset.ch, playing));
+    $("#tocSel").innerHTML = CH.map((c,i) => `<option value="${i}" ${i===cur?"selected":""}>${i ? "Chapitre " + i + " — " : ""}${esc(c.titre)}</option>`).join("");
+    $("#tocSel").onchange = e => { go(+e.target.value, playing); $("#chapter").scrollIntoView({behavior:"smooth"}); };
+  }
+  function render(){
+    const c = CH[cur];
+    let h = `<header class="ch-head"><span class="kicker">${cur ? "Chapitre " + cur + " / " + (CH.length-1) : "Introduction"}</span><h2>${esc(c.titre)}</h2><div class="sous">${esc(c.sous)}</div></header>`;
+    h += `<div class="recit">${c.recit.map((p,i)=>`<p data-p="${i}" class="${playing&&i===para?'on':''}">${esc(p)}</p>`).join("")}</div>`;
+    if (c.satellite) h += satHtml(c.satellite);
+    if (c.faits.length) h += `<h3 class="sec">Repères</h3><ul class="faits">${c.faits.map(f=>`<li><time>${esc(f[0])}</time>${esc(f[1])}</li>`).join("")}</ul>`;
+    if (c.sources && c.sources.length) h += `<h3 class="sec">Sources publiques</h3><ul class="faits">${c.sources.map(s=>`<li><a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join("")}</ul>`;
+    const ps = c.pieces.map(id => byId[id]).filter(Boolean);
+    if (ps.length) h += `<h3 class="sec">Pièces du chapitre</h3><div class="pieces">${ps.map(pieceCard).join("")}</div>`;
+    h += `<nav class="chnav">${cur>0?`<button class="btn" data-go="${cur-1}">← ${esc(CH[cur-1].titre)}</button>`:"<span></span>"}${cur<CH.length-1?`<button class="btn gold" data-go="${cur+1}">${esc(CH[cur+1].titre)} →</button>`:""}</nav>`;
+    $("#chapter").innerHTML = h;
+    $("#chapter").querySelectorAll("[data-go]").forEach(b => b.onclick = () => { go(+b.dataset.go, playing); $("#chapter").scrollIntoView({behavior:"smooth"}); });
+    $("#chapter").querySelectorAll(".recit p").forEach(p => p.onclick = () => { para = +p.dataset.p; play(); });
+    bindSat(); renderToc(); renderSugg();
+    try { localStorage.setItem("mena_ch", cur); } catch(e) {}
+  }
+  function go(i, keepPlaying){
+    cur = Math.max(0, Math.min(CH.length-1, i)); para = 0;
+    stop(); render();
+    if (keepPlaying) play();
+  }
+
+  // ---------- narration ----------
+  function setPlaying(v){
+    playing = v;
+    $("#menaCard").classList.toggle("speaking", v);
+    $("#icoPlay").innerHTML = v ? '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>' : '<path d="M8 5v14l11-7z"/>';
+    $("#bPlay").setAttribute("aria-label", v ? "Mettre en pause" : "Écouter Mena");
+    $("#menaStatus").textContent = v ? `Je vous lis : ${CH[cur].titre}` : "Je vous présente le dossier, chapitre par chapitre.";
+  }
+  function mark(){ document.querySelectorAll(".recit p").forEach(p => p.classList.toggle("on", playing && +p.dataset.p === para)); }
+  function play(){
+    const c = CH[cur];
+    if (para >= c.recit.length){ if (cur < CH.length-1){ go(cur+1, true); } else { stop(); } return; }
+    audio.src = `audio/c${String(c.id).padStart(2,"0")}_p${para}.mp3`;
+    audio.playbackRate = rate;
+    audio.play().then(() => { setPlaying(true); mark();
+      const el = document.querySelector(`.recit p[data-p="${para}"]`); if (el) el.scrollIntoView({block:"center",behavior:"smooth"}); })
+      .catch(() => { setPlaying(false); });
+  }
+  function stop(){ audio.pause(); setPlaying(false); mark(); }
+  audio.onended = () => { para++; play(); };
+  audio.onerror = () => { para++; if (playing) play(); };
+  $("#bPlay").onclick = () => playing ? stop() : play();
+  $("#bPrev").onclick = () => go(cur-1, playing);
+  $("#bNext").onclick = () => go(cur+1, playing);
+  $("#bSpeed").onclick = () => { rate = rate===1 ? 1.25 : rate===1.25 ? 1.5 : rate===1.5 ? 0.85 : 1; audio.playbackRate = rate; $("#bSpeed").textContent = rate + "×"; };
+
+  // ---------- questions à Mena ----------
+  const history = [];
+  const SUGG = {
+    0:["Résume l'affaire en 5 lignes","Qui est la partie civile ?"],
+    1:["Où est mort Abdelkrim Mansouri ?","Pourquoi le rapport dit-il « décédé au Maroc » ?"],
+    2:["Quelles plaintes pour empoisonnement existent ?","Qu'est-ce que le PV 72/3201/2018 ?"],
+    3:["Quel est le mobile de l'assassinat ?","Pourquoi l'usufruit est-il décisif ?"],
+    4:["Quels biens sont au nom du défunt au Maroc ?"],
+    5:["Pourquoi la vente de 2011 est-elle contestée ?","Que montrent les images satellites ?"],
+    6:["Que prouve l'hypothèque de 2016 ?","Que reproche-t-on à l'acte de 2013 ?"],
+    7:["Pourquoi Tarik Mansouri a-t-il été emprisonné ?"],
+    8:["Quels sont les épisodes de la mandataire ?","Qu'est-ce que la contrepassation de 200 000 € ?"],
+    9:["Pourquoi la notaire a-t-elle été destituée ?","Que dit le projet d'acte de notoriété ?"],
+    10:["Où en est la procédure ?"],
+    11:["Quels actes demander au juge ?"],
+    12:["Comment ces opérations ont-elles pu passer inaperçues ?","Que demande la partie civile sur les mouvements de fonds ?"]
+  };
+  function renderSugg(){ $("#sugg").innerHTML = (SUGG[CH[cur].id]||[]).map(s=>`<button type="button">${esc(s)}</button>`).join("");
+    $("#sugg").querySelectorAll("button").forEach(b => b.onclick = () => ask(b.textContent)); }
+  function addMsg(txt, who){ const d = document.createElement("div"); d.className = "msg " + who; d.textContent = txt; $("#msgs").appendChild(d); $("#msgs").scrollTop = 1e9; return d; }
+  function speakAnswer(t){
+    if (!$("#voiceAns").checked || !("speechSynthesis" in window)) return;
+    stop(); speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(t); u.lang = "fr-FR"; u.rate = rate;
+    const v = speechSynthesis.getVoices().find(v => /^fr/i.test(v.lang) && /female|femme|denise|vivienne|amelie|audrey|julie/i.test(v.name)) || speechSynthesis.getVoices().find(v => /^fr/i.test(v.lang));
+    if (v) u.voice = v;
+    u.onstart = () => $("#menaCard").classList.add("speaking");
+    u.onend = () => $("#menaCard").classList.remove("speaking");
+    speechSynthesis.speak(u);
+  }
+  async function ask(q){
+    q = (q||"").trim(); if (!q) return;
+    addMsg(q, "me"); $("#q").value = "";
+    const w = addMsg("Mena consulte le dossier…", "ai wait");
+    try {
+      const r = await fetch(API, { method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ question:q, history:history.slice(-6), persona:"mena", chapitre:CH[cur].titre }) });
+      const d = await r.json().catch(()=>({}));
+      const a = d.answer || d.error || "Je n'ai pas pu répondre pour le moment. Réessayez dans un instant.";
+      w.className = "msg ai"; w.textContent = a;
+      if (d.answer){ history.push({role:"user",content:q},{role:"assistant",content:a}); speakAnswer(a); }
+    } catch(e){ w.className = "msg ai"; w.textContent = "Connexion impossible avec Mena. Vérifiez votre réseau et réessayez."; }
+  }
+  $("#chatForm").onsubmit = e => { e.preventDefault(); ask($("#q").value); };
+
+  // ---------- démarrage ----------
+  try { const s = +localStorage.getItem("mena_ch"); if (s>=0 && s<CH.length) cur = s; } catch(e) {}
+  const hash = location.hash.match(/^#ch(\d+)$/); if (hash) cur = Math.min(CH.length-1, +hash[1]);
+  fetch("pieces.json").then(r=>r.json()).then(list => { PIECES = list; list.forEach(p => byId[p.id]=p); render(); renderBordereau(); })
+    .catch(() => render());
+  render();
+})();
+</script>
+</body>
+</html>
