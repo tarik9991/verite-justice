@@ -105,6 +105,22 @@ h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;ma
 .bar .btn{flex:1;min-height:52px;font-size:1rem}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--gold);color:#16130c;font-weight:600;padding:10px 16px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.on{opacity:1}
+/* films : EN, DZ, FR */
+.films{padding:16px 0 0}
+.films h2{font-size:1.15rem;margin-bottom:10px}
+.films-note{font-style:italic;font-size:.86rem;line-height:1.35;color:var(--ink-dim);margin:-4px 0 10px}
+.films-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.film{position:relative;aspect-ratio:9/16;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.film img.po{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 45%,rgba(0,0,0,.82))}
+.film .flag{position:absolute;z-index:1;left:8px;top:8px;width:44px;height:auto;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.6)}
+.film .play{position:absolute;z-index:1;left:50%;top:74%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:rgba(13,15,18,.72);border:2px solid var(--gold-soft);display:grid;place-items:center}
+.film .play svg{width:20px;height:20px;fill:var(--gold-soft);margin-left:3px}
+.film .nm{position:absolute;z-index:1;left:4px;right:4px;bottom:9px;text-align:center;color:#fff;font-weight:700;font-size:.8rem;letter-spacing:.08em}
+.player{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.94)}
+.player.on{display:flex}
+.player video{max-width:100%;max-height:100%;width:auto;height:100%}
+.player button{position:absolute;right:12px;top:12px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel-2);font-size:1.2rem}
 </style>
 </head>
 <body>
@@ -118,6 +134,22 @@ h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;ma
 </header>
 
 <main class="wrap">
+  <section class="films" aria-labelledby="h-films">
+    <h2 id="h-films"><span lang="fr">Regardez le film (2 min 15)</span><span lang="en">Watch the film (2 min 15)</span></h2>
+    <p class="films-note"><span lang="fr">Cette image ne représente pas les 99,99 % de magistrats intègres.</span><span lang="en">This image does not represent the 99.99% of judges who act with integrity.</span></p>
+    <div class="films-grid">
+      <button class="film" data-film="film_en.mp4" aria-label="English">
+        <img class="po" src="video/poster_en.jpg" alt="" loading="eager"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="3" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l15 8-15 8z"/></svg></span><span class="nm">ENGLISH</span>
+      </button>
+      <button class="film" data-film="film_dz.mp4" aria-label="Darija">
+        <img class="po" src="video/poster_dz.jpg" alt="" loading="eager"><svg class="flag" viewBox="0 0 60 40" aria-hidden="true"><path fill="#006633" d="M0 0h30v40H0z"/><path fill="#fff" d="M30 0h30v40H30z"/><path fill="#D21034" d="M36.5 10a11 11 0 1 0 0 20 8.8 8.8 0 1 1 0-20z"/><path fill="#D21034" d="M41 20l-6.5-2.1 4 5.5v-6.8l-4 5.5z"/></svg><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l15 8-15 8z"/></svg></span><span class="nm">DARIJA</span>
+      </button>
+      <button class="film" data-film="film_fr.mp4" aria-label="Français">
+        <img class="po" src="video/poster_fr.jpg" alt="" loading="eager"><svg class="flag" viewBox="0 0 60 40" aria-hidden="true"><path fill="#002395" d="M0 0h20v40H0z"/><path fill="#fff" d="M20 0h20v40H20z"/><path fill="#ED2939" d="M40 0h20v40H40z"/></svg><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l15 8-15 8z"/></svg></span><span class="nm">FRANÇAIS</span>
+      </button>
+    </div>
+  </section>
+
   <div class="hero">
     <span class="kicker"><span lang="fr">Grève de la faim · Londres · dès le 1er novembre</span><span lang="en">Hunger strike · London · from 1 November</span></span>
     <h1><span lang="fr">Justice pour <span>Abdelkrim Mansouri</span></span><span lang="en">Justice for <span>Abdelkrim Mansouri</span></span></h1>
@@ -228,8 +260,8 @@ h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;ma
 
       <li class="hot"><details><summary><span class="d"><span lang="fr">1er nov. 2026</span><span lang="en">1 Nov 2026</span></span><span class="t"><span lang="fr">Grève de la faim à Londres</span><span lang="en">Hunger strike in London</span></span></summary>
         <div class="body">
-          <p lang="fr">À partir du 1er novembre 2026 — date choisie en hommage au 1er novembre 1954 — Tarik Mansouri jeûne devant le consulat général de France à Londres, jusqu'aux arrestations : les assassins de son père, et ceux qui ont pillé sa succession, notaire et mandataire compris.</p>
-          <p lang="en">From 1 November 2026 — a date chosen in honour of 1 November 1954, the start of the Algerian War of Independence — Tarik Mansouri is on hunger strike outside the French Consulate General in London. He will continue until arrests are made: his father's killers, and those who stole his estate, including the notary and the court-appointed administrator.</p>
+          <p lang="fr">À partir du 1er novembre 2026, Tarik Mansouri jeûne devant le consulat général de France à Londres, jusqu'aux arrestations : les assassins de son père, et ceux qui ont pillé sa succession, notaire et mandataire compris.</p>
+          <p lang="en">From 1 November 2026, Tarik Mansouri is on hunger strike outside the French Consulate General in London. He will continue until arrests are made: his father's killers, and those who stole his estate, including the notary and the court-appointed administrator.</p>
         </div></details></li>
     </ol>
   </section>
@@ -303,6 +335,20 @@ $("[data-audio]").forEach(b => b.addEventListener("click", () => {
   if (audio) audio.pause();
   audio = new Audio("audio/" + b.dataset.audio + ".mp3"); audioBtn = b; audio.play().catch(() => {});
 }));
+</script>
+<div class="player" id="player" role="dialog" aria-label="Film">
+  <button id="player-close" aria-label="Fermer / Close">✕</button>
+  <video id="player-v" controls playsinline preload="none"></video>
+</div>
+<script>
+(function(){
+  var p=document.getElementById("player"),v=document.getElementById("player-v");
+  function close(){v.pause();v.removeAttribute("src");v.load();p.classList.remove("on");}
+  document.querySelectorAll("[data-film]").forEach(function(b){b.addEventListener("click",function(){
+    v.src="video/"+b.dataset.film;p.classList.add("on");v.play().catch(function(){});});});
+  document.getElementById("player-close").addEventListener("click",close);
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&p.classList.contains("on"))close();});
+})();
 </script>
 </body>
 </html>
