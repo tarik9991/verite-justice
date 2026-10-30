@@ -121,6 +121,8 @@ h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;ma
 .player.on{display:flex}
 .player video{max-width:100%;max-height:100%;width:auto;height:100%}
 .player button{position:absolute;right:12px;top:12px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel-2);font-size:1.2rem}
+.player button.sound{display:none;left:50%;right:auto;top:auto;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);width:auto;height:auto;min-height:56px;padding:12px 24px;border:0;border-radius:999px;background:var(--gold);color:#16130c;font-weight:700;font-size:1.05rem;white-space:nowrap;box-shadow:0 4px 18px rgba(0,0,0,.6)}
+.player.muted button.sound{display:block}
 </style>
 </head>
 <body>
@@ -338,16 +340,27 @@ $("[data-audio]").forEach(b => b.addEventListener("click", () => {
 </script>
 <div class="player" id="player" role="dialog" aria-label="Film">
   <button id="player-close" aria-label="Fermer / Close">✕</button>
+  <button class="sound" id="player-sound"><span lang="fr">🔊 Activer le son</span><span lang="en">🔊 Tap for sound</span></button>
   <video id="player-v" controls playsinline preload="none"></video>
 </div>
 <script>
 (function(){
   var p=document.getElementById("player"),v=document.getElementById("player-v");
-  function close(){v.pause();v.removeAttribute("src");v.load();p.classList.remove("on");}
-  document.querySelectorAll("[data-film]").forEach(function(b){b.addEventListener("click",function(){
-    v.src="video/"+b.dataset.film;p.classList.add("on");v.play().catch(function(){});});});
+  function close(){v.pause();v.removeAttribute("src");v.load();p.classList.remove("on","muted");}
+  function open(file,muted){
+    v.muted=muted;v.src="video/"+file;p.classList.add("on");p.classList.toggle("muted",muted);
+    v.play().catch(function(){if(muted)close();});
+  }
+  document.querySelectorAll("[data-film]").forEach(function(b){b.addEventListener("click",function(){open(b.dataset.film,false);});});
+  document.getElementById("player-sound").addEventListener("click",function(){v.muted=false;p.classList.remove("muted");v.play().catch(function(){});});
   document.getElementById("player-close").addEventListener("click",close);
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&p.classList.contains("on"))close();});
+  v.addEventListener("ended",close);
+  v.addEventListener("volumechange",function(){if(!v.muted)p.classList.remove("muted");});
+  // Film anglais lancé à l'arrivée (scan du QR), sans le son : les navigateurs bloquent l'autoplay sonore. Une fois par visite.
+  var vu=false;try{vu=sessionStorage.getItem("mena-film-vu")==="1";sessionStorage.setItem("mena-film-vu","1");}catch(e){}
+  var eco=navigator.connection&&navigator.connection.saveData;
+  if(!vu&&!eco&&!location.hash)open("film_en.mp4",true);
 })();
 </script>
 </body>
