@@ -29,7 +29,7 @@ button{font:inherit;cursor:pointer}
   padding:12px 20px;background:rgba(13,15,18,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .brand{font-family:'Playfair Display',serif;color:var(--gold-soft);letter-spacing:.04em;display:flex;align-items:center;gap:8px;text-decoration:none;font-size:1.02rem}
 .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}
-.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);
   padding:7px 13px;border-radius:999px;font-size:.84rem;text-decoration:none;white-space:nowrap;transition:border-color .2s,background .2s}
 .btn:hover{border-color:var(--gold)}
@@ -56,11 +56,11 @@ aside{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 92px);di
 .icon-btn:hover{border-color:var(--gold)}
 .icon-btn.main{width:46px;height:46px;background:var(--gold);color:#16130c;border-color:var(--gold)}
 .icon-btn svg{width:18px;height:18px}
-.speed{margin-left:auto;font-size:.78rem;color:var(--ink-dim);background:none;border:1px solid var(--line);border-radius:999px;padding:4px 9px}
+.speed{margin-inline-start:auto;font-size:.78rem;color:var(--ink-dim);background:none;border:1px solid var(--line);border-radius:999px;padding:4px 9px}
 
 /* sommaire */
 .toc{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:8px;overflow:auto;min-height:120px}
-.toc button{display:flex;gap:10px;width:100%;text-align:left;background:none;border:0;color:var(--ink-dim);padding:8px 10px;border-radius:9px;font-size:.88rem;line-height:1.35}
+.toc button{display:flex;gap:10px;width:100%;text-align:start;background:none;border:0;color:var(--ink-dim);padding:8px 10px;border-radius:9px;font-size:.88rem;line-height:1.35}
 .toc button:hover{background:var(--bg-soft);color:var(--ink)}
 .toc button.on{background:var(--bg-soft);color:var(--gold-soft)}
 .toc-select{display:none;width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--gold);border-radius:12px;padding:12px 14px;font:inherit;font-size:1rem}
@@ -78,17 +78,17 @@ main{min-width:0}
 .ch-head h2{font-size:clamp(1.5rem,3vw,2.1rem);margin:4px 0 2px}
 .ch-head .sous{color:var(--ink-dim);font-style:italic;font-family:'Playfair Display',serif;font-size:1.08rem}
 .recit{margin:20px 0 6px;display:flex;flex-direction:column;gap:12px;max-width:74ch}
-.recit p{padding:10px 14px;border-left:3px solid transparent;border-radius:0 8px 8px 0;transition:background .3s,border-color .3s;cursor:pointer;font-size:1.02rem}
+.recit p{padding:10px 14px;border-inline-start:3px solid transparent;border-start-end-radius:8px;border-end-end-radius:8px;transition:background .3s,border-color .3s;cursor:pointer;font-size:1.02rem}
 .recit p:hover{background:rgba(255,255,255,.02)}
-.recit p.on{background:rgba(200,163,90,.09);border-left-color:var(--gold);color:#fff}
+.recit p.on{background:rgba(200,163,90,.09);border-inline-start-color:var(--gold);color:#fff}
 
 h3.sec{font-size:1.12rem;margin:30px 0 12px;color:var(--gold-soft);display:flex;align-items:center;gap:10px}
 h3.sec::after{content:"";flex:1;height:1px;background:var(--line)}
 
-.faits{list-style:none;border-left:2px solid var(--line);margin-left:6px}
-.faits li{position:relative;padding:4px 0 10px 18px;font-size:.93rem}
-.faits li::before{content:"";position:absolute;left:-6px;top:11px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
-.faits time{color:var(--gold-soft);font-weight:500;font-variant-numeric:tabular-nums;margin-right:8px}
+.faits{list-style:none;border-inline-start:2px solid var(--line);margin-inline-start:6px}
+.faits li{position:relative;padding:4px 0 10px;padding-inline-start:18px;font-size:.93rem}
+.faits li::before{content:"";position:absolute;inset-inline-start:-6px;top:11px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
+.faits time{unicode-bidi:plaintext;color:var(--gold-soft);font-weight:500;font-variant-numeric:tabular-nums;margin-inline-end:8px}
 
 /* pièces */
 .pieces{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
@@ -111,17 +111,17 @@ h3.sec::after{content:"";flex:1;height:1px;background:var(--line)}
 .sat img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;display:block;background:#000}
 .sat figcaption{position:absolute;left:8px;top:8px;background:rgba(0,0,0,.75);padding:2px 9px;border-radius:6px;font-weight:600;font-size:.85rem;color:#fff}
 .sat .state{font-size:.88rem;color:var(--ink-dim);margin-top:8px;min-height:2.6em}
-.sat input[type=range]{width:100%;accent-color:var(--gold);margin-top:10px}
-.sat .ticks{display:flex;justify-content:space-between;font-size:.7rem;color:var(--ink-dim)}
+.sat input[type=range]{direction:ltr;width:100%;accent-color:var(--gold);margin-top:10px}
+.sat .ticks{direction:ltr;display:flex;justify-content:space-between;font-size:.7rem;color:var(--ink-dim)}
 .sat .note{font-size:.8rem;color:#e3b07a;margin-top:8px}
 
 /* bordereau */
 table.bord{width:100%;border-collapse:collapse;font-size:.86rem}
-.bord th,.bord td{border-bottom:1px solid var(--line);padding:8px 8px;text-align:left;vertical-align:top}
+.bord th,.bord td{border-bottom:1px solid var(--line);padding:8px 8px;text-align:start;vertical-align:top}
 .bord th{color:var(--ink-dim);font-weight:500;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em}
 .bord td:first-child{color:var(--gold-soft);font-weight:600;white-space:nowrap}
 .bord .dl{white-space:nowrap}
-.bord .dl a{margin-right:8px}
+.bord .dl a{margin-inline-end:8px}
 .tbl{overflow-x:auto}
 
 /* navigation chapitre */
@@ -151,6 +151,16 @@ table.bord{width:100%;border-collapse:collapse;font-size:.86rem}
 .lb-b img{max-width:min(100%,1000px);border-radius:6px}
 .lb-b iframe{width:min(100%,1000px);flex:1;min-height:80vh;border:0;background:#fff;border-radius:6px}
 
+/* langues */
+.lang{direction:ltr;display:flex;flex:none;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;padding:6px 9px;font-size:.78rem;font-weight:500;color:var(--ink-dim)}
+.lang button[aria-pressed="true"]{background:var(--gold);color:#16130c}
+html[data-l=ar] *{letter-spacing:0 !important}
+html[data-l=ar] h1,html[data-l=ar] h2,html[data-l=ar] h3,html[data-l=ar] .brand,html[data-l=ar] .mena-txt b,
+html[data-l=zh] h1,html[data-l=zh] h2,html[data-l=zh] h3{font-family:system-ui,sans-serif;font-weight:700}
+html[data-l=ar] .ch-head .sous,html[data-l=zh] .ch-head .sous{font-style:normal;font-family:inherit}
+html[data-l=ar] body,html[data-l=zh] body{font-family:system-ui,sans-serif;font-weight:400}
+
 footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim);font-size:.8rem;border-top:1px solid var(--line)}
 
 @media (max-width:960px){
@@ -163,8 +173,9 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
   .chat{max-height:60vh}
   .top{padding:10px 16px}
   .top-actions .btn span{display:none}
+  .top-actions .btn:first-child span{display:inline}
 }
-@media (max-width:560px){ .sat-view{grid-template-columns:1fr} .pieces{grid-template-columns:1fr} }
+@media (max-width:560px){ .brand{display:none} .top-actions{width:100%;justify-content:space-between} .lang button{padding:6px 7px} .sat-view{grid-template-columns:1fr} .pieces{grid-template-columns:1fr} }
 @media (prefers-reduced-motion:reduce){ .speaking .avatar::after{animation:none} html{scroll-behavior:auto} }
 </style>
 </head>
@@ -173,9 +184,15 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
 <header class="top">
   <a class="brand" href="../"><span class="dot"></span>Vérité &amp; Justice</a>
   <nav class="top-actions">
-    <a class="btn" href="./"><span>← Résumé</span></a>
-    <a class="btn" href="#bordereau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span>Bordereau des pièces</span></a>
-    <a class="btn gold" href="dossier-complet-mansouri.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v3h16v-3"/></svg><span>Dossier complet (ZIP)</span></a>
+    <a class="btn" href="./"><span data-t="summary">← Résumé</span></a>
+    <a class="btn" href="#bordereau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span data-t="bord">Bordereau des pièces</span></a>
+    <a class="btn gold" href="dossier-complet-mansouri.zip" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v3h16v-3"/></svg><span data-t="zip">Dossier complet (ZIP)</span></a>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button data-set="en" aria-label="English">EN</button>
+      <button data-set="fr" aria-label="Français">FR</button>
+      <button data-set="ar" aria-label="العربية">عربي</button>
+      <button data-set="zh" aria-label="中文">中文</button>
+    </div>
   </nav>
 </header>
 
@@ -185,53 +202,51 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
       <div class="avatar"><img src="img/mena.jpg" loading="lazy" decoding="async" alt="Mena, l'assistante qui présente le dossier"></div>
       <div class="mena-txt">
         <b>Mena</b>
-        <span id="menaStatus">Je vous présente le dossier, chapitre par chapitre.</span>
+        <span id="menaStatus"></span>
         <div class="player">
-          <button class="icon-btn" id="bPrev" aria-label="Chapitre précédent"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/></svg></button>
+          <button class="icon-btn" id="bPrev" data-ta="prevCh" aria-label="Chapitre précédent"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/></svg></button>
           <button class="icon-btn main" id="bPlay" aria-label="Écouter Mena"><svg id="icoPlay" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
-          <button class="icon-btn" id="bNext" aria-label="Chapitre suivant"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
-          <button class="speed" id="bSpeed" aria-label="Vitesse de lecture">1×</button>
+          <button class="icon-btn" id="bNext" data-ta="nextCh" aria-label="Chapitre suivant"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
+          <button class="speed" id="bSpeed" data-ta="speed" aria-label="Vitesse de lecture">1×</button>
         </div>
       </div>
     </div>
 
-    <nav class="toc" id="toc" aria-label="Chapitres"></nav>
-    <select class="toc-select" id="tocSel" aria-label="Choisir un chapitre"></select>
+    <nav class="toc" id="toc" data-ta="chapters" aria-label="Chapitres"></nav>
+    <select class="toc-select" id="tocSel" data-ta="pick" aria-label="Choisir un chapitre"></select>
 
-    <section class="chat" aria-label="Questions à Mena">
-      <div class="chat-h">Posez votre question à Mena
-        <label><input type="checkbox" id="voiceAns"> voix</label></div>
+    <section class="chat" data-ta="askH" aria-label="Questions à Mena">
+      <div class="chat-h"><span data-t="askH">Posez votre question à Mena</span>
+        <label><input type="checkbox" id="voiceAns"> <span data-t="voice">voix</span></label></div>
       <div class="msgs" id="msgs">
-        <div class="msg ai">Je réponds à partir des pièces du dossier. Par exemple : « Pourquoi la vente de 2011 est-elle contestée ? »</div>
+        <div class="msg ai" data-t="hello"></div>
       </div>
       <div class="sugg" id="sugg"></div>
       <form id="chatForm">
-        <input id="q" autocomplete="off" placeholder="Votre question…" maxlength="600" aria-label="Votre question">
-        <button class="icon-btn main" aria-label="Envoyer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></button>
+        <input id="q" autocomplete="off" placeholder="Votre question…" maxlength="600" data-ta="q" aria-label="Votre question">
+        <button class="icon-btn main" data-ta="send" aria-label="Envoyer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></button>
       </form>
     </section>
   </aside>
 
   <main>
     <div class="hero">
-      <div class="kicker">Information judiciaire JI DOYEN 24000274 · TJ de Nanterre</div>
-      <h1>L'affaire Abdelkrim Mansouri</h1>
-      <p>Le dossier de la partie civile, raconté par Mena en treize chapitres : les faits, les pièces originales à télécharger et leurs traductions françaises.</p>
-      <div class="alert">Les traductions de l'arabe sont des <b>traductions libres, non assermentées</b>. Les analyses présentées sont celles de la partie civile ; les personnes mises en cause sont présumées innocentes.</div>
+      <div class="kicker" data-t="kicker"></div>
+      <h1 data-t="h1"></h1>
+      <p data-t="intro"></p>
+      <div class="alert" data-th="alert"></div>
     </div>
     <article id="chapter" aria-live="polite"></article>
 
-    <h3 class="sec" id="bordereau">Bordereau des pièces</h3>
+    <h3 class="sec" id="bordereau" data-t="bord">Bordereau des pièces</h3>
     <div class="tbl"><table class="bord"><thead><tr><th>N°</th><th>Pièce</th><th>Date</th><th>Langue</th><th>Télécharger</th></tr></thead><tbody id="bordBody"></tbody></table></div>
   </main>
 </div>
 
-<footer>
-  Dossier présenté par la partie civile, Tarik Mansouri. Mena est une assistante d'intelligence artificielle : elle peut se tromper, et ne remplace ni un avocat ni une décision de justice. Imagerie satellite : Google Earth, © Maxar Technologies / Airbus.
-</footer>
+<footer data-t="footer"></footer>
 
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visionneuse de pièce">
-  <div class="lb-h"><span id="lbTitle"></span><button class="btn" id="lbClose">Fermer ✕</button></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" data-ta="viewer" aria-label="Visionneuse de pièce">
+  <div class="lb-h"><span id="lbTitle"></span><button class="btn" id="lbClose" data-t="close">Fermer ✕</button></div>
   <div class="lb-b" id="lbBody"></div>
 </div>
 
@@ -246,27 +261,101 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
   const $ = s => document.querySelector(s);
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+  // ---------- langues ----------
+  // Récit et titres des pièces : chapitres.<langue>.js, chargé à la demande. Interface : ci-dessous.
+  const UI = {
+   fr:{ docTitle:"Dossier Mansouri — Mena", summary:"← Résumé", bord:"Bordereau des pièces", zip:"Dossier complet (ZIP)", idle:"Je vous présente le dossier, chapitre par chapitre.", reading:"Je vous lis : ", listen:"Écouter Mena", pause:"Mettre en pause", prevCh:"Chapitre précédent", nextCh:"Chapitre suivant", speed:"Vitesse de lecture", chapters:"Chapitres", pick:"Choisir un chapitre",
+    askH:"Posez votre question à Mena", voice:"voix", hello:"Je réponds à partir des pièces du dossier. Par exemple : « Pourquoi la vente de 2011 est-elle contestée ? »", q:"Votre question…", send:"Envoyer",
+    kicker:"Information judiciaire JI DOYEN 24000274 · TJ de Nanterre", h1:"L'affaire Abdelkrim Mansouri", intro:"Le dossier de la partie civile, raconté par Mena en treize chapitres : les faits, les pièces originales à télécharger et leurs traductions françaises.",
+    alert:"Les traductions de l'arabe sont des <b>traductions libres, non assermentées</b>. Les analyses présentées sont celles de la partie civile ; les personnes mises en cause sont présumées innocentes.",
+    th:["N°","Pièce","Date","Langue","Télécharger"], footer:"Dossier présenté par la partie civile, Tarik Mansouri. Mena est une assistante d'intelligence artificielle : elle peut se tromper, et ne remplace ni un avocat ni une décision de justice. Imagerie satellite : Google Earth, © Maxar Technologies / Airbus.",
+    close:"Fermer ✕", viewer:"Visionneuse de pièce", chapter:"Chapitre ", introK:"Introduction", marks:"Repères", sources:"Sources publiques", chPieces:"Pièces du chapitre", prev:"← ", next:" →",
+    transcription:"transcription", pc:"établie par la partie civile", original:"Original (PDF)", orig:"Original", tradFr:"Traduction FR", tradWait:"Traduction en cours", tradWait2:"trad. en cours", seePiece:"Voir la pièce ",
+    satH:"Images satellites datées — Google Earth / Maxar", satAlt:"Image satellite datée", satAlt2:"Le même bâtiment en 2025", satDate:"Date de l'image", satNote:"Cercle rouge : bâtiment « 7 » selon la cartographie publique (OpenStreetMap), face au studio Medi 1 TV. Identification à confirmer par le plan de lotissement.",
+    sat:["Chantier : structure en béton en élévation.","Gros œuvre en cours — aucun appartement achevé. C'est l'année de la vente alléguée.","Image voilée ; bâtiment en voie d'achèvement.","Bâtiment achevé."],
+    wait:"Mena consulte le dossier…", noAns:"Je n'ai pas pu répondre pour le moment. Réessayez dans un instant.", noNet:"Connexion impossible avec Mena. Vérifiez votre réseau et réessayez." },
+   en:{ docTitle:"Mansouri case file — Mena", summary:"← Summary", bord:"List of documents", zip:"Full file (ZIP)", idle:"I will take you through the case, chapter by chapter. Audio in French.", reading:"Reading (in French): ", listen:"Listen to Mena (in French)", pause:"Pause", prevCh:"Previous chapter", nextCh:"Next chapter", speed:"Playback speed", chapters:"Chapters", pick:"Choose a chapter",
+    askH:"Ask Mena a question", voice:"voice", hello:"I answer from the documents in the file. For example: \"Why is the 2011 sale disputed?\"", q:"Your question…", send:"Send",
+    kicker:"Judicial investigation JI DOYEN 24000274 · Nanterre court, France", h1:"The Abdelkrim Mansouri case", intro:"The civil party's file, told by Mena in thirteen chapters: the facts, the original documents to download and their French translations.",
+    alert:"This English text is a translation: the French text prevails. Translations from Arabic are <b>informal, not certified</b>. The analyses presented are those of the civil party; the people accused are presumed innocent.",
+    th:["No.","Document","Date","Language","Download"], footer:"File presented by the civil party, Tarik Mansouri. Mena is an artificial intelligence assistant: she can make mistakes, and does not replace a lawyer or a court decision. Satellite imagery: Google Earth, © Maxar Technologies / Airbus.",
+    close:"Close ✕", viewer:"Document viewer", chapter:"Chapter ", introK:"Introduction", marks:"Key dates", sources:"Public sources", chPieces:"Documents for this chapter", prev:"← ", next:" →",
+    transcription:"transcription", pc:"prepared by the civil party", original:"Original (PDF)", orig:"Original", tradFr:"French translation", tradWait:"Translation in progress", tradWait2:"translation in progress", seePiece:"View document ",
+    satH:"Dated satellite images — Google Earth / Maxar", satAlt:"Dated satellite image", satAlt2:"The same building in 2025", satDate:"Image date", satNote:"Red circle: building \"7\" according to public maps (OpenStreetMap), opposite the Medi 1 TV studio. Identification to be confirmed by the site plan.",
+    sat:["Construction site: concrete structure going up.","Bare structure — no flat finished. This is the year of the alleged sale.","Hazy image; building nearing completion.","Building finished."],
+    wait:"Mena is checking the file…", noAns:"I could not answer just now. Please try again in a moment.", noNet:"Could not reach Mena. Check your network and try again." },
+   ar:{ docTitle:"ملف منصوري — مينا", summary:"→ الملخص", bord:"قائمة الوثائق", zip:"الملف الكامل (ZIP)", idle:"سأعرض عليكم الملف فصلًا بعد فصل. الصوت بالفرنسية.", reading:"القراءة (بالفرنسية): ", listen:"الاستماع إلى مينا (بالفرنسية)", pause:"إيقاف مؤقت", prevCh:"الفصل السابق", nextCh:"الفصل التالي", speed:"سرعة القراءة", chapters:"الفصول", pick:"اختيار فصل",
+    askH:"اطرحوا سؤالكم على مينا", voice:"صوت", hello:"أجيب انطلاقًا من وثائق الملف. مثلًا: «لماذا يُطعن في بيع 2011؟»", q:"سؤالكم…", send:"إرسال",
+    kicker:"تحقيق قضائي JI DOYEN 24000274 · محكمة نانتير، فرنسا", h1:"قضية عبد الكريم منصوري", intro:"ملف الطرف المدني ترويه مينا في ثلاثة عشر فصلًا: الوقائع، والوثائق الأصلية للتحميل، وترجماتها الفرنسية.",
+    alert:"هذا النص العربي ترجمة: والنص الفرنسي هو المرجع. ترجمات الوثائق العربية إلى الفرنسية <b>ترجمات حرة غير محلَّفة</b>. والتحليلات المعروضة هي تحليلات الطرف المدني؛ والأشخاص المشتبه فيهم أبرياء إلى أن تثبت إدانتهم.",
+    th:["رقم","الوثيقة","التاريخ","اللغة","تحميل"], footer:"ملف يقدمه الطرف المدني طارق منصوري. مينا مساعدة بالذكاء الاصطناعي: قد تخطئ، ولا تحل محل محامٍ ولا محل حكم قضائي. صور الأقمار الصناعية: Google Earth، © Maxar Technologies / Airbus.",
+    close:"إغلاق ✕", viewer:"عارض الوثائق", chapter:"الفصل ", introK:"مقدمة", marks:"تواريخ أساسية", sources:"مصادر عامة", chPieces:"وثائق الفصل", prev:"→ ", next:" ←",
+    transcription:"نسخ مطبوع", pc:"من إعداد الطرف المدني", original:"الأصل (PDF)", orig:"الأصل", tradFr:"الترجمة الفرنسية", tradWait:"الترجمة جارية", tradWait2:"الترجمة جارية", seePiece:"عرض الوثيقة ",
+    satH:"صور أقمار صناعية مؤرخة — Google Earth / Maxar", satAlt:"صورة قمر صناعي مؤرخة", satAlt2:"المبنى نفسه في 2025", satDate:"تاريخ الصورة", satNote:"الدائرة الحمراء: المبنى «7» بحسب الخرائط العامة (OpenStreetMap)، قبالة استوديو ميدي 1 تي في. يجب تأكيد التحديد بتصميم التجزئة.",
+    sat:["ورشة بناء: هيكل خرساني قيد الارتفاع.","أشغال الهيكل جارية — لا توجد أي شقة مكتملة. وهي سنة البيع المزعوم.","صورة غير واضحة؛ المبنى في طور الاكتمال.","المبنى مكتمل."],
+    wait:"مينا تراجع الملف…", noAns:"لم أتمكن من الإجابة الآن. أعيدوا المحاولة بعد قليل.", noNet:"تعذر الاتصال بمينا. تحققوا من الشبكة وأعيدوا المحاولة." },
+   zh:{ docTitle:"曼苏里案卷 — Mena", summary:"← 摘要", bord:"文件清单", zip:"完整案卷（ZIP）", idle:"我将逐章为您介绍案情。音频为法语。", reading:"朗读中（法语）：", listen:"收听 Mena（法语）", pause:"暂停", prevCh:"上一章", nextCh:"下一章", speed:"播放速度", chapters:"章节", pick:"选择章节",
+    askH:"向 Mena 提问", voice:"语音", hello:"我依据案卷文件回答。例如：「为什么 2011 年的买卖有争议？」", q:"您的问题…", send:"发送",
+    kicker:"司法预审 JI DOYEN 24000274 · 法国楠泰尔法院", h1:"阿卜杜勒克里姆·曼苏里案", intro:"由 Mena 用十三个章节讲述民事当事人的案卷：事实、可下载的原始文件及其法文译本。",
+    alert:"本中文文本为译文，以法文为准。阿拉伯文文件的翻译为<b>非正式、未经宣誓的翻译</b>。文中分析为民事当事人的观点；被指控者均被推定无罪。",
+    th:["编号","文件","日期","语言","下载"], footer:"案卷由民事当事人塔里克·曼苏里提供。Mena 是人工智能助手：可能出错，不能代替律师或法院裁决。卫星图像：Google Earth，© Maxar Technologies / Airbus。",
+    close:"关闭 ✕", viewer:"文件查看器", chapter:"第 ", chapterEnd:" 章", introK:"引言", marks:"关键日期", sources:"公开来源", chPieces:"本章文件", prev:"← ", next:" →",
+    transcription:"转录件", pc:"由民事当事人制作", original:"原件（PDF）", orig:"原件", tradFr:"法文译本", tradWait:"翻译中", tradWait2:"翻译中", seePiece:"查看文件 ",
+    satH:"带日期的卫星图像 — Google Earth / Maxar", satAlt:"带日期的卫星图像", satAlt2:"同一建筑 2025 年的样子", satDate:"图像日期", satNote:"红圈：根据公开地图（OpenStreetMap）标示的「7」号楼，位于 Medi 1 TV 演播室对面。认定结果有待小区规划图确认。",
+    sat:["工地：混凝土结构正在升起。","主体结构施工中 — 没有任何公寓竣工。这正是所谓买卖发生的年份。","图像模糊；建筑接近完工。","建筑完工。"],
+    wait:"Mena 正在查阅案卷…", noAns:"暂时无法回答，请稍后再试。", noNet:"无法连接 Mena。请检查网络后重试。" }
+  };
+  const T = {};            // traductions chargées, par langue
+  let lang = "en";
+  try { lang = localStorage.getItem("mena-lang"); } catch(e) {}
+  if (!UI[lang]) { const m = /^(fr|ar|zh)/i.exec(navigator.language || ""); lang = m ? m[1].toLowerCase() : "en"; }
+  const t = k => UI[lang][k];
+  const ch = c => Object.assign({}, c, T[lang] && T[lang].ch[c.id]);
+  const titrePiece = p => (T[lang] && T[lang].pieces[p.id]) || p.titre;
+  const nomChapitre = i => t("chapter") + i + (t("chapterEnd") || "");
+  function chargerLangue(l, ok){
+    if (l === "fr" || T[l]) return ok();
+    const s = document.createElement("script"); s.src = `chapitres.${l}.js`;
+    s.onload = () => { T[l] = window.TRAD; ok(); };
+    s.onerror = ok;
+    document.head.appendChild(s);
+  }
+  function setLang(l){
+    lang = l;
+    const r = document.documentElement; r.lang = l; r.dataset.l = l; r.dir = l === "ar" ? "rtl" : "ltr";
+    document.title = t("docTitle");
+    document.querySelectorAll("[data-t]").forEach(e => { e.textContent = t(e.dataset.t); });
+    document.querySelectorAll("[data-th]").forEach(e => { e.innerHTML = t(e.dataset.th); });
+    document.querySelectorAll("[data-ta]").forEach(e => e.setAttribute("aria-label", t(e.dataset.ta)));
+    document.querySelectorAll(".bord th").forEach((e,i) => { e.textContent = t("th")[i]; });
+    $("#q").placeholder = t("q");
+    document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.set === l));
+    setPlaying(playing);
+    chargerLangue(l, () => { render(); renderBordereau(); });
+  }
+  document.querySelectorAll(".lang button").forEach(b => b.onclick = () => {
+    setLang(b.dataset.set);
+    try { localStorage.setItem("mena-lang", b.dataset.set); } catch(e) {}
+  });
+
   // ---------- satellite ----------
   const SAT = {
     imm7: { dates:["2010-03-27","2011-05-22","2011-09-27","2012-06-27","2012-12-28","2013-01-03","2013-05-23","2013-09-04","2014-02-07","2014-12-10","2015-08-20","2016-10-31","2017-03-29","2017-09-30","2025-11-22"],
-      etat: d => d < "2011-01-01" ? "Chantier : structure en béton en élévation." :
-                 d < "2012-01-01" ? "Gros œuvre en cours — aucun appartement achevé. C'est l'année de la vente alléguée." :
-                 d < "2012-12-01" ? "Image voilée ; bâtiment en voie d'achèvement." :
-                 "Bâtiment achevé.",
+      etat: d => t("sat")[d < "2011-01-01" ? 0 : d < "2012-01-01" ? 1 : d < "2012-12-01" ? 2 : 3],
       ref: "2011-05-22" }
   };
   function satHtml(key){
     const s = SAT[key], i0 = s.dates.indexOf(s.ref);
-    return `<h3 class="sec">Images satellites datées — Google Earth / Maxar</h3>
+    return `<h3 class="sec">${t("satH")}</h3>
     <div class="sat" data-sat="${key}">
       <div class="sat-view">
-        <figure><img id="satA" alt="Image satellite datée" src="satellite/${key}_${s.ref}.jpg"><figcaption id="satAc">${fr(s.ref)}</figcaption></figure>
-        <figure><img alt="Le même bâtiment en 2025" src="satellite/${key}_2025-11-22.jpg"><figcaption>${fr("2025-11-22")}</figcaption></figure>
+        <figure><img id="satA" alt="${t("satAlt")}" src="satellite/${key}_${s.ref}.jpg"><figcaption id="satAc">${fr(s.ref)}</figcaption></figure>
+        <figure><img alt="${t("satAlt2")}" src="satellite/${key}_2025-11-22.jpg"><figcaption>${fr("2025-11-22")}</figcaption></figure>
       </div>
-      <input type="range" id="satR" min="0" max="${s.dates.length-1}" value="${i0}" aria-label="Date de l'image">
+      <input type="range" id="satR" min="0" max="${s.dates.length-1}" value="${i0}" aria-label="${t("satDate")}">
       <div class="ticks"><span>2010</span><span>2011</span><span>2013</span><span>2015</span><span>2017</span><span>2025</span></div>
       <div class="state" id="satS">${s.etat(s.ref)}</div>
-      <div class="note">Cercle rouge : bâtiment « 7 » selon la cartographie publique (OpenStreetMap), face au studio Medi 1 TV. Identification à confirmer par le plan de lotissement.</div>
+      <div class="note">${t("satNote")}</div>
     </div>`;
   }
   function fr(d){ const [y,m,j]=d.split("-"); return `${j}/${m}/${y}`; }
@@ -282,21 +371,21 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
     const thumb = p.vignette ? `style="background-image:url('${esc(p.vignette)}')"` : "";
     const tags = [`<span class="tag">${esc(p.date)}</span>`];
     if (/AR/.test(p.langue)) tags.push(`<span class="tag ar">${esc(p.langue)}</span>`);
-    if (p.nature === "transcription") tags.push(`<span class="tag warn">transcription</span>`);
-    if (p.nature === "partie-civile") tags.push(`<span class="tag warn">établie par la partie civile</span>`);
+    if (p.nature === "transcription") tags.push(`<span class="tag warn">${t("transcription")}</span>`);
+    if (p.nature === "partie-civile") tags.push(`<span class="tag warn">${t("pc")}</span>`);
     const trad = p.trad ? (p.trad_pdf
-        ? `<a class="btn" href="${esc(p.trad_pdf)}" target="_blank" rel="noopener">Traduction FR</a>`
-        : `<span class="btn" aria-disabled="true">Traduction en cours</span>`) : "";
+        ? `<a class="btn" href="${esc(p.trad_pdf)}" target="_blank" rel="noopener">${t("tradFr")}</a>`
+        : `<span class="btn" aria-disabled="true">${t("tradWait")}</span>`) : "";
     return `<div class="piece">
-      <div class="thumb" ${thumb} data-open="${p.id}" role="button" tabindex="0" aria-label="Voir la pièce ${p.id}"><span class="id">${p.id}</span></div>
-      <div class="body"><div class="t">${esc(p.titre)}</div><div class="m">${tags.join("")}</div>
-      <div class="acts"><a class="btn" href="${esc(p.pdf)}" target="_blank" rel="noopener">Original (PDF)</a>${trad}</div></div></div>`;
+      <div class="thumb" ${thumb} data-open="${p.id}" role="button" tabindex="0" aria-label="${t("seePiece")}${p.id}"><span class="id">${p.id}</span></div>
+      <div class="body"><div class="t">${esc(titrePiece(p))}</div><div class="m">${tags.join("")}</div>
+      <div class="acts"><a class="btn" href="${esc(p.pdf)}" target="_blank" rel="noopener">${t("original")}</a>${trad}</div></div></div>`;
   }
   function openPiece(id){
     const p = byId[id]; if(!p) return;
     if (window.matchMedia("(max-width:960px), (pointer:coarse)").matches) { window.open(p.pdf, "_blank", "noopener"); return; }
-    $("#lbTitle").textContent = `${p.id} — ${p.titre}`;
-    $("#lbBody").innerHTML = `<iframe src="${esc(p.pdf)}" title="${esc(p.titre)}"></iframe>`;
+    $("#lbTitle").textContent = `${p.id} — ${titrePiece(p)}`;
+    $("#lbBody").innerHTML = `<iframe src="${esc(p.pdf)}" title="${esc(titrePiece(p))}"></iframe>`;
     $("#lb").classList.add("on"); $("#lbClose").focus();
   }
   $("#lbClose").onclick = () => { $("#lb").classList.remove("on"); $("#lbBody").innerHTML = ""; };
@@ -305,28 +394,28 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
   document.addEventListener("keydown", e => { const t = e.target.closest && e.target.closest("[data-open]"); if(t && (e.key==="Enter"||e.key===" ")){ e.preventDefault(); openPiece(t.dataset.open);} });
 
   function renderBordereau(){
-    $("#bordBody").innerHTML = PIECES.map(p => `<tr><td>${p.id}</td><td>${esc(p.titre)}${p.nature==="transcription"?" <em>(transcription)</em>":p.nature==="partie-civile"?" <em>(établie par la partie civile)</em>":""}</td>
+    $("#bordBody").innerHTML = PIECES.map(p => `<tr><td>${p.id}</td><td>${esc(titrePiece(p))}${p.nature==="transcription"?` <em>(${t("transcription")})</em>`:p.nature==="partie-civile"?` <em>(${t("pc")})</em>`:""}</td>
       <td>${esc(p.date)}</td><td>${esc(p.langue)}</td>
-      <td class="dl"><a href="${esc(p.pdf)}" target="_blank" rel="noopener">Original</a>${p.trad_pdf?`<a href="${esc(p.trad_pdf)}" target="_blank" rel="noopener">Traduction FR</a>`:(p.trad?'<span style="color:var(--ink-dim)">trad. en cours</span>':"")}</td></tr>`).join("");
+      <td class="dl"><a href="${esc(p.pdf)}" target="_blank" rel="noopener">${t("orig")}</a>${p.trad_pdf?`<a href="${esc(p.trad_pdf)}" target="_blank" rel="noopener">${t("tradFr")}</a>`:(p.trad?`<span style="color:var(--ink-dim)">${t("tradWait2")}</span>`:"")}</td></tr>`).join("");
   }
 
   // ---------- chapitres ----------
   function renderToc(){
-    $("#toc").innerHTML = CH.map((c,i) => `<button data-ch="${i}" class="${i===cur?'on':''}"><span class="n">${i||"·"}</span><span>${esc(c.titre)}</span></button>`).join("");
+    $("#toc").innerHTML = CH.map((c,i) => `<button data-ch="${i}" class="${i===cur?'on':''}"><span class="n">${i||"·"}</span><span>${esc(ch(c).titre)}</span></button>`).join("");
     $("#toc").querySelectorAll("button").forEach(b => b.onclick = () => go(+b.dataset.ch, playing));
-    $("#tocSel").innerHTML = CH.map((c,i) => `<option value="${i}" ${i===cur?"selected":""}>${i ? "Chapitre " + i + " — " : ""}${esc(c.titre)}</option>`).join("");
+    $("#tocSel").innerHTML = CH.map((c,i) => `<option value="${i}" ${i===cur?"selected":""}>${i ? nomChapitre(i) + " — " : ""}${esc(ch(c).titre)}</option>`).join("");
     $("#tocSel").onchange = e => { go(+e.target.value, playing); $("#chapter").scrollIntoView({behavior:"smooth"}); };
   }
   function render(){
-    const c = CH[cur];
-    let h = `<header class="ch-head"><span class="kicker">${cur ? "Chapitre " + cur + " / " + (CH.length-1) : "Introduction"}</span><h2>${esc(c.titre)}</h2><div class="sous">${esc(c.sous)}</div></header>`;
+    const c = ch(CH[cur]);
+    let h = `<header class="ch-head"><span class="kicker">${cur ? nomChapitre(cur) + " / " + (CH.length-1) : t("introK")}</span><h2>${esc(c.titre)}</h2><div class="sous">${esc(c.sous)}</div></header>`;
     h += `<div class="recit">${c.recit.map((p,i)=>`<p data-p="${i}" class="${playing&&i===para?'on':''}">${esc(p)}</p>`).join("")}</div>`;
     if (c.satellite) h += satHtml(c.satellite);
-    if (c.faits.length) h += `<h3 class="sec">Repères</h3><ul class="faits">${c.faits.map(f=>`<li><time>${esc(f[0])}</time>${esc(f[1])}</li>`).join("")}</ul>`;
-    if (c.sources && c.sources.length) h += `<h3 class="sec">Sources publiques</h3><ul class="faits">${c.sources.map(s=>`<li><a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join("")}</ul>`;
+    if (c.faits.length) h += `<h3 class="sec">${t("marks")}</h3><ul class="faits">${c.faits.map(f=>`<li><time>${esc(f[0])}</time>${esc(f[1])}</li>`).join("")}</ul>`;
+    if (c.sources && c.sources.length) h += `<h3 class="sec">${t("sources")}</h3><ul class="faits">${CH[cur].sources.map((s,i)=>`<li><a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(Array.isArray(c.sources[i]) ? s[0] : c.sources[i])}</a></li>`).join("")}</ul>`;
     const ps = c.pieces.map(id => byId[id]).filter(Boolean);
-    if (ps.length) h += `<h3 class="sec">Pièces du chapitre</h3><div class="pieces">${ps.map(pieceCard).join("")}</div>`;
-    h += `<nav class="chnav">${cur>0?`<button class="btn" data-go="${cur-1}">← ${esc(CH[cur-1].titre)}</button>`:"<span></span>"}${cur<CH.length-1?`<button class="btn gold" data-go="${cur+1}">${esc(CH[cur+1].titre)} →</button>`:""}</nav>`;
+    if (ps.length) h += `<h3 class="sec">${t("chPieces")}</h3><div class="pieces">${ps.map(pieceCard).join("")}</div>`;
+    h += `<nav class="chnav">${cur>0?`<button class="btn" data-go="${cur-1}">${t("prev")}${esc(ch(CH[cur-1]).titre)}</button>`:"<span></span>"}${cur<CH.length-1?`<button class="btn gold" data-go="${cur+1}">${esc(ch(CH[cur+1]).titre)}${t("next")}</button>`:""}</nav>`;
     $("#chapter").innerHTML = h;
     $("#chapter").querySelectorAll("[data-go]").forEach(b => b.onclick = () => { go(+b.dataset.go, playing); $("#chapter").scrollIntoView({behavior:"smooth"}); });
     $("#chapter").querySelectorAll(".recit p").forEach(p => p.onclick = () => { para = +p.dataset.p; play(); });
@@ -344,8 +433,8 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
     playing = v;
     $("#menaCard").classList.toggle("speaking", v);
     $("#icoPlay").innerHTML = v ? '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>' : '<path d="M8 5v14l11-7z"/>';
-    $("#bPlay").setAttribute("aria-label", v ? "Mettre en pause" : "Écouter Mena");
-    $("#menaStatus").textContent = v ? `Je vous lis : ${CH[cur].titre}` : "Je vous présente le dossier, chapitre par chapitre.";
+    $("#bPlay").setAttribute("aria-label", t(v ? "pause" : "listen"));
+    $("#menaStatus").textContent = v ? t("reading") + ch(CH[cur]).titre : t("idle");
   }
   function mark(){ document.querySelectorAll(".recit p").forEach(p => p.classList.toggle("on", playing && +p.dataset.p === para)); }
   function play(){
@@ -368,28 +457,76 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
   // ---------- questions à Mena ----------
   const history = [];
   const SUGG = {
+   fr:{
     0:["Résume l'affaire en 5 lignes","Qui est la partie civile ?"],
     1:["Où est mort Abdelkrim Mansouri ?","Pourquoi le rapport dit-il « décédé au Maroc » ?"],
     2:["Quelles plaintes pour empoisonnement existent ?","Qu'est-ce que le PV 72/3201/2018 ?"],
     3:["Quel est le mobile de l'assassinat ?","Pourquoi l'usufruit est-il décisif ?"],
     4:["Quels biens sont au nom du défunt au Maroc ?"],
     5:["Pourquoi la vente de 2011 est-elle contestée ?","Que montrent les images satellites ?"],
-    6:["Que prouve l'hypothèque de 2016 ?","Que reproche-t-on à l'acte de 2013 ?"],
+    6:["Que prouve l'hypothèque de 2010 ?","Que reproche-t-on à l'acte de 2013 ?"],
     7:["Pourquoi Tarik Mansouri a-t-il été emprisonné ?"],
     8:["Quels sont les épisodes de la mandataire ?","Qu'est-ce que la contrepassation de 200 000 € ?"],
     9:["Pourquoi la notaire a-t-elle été destituée ?","Que dit le projet d'acte de notoriété ?"],
     10:["Où en est la procédure ?"],
     11:["Quels actes demander au juge ?"],
     12:["Comment ces opérations ont-elles pu passer inaperçues ?","Que demande la partie civile sur les mouvements de fonds ?"]
+   },
+   en:{
+    0:["Sum up the case in 5 lines","Who is the civil party?"],
+    1:["Where did Abdelkrim Mansouri die?","Why does the report say he died in Morocco?"],
+    2:["What poisoning complaints exist?","What is report 72/3201/2018?"],
+    3:["What is the motive for the murder?","Why is the life interest decisive?"],
+    4:["What property is in the deceased's name in Morocco?"],
+    5:["Why is the 2011 sale disputed?","What do the satellite images show?"],
+    6:["What does the 2010 mortgage prove?","What is wrong with the 2013 deed?"],
+    7:["Why was Tarik Mansouri jailed?"],
+    8:["What are the administrator's episodes?","What is the €200,000 reversal?"],
+    9:["Why was the notary removed?","What does the draft affidavit of heirship say?"],
+    10:["Where do the proceedings stand?"],
+    11:["What steps should the judge be asked to take?"],
+    12:["How could these operations go unnoticed?","What does the civil party ask about the movements of funds?"]
+   },
+   ar:{
+    0:["لخّصي القضية في 5 أسطر","من هو الطرف المدني؟"],
+    1:["أين توفي عبد الكريم منصوري؟","لماذا يقول التقرير إنه توفي في المغرب؟"],
+    2:["ما الشكايات الموجودة بشأن التسميم؟","ما هو المحضر 72/3201/2018؟"],
+    3:["ما دافع القتل؟","لماذا يعد حق الانتفاع حاسمًا؟"],
+    4:["ما الممتلكات المسجلة باسم المتوفى في المغرب؟"],
+    5:["لماذا يُطعن في بيع 2011؟","ماذا تُظهر صور الأقمار الصناعية؟"],
+    6:["ماذا يثبت رهن 2010؟","ما المآخذ على عقد 2013؟"],
+    7:["لماذا سُجن طارق منصوري؟"],
+    8:["ما هي حلقات الوكيلة؟","ما هو القيد العكسي لمبلغ 200 000 يورو؟"],
+    9:["لماذا أُقيلت الموثقة؟","ماذا يقول مشروع عقد الشهرة؟"],
+    10:["أين وصلت المسطرة؟"],
+    11:["ما الإجراءات التي تُطلب من القاضي؟"],
+    12:["كيف أمكن لهذه العمليات أن تمر دون انتباه؟","ماذا يطلب الطرف المدني بشأن حركات الأموال؟"]
+   },
+   zh:{
+    0:["用 5 行概括此案","谁是民事当事人？"],
+    1:["阿卜杜勒克里姆·曼苏里死于何处？","报告为什么说他死于摩洛哥？"],
+    2:["有哪些投毒控告？","第 72/3201/2018 号笔录是什么？"],
+    3:["杀人动机是什么？","用益权为什么具有决定性？"],
+    4:["摩洛哥有哪些财产在死者名下？"],
+    5:["2011 年的买卖为什么有争议？","卫星图像显示了什么？"],
+    6:["2010 年的抵押证明了什么？","2013 年的契约有什么问题？"],
+    7:["塔里克·曼苏里为什么入狱？"],
+    8:["管理人事件有哪些阶段？","20 万欧元冲回是怎么回事？"],
+    9:["公证人为什么被免职？","继承公证书草案写了什么？"],
+    10:["程序进展如何？"],
+    11:["应向法官申请哪些措施？"],
+    12:["这些操作怎么会没人察觉？","民事当事人对资金往来有什么要求？"]
+   }
   };
-  function renderSugg(){ $("#sugg").innerHTML = (SUGG[CH[cur].id]||[]).map(s=>`<button type="button">${esc(s)}</button>`).join("");
+  function renderSugg(){ $("#sugg").innerHTML = (SUGG[lang][CH[cur].id]||[]).map(s=>`<button type="button">${esc(s)}</button>`).join("");
     $("#sugg").querySelectorAll("button").forEach(b => b.onclick = () => ask(b.textContent)); }
   function addMsg(txt, who){ const d = document.createElement("div"); d.className = "msg " + who; d.textContent = txt; $("#msgs").appendChild(d); $("#msgs").scrollTop = 1e9; return d; }
   function speakAnswer(t){
     if (!$("#voiceAns").checked || !("speechSynthesis" in window)) return;
     stop(); speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(t); u.lang = "fr-FR"; u.rate = rate;
-    const v = speechSynthesis.getVoices().find(v => /^fr/i.test(v.lang) && /female|femme|denise|vivienne|amelie|audrey|julie/i.test(v.name)) || speechSynthesis.getVoices().find(v => /^fr/i.test(v.lang));
+    const u = new SpeechSynthesisUtterance(t); u.lang = {fr:"fr-FR",en:"en-GB",ar:"ar",zh:"zh-CN"}[lang]; u.rate = rate;
+    const code = new RegExp("^" + lang, "i");
+    const v = speechSynthesis.getVoices().find(v => code.test(v.lang) && /female|femme|denise|vivienne|amelie|audrey|julie/i.test(v.name)) || speechSynthesis.getVoices().find(v => code.test(v.lang));
     if (v) u.voice = v;
     u.onstart = () => $("#menaCard").classList.add("speaking");
     u.onend = () => $("#menaCard").classList.remove("speaking");
@@ -398,24 +535,24 @@ footer{max-width:1280px;margin:0 auto;padding:22px 20px 40px;color:var(--ink-dim
   async function ask(q){
     q = (q||"").trim(); if (!q) return;
     addMsg(q, "me"); $("#q").value = "";
-    const w = addMsg("Mena consulte le dossier…", "ai wait");
+    const w = addMsg(t("wait"), "ai wait");
     try {
       const r = await fetch(API, { method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ question:q, history:history.slice(-6), persona:"mena", chapitre:CH[cur].titre }) });
+        body: JSON.stringify({ question:q, history:history.slice(-6), persona:"mena", chapitre:CH[cur].titre, lang }) });
       const d = await r.json().catch(()=>({}));
-      const a = d.answer || d.error || "Je n'ai pas pu répondre pour le moment. Réessayez dans un instant.";
+      const a = (d.error ? t("noAns") : d.answer) || t("noAns");
       w.className = "msg ai"; w.textContent = a;
       if (d.answer){ history.push({role:"user",content:q},{role:"assistant",content:a}); speakAnswer(a); }
-    } catch(e){ w.className = "msg ai"; w.textContent = "Connexion impossible avec Mena. Vérifiez votre réseau et réessayez."; }
+    } catch(e){ w.className = "msg ai"; w.textContent = t("noNet"); }
   }
   $("#chatForm").onsubmit = e => { e.preventDefault(); ask($("#q").value); };
 
   // ---------- démarrage ----------
   try { const s = +localStorage.getItem("mena_ch"); if (s>=0 && s<CH.length) cur = s; } catch(e) {}
   const hash = location.hash.match(/^#ch(\d+)$/); if (hash) cur = Math.min(CH.length-1, +hash[1]);
-  fetch("pieces.json").then(r=>r.json()).then(list => { PIECES = list; list.forEach(p => byId[p.id]=p); render(); renderBordereau(); })
-    .catch(() => render());
-  render();
+  setLang(lang);
+  fetch("pieces.json").then(r=>r.json()).then(list => { PIECES = list; list.forEach(p => byId[p.id]=p); chargerLangue(lang, () => { render(); renderBordereau(); }); })
+    .catch(() => {});
 })();
 </script>
 </body>

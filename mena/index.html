@@ -13,10 +13,10 @@
 <script>
 // Anciens liens /mena/#chN → page dossier complète
 if (/^#ch\d+$/.test(location.hash)) location.replace("dossier.html" + location.hash);
-// Langue : choix mémorisé, sinon anglais (public londonien) — FR seulement si le téléphone est en français
-(function(){ var l; try { l = localStorage.getItem("mena-lang"); } catch(e) {}
-  if (l !== "fr" && l !== "en") l = /^fr/i.test(navigator.language || "") ? "fr" : "en";
-  document.documentElement.dataset.l = l; document.documentElement.lang = l; })();
+// Langue : choix mémorisé, sinon anglais (public londonien) — FR, AR ou ZH seulement si le téléphone est dans cette langue
+(function(){ var l, m; try { l = localStorage.getItem("mena-lang"); } catch(e) {}
+  if (!/^(fr|en|ar|zh)$/.test(l)) { m = /^(fr|ar|zh)/i.exec(navigator.language || ""); l = m ? m[1].toLowerCase() : "en"; }
+  var h = document.documentElement; h.dataset.l = l; h.lang = l; h.dir = l === "ar" ? "rtl" : "ltr"; })();
 </script>
 <style>
 :root{
@@ -31,14 +31,18 @@ body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'
 a{color:var(--gold-soft)}
 button{font:inherit;cursor:pointer;color:inherit}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-html[data-l=fr] [lang=en], html[data-l=en] [lang=fr]{display:none !important}
+html:not([data-l=fr]) [lang=fr], html:not([data-l=en]) [lang=en], html:not([data-l=ar]) [lang=ar], html:not([data-l=zh]) [lang=zh]{display:none !important}
+/* l'espacement des lettres casse la liaison de l'arabe ; l'italique n'existe ni en arabe ni en chinois */
+html[data-l=ar] *{letter-spacing:0 !important}
+html[data-l=ar] .films-note, html[data-l=zh] .films-note{font-style:normal}
+html[data-l=ar] h1, html[data-l=ar] h2, html[data-l=zh] h1, html[data-l=zh] h2{font-family:inherit;font-weight:700}
 
 .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;
   padding:10px 16px;background:rgba(13,15,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .brand{font-family:var(--serif);color:var(--gold-soft);text-decoration:none;font-size:1rem;letter-spacing:.03em}
-.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.lang button{background:none;border:0;padding:8px 14px;min-height:40px;font-size:.85rem;font-weight:600;color:var(--ink-dim)}
-html[data-l=fr] .lang [data-set=fr], html[data-l=en] .lang [data-set=en]{background:var(--gold);color:#16130c}
+.lang{direction:ltr;flex:none;display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;padding:8px 10px;min-height:40px;font-size:.85rem;font-weight:600;color:var(--ink-dim)}
+html[data-l=fr] .lang [data-set=fr], html[data-l=en] .lang [data-set=en], html[data-l=ar] .lang [data-set=ar], html[data-l=zh] .lang [data-set=zh]{background:var(--gold);color:#16130c}
 
 .wrap{max-width:640px;margin:0 auto;padding:0 16px}
 .hero{padding:26px 0 8px}
@@ -59,28 +63,28 @@ h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;ma
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
 .accuse{margin:16px 0 4px;border:2px solid var(--red);border-radius:14px;padding:16px;background:linear-gradient(180deg,rgba(208,100,90,.16),var(--panel))}
 .accuse h2{font-family:var(--serif);font-size:1.55rem;line-height:1.15;color:#fff;margin:0 0 10px}
-.accuse ul{margin:0;padding-left:18px;display:grid;gap:8px}
+.accuse ul{margin:0;padding-inline-start:18px;display:grid;gap:8px}
 .accuse li{font-size:1rem}
 .accuse small{display:block;margin-top:10px;color:var(--ink-dim);font-size:.8rem}
 .card.strike{border-color:rgba(208,100,90,.55);background:linear-gradient(180deg,rgba(208,100,90,.10),var(--panel))}
 .card p+p{margin-top:10px}
 .asks{list-style:none;counter-reset:a;display:grid;gap:10px}
-.asks li{counter-increment:a;position:relative;padding:14px 14px 14px 54px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
-.asks li::before{content:counter(a);position:absolute;left:14px;top:13px;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#16130c;font-weight:700;display:grid;place-items:center;font-size:.9rem}
+.asks li{counter-increment:a;position:relative;padding:14px;padding-inline-start:54px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.asks li::before{content:counter(a);position:absolute;inset-inline-start:14px;top:13px;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#16130c;font-weight:700;display:grid;place-items:center;font-size:.9rem}
 .asks b{color:var(--gold-soft)}
 
 /* frise */
-.tl{list-style:none;position:relative;margin-left:8px;padding-left:22px;border-left:2px solid var(--line)}
+.tl{list-style:none;position:relative;margin-inline-start:8px;padding-inline-start:22px;border-inline-start:2px solid var(--line)}
 .tl li{position:relative;margin-bottom:10px}
-.tl li::before{content:"";position:absolute;left:-30px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--gold)}
+.tl li::before{content:"";position:absolute;inset-inline-start:-30px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--gold)}
 .tl li.hot::before{border-color:var(--red);background:var(--red)}
 .tl details{background:var(--panel);border:1px solid var(--line);border-radius:12px}
 .tl details[open]{border-color:rgba(200,163,90,.5)}
 .tl summary{list-style:none;display:flex;gap:10px;align-items:center;padding:12px 14px;min-height:56px;cursor:pointer}
 .tl summary::-webkit-details-marker{display:none}
-.tl summary::after{content:"+";margin-left:auto;flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--panel-2);color:var(--gold-soft);font-weight:700}
+.tl summary::after{content:"+";margin-inline-start:auto;flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--panel-2);color:var(--gold-soft);font-weight:700}
 .tl details[open] summary::after{content:"–"}
-.tl .d{flex:none;min-width:84px;font-size:.8rem;font-weight:700;color:var(--gold-soft);letter-spacing:.02em}
+.tl .d{unicode-bidi:plaintext;flex:none;min-width:84px;font-size:.8rem;font-weight:700;color:var(--gold-soft);letter-spacing:.02em}
 .tl li.hot .d{color:var(--red)}
 .tl .t{font-weight:600;line-height:1.3}
 .tl .body{padding:0 14px 14px;font-size:.96rem;color:#d9d5cc}
@@ -132,13 +136,15 @@ h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;ma
   <div class="lang" role="group" aria-label="Langue / Language">
     <button data-set="en" aria-label="English">EN</button>
     <button data-set="fr" aria-label="Français">FR</button>
+    <button data-set="ar" aria-label="العربية">عربي</button>
+    <button data-set="zh" aria-label="中文">中文</button>
   </div>
 </header>
 
 <main class="wrap">
   <section class="films" aria-labelledby="h-films">
-    <h2 id="h-films"><span lang="fr">Regardez le film (2 min 15)</span><span lang="en">Watch the film (2 min 15)</span></h2>
-    <p class="films-note"><span lang="fr">Cette image ne représente pas les 99,99 % de magistrats intègres.</span><span lang="en">This image does not represent the 99.99% of judges who act with integrity.</span></p>
+    <h2 id="h-films"><span lang="fr">Regardez le film (2 min 15)</span><span lang="en">Watch the film (2 min 15)</span><span lang="ar">شاهدوا الفيلم (2 د 15 ث)</span><span lang="zh">观看影片（2 分 15 秒）</span></h2>
+    <p class="films-note"><span lang="fr">Cette image ne représente pas les 99,99 % de magistrats intègres.</span><span lang="en">This image does not represent the 99.99% of judges who act with integrity.</span><span lang="ar">هذه الصورة لا تمثل 99,99 % من القضاة النزهاء.</span><span lang="zh">此画面不代表 99.99% 正直的法官。</span></p>
     <div class="films-grid">
       <button class="film" data-film="film_en.mp4" aria-label="English">
         <img class="po" src="video/poster_en.jpg" alt="" loading="eager"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/><path stroke="#C8102E" stroke-width="3" d="M0 0l60 30M60 0L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l15 8-15 8z"/></svg></span><span class="nm">ENGLISH</span>
@@ -153,162 +159,194 @@ h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;ma
   </section>
 
   <div class="hero">
-    <span class="kicker"><span lang="fr">Grève de la faim · Londres · dès le 1er novembre</span><span lang="en">Hunger strike · London · from 1 November</span></span>
-    <h1><span lang="fr">Justice pour <span>Abdelkrim Mansouri</span></span><span lang="en">Justice for <span>Abdelkrim Mansouri</span></span></h1>
+    <span class="kicker"><span lang="fr">Grève de la faim · Londres · dès le 1er novembre</span><span lang="en">Hunger strike · London · from 1 November</span><span lang="ar">إضراب عن الطعام · لندن · ابتداءً من 1 نوفمبر</span><span lang="zh">绝食抗议 · 伦敦 · 11 月 1 日起</span></span>
+    <h1><span lang="fr">Justice pour <span>Abdelkrim Mansouri</span></span><span lang="en">Justice for <span>Abdelkrim Mansouri</span></span><span lang="ar">العدالة لـ<span>عبد الكريم منصوري</span></span><span lang="zh">为<span>阿卜杜勒克里姆·曼苏里</span>讨回公道</span></h1>
     <p class="lead" lang="fr">Mort en France en 2017. Au Maroc, <b>la gendarmerie a conclu à un assassinat</b> après la découverte de preuves. <b>La police de Neuilly a conclu de même.</b> Une information judiciaire pour assassinat est ouverte à Nanterre. Personne n'a été arrêté. Son fils fait la grève de la faim devant le consulat de France à Londres, jusqu'aux arrestations.</p>
     <p class="lead" lang="en">He died in France in 2017. In Morocco, <b>the gendarmerie concluded it was murder</b>, after finding evidence. <b>The police in Neuilly reached the same conclusion.</b> French prosecutors then asked for a murder investigation. Nobody has been arrested. His son is on hunger strike outside the French Consulate in London until arrests are made.</p>
+    <p class="lead" lang="ar">توفي في فرنسا سنة 2017. في المغرب، <b>خلص الدرك إلى أنها جريمة قتل</b> بعد العثور على أدلة. <b>وانتهت شرطة نويي إلى الخلاصة نفسها.</b> ثم طلبت النيابة العامة الفرنسية فتح تحقيق في جريمة قتل. ولم يُعتقل أحد. ويخوض ابنه إضرابًا عن الطعام أمام القنصلية الفرنسية في لندن إلى أن تتم الاعتقالات.</p>
+    <p class="lead" lang="zh">他于 2017 年在法国去世。在摩洛哥，<b>宪兵在发现证据后认定这是谋杀</b>。<b>讷伊警方也得出了同样的结论。</b>法国检察官随后要求展开谋杀调查。至今无人被捕。他的儿子正在伦敦法国领事馆外绝食抗议，直到有人被捕。</p>
     <ul class="facts">
-      <li><span class="ico">†</span><div><b><span lang="fr">Le décès</span><span lang="en">Death</span></b>
+      <li><span class="ico">†</span><div><b><span lang="fr">Le décès</span><span lang="en">Death</span><span lang="ar">الوفاة</span><span lang="zh">死亡</span></b>
         <span lang="fr">16 février 2017, Neuilly-sur-Seine (acte de décès n° 160). Il avait 71 ans.</span>
-        <span lang="en">16 February 2017, Neuilly-sur-Seine, France (death certificate no. 160). He was 71.</span></div></li>
-      <li><span class="ico">✓</span><div><b><span lang="fr">Les deux conclusions</span><span lang="en">Two conclusions</span></b>
+        <span lang="en">16 February 2017, Neuilly-sur-Seine, France (death certificate no. 160). He was 71.</span><span lang="ar">16 فبراير 2017، نويي سور سين، فرنسا (شهادة الوفاة رقم 160). كان عمره 71 عامًا.</span><span lang="zh">2017 年 2 月 16 日，法国塞纳河畔讷伊（第 160 号死亡证明）。享年 71 岁。</span></div></li>
+      <li><span class="ico">✓</span><div><b><span lang="fr">Les deux conclusions</span><span lang="en">Two conclusions</span><span lang="ar">خلاصتان</span><span lang="zh">两项结论</span></b>
         <span lang="fr">Maroc : la gendarmerie a conclu à un assassinat, après la découverte de preuves. France : la police de Neuilly a conclu de même.</span>
-        <span lang="en">Morocco: the gendarmerie concluded it was premeditated murder, after finding evidence. France: the police in Neuilly reached the same conclusion.</span></div></li>
-      <li><span class="ico">§</span><div><b><span lang="fr">L'enquête</span><span lang="en">The case</span></b>
+        <span lang="en">Morocco: the gendarmerie concluded it was premeditated murder, after finding evidence. France: the police in Neuilly reached the same conclusion.</span><span lang="ar">المغرب: خلص الدرك إلى أنها جريمة قتل مع سبق الإصرار بعد العثور على أدلة. فرنسا: انتهت شرطة نويي إلى الخلاصة نفسها.</span><span lang="zh">摩洛哥：宪兵在发现证据后认定这是预谋杀人。法国：讷伊警方也得出了同样的结论。</span></div></li>
+      <li><span class="ico">§</span><div><b><span lang="fr">L'enquête</span><span lang="en">The case</span><span lang="ar">القضية</span><span lang="zh">案件</span></b>
         <span lang="fr">Information judiciaire pour assassinat, tribunal judiciaire de Nanterre (JI DOYEN 24000274).</span>
-        <span lang="en">A murder investigation (<i>assassinat</i>: premeditated murder) led by an investigating judge at the Nanterre court, near Paris. Ref. JI DOYEN 24000274.</span></div></li>
-      <li><span class="ico">!</span><div><b><span lang="fr">La demande</span><span lang="en">The demand</span></b>
+        <span lang="en">A murder investigation (<i>assassinat</i>: premeditated murder) led by an investigating judge at the Nanterre court, near Paris. Ref. JI DOYEN 24000274.</span><span lang="ar">تحقيق في جريمة قتل مع سبق الإصرار (<i>assassinat</i>) يقوده قاضي تحقيق في محكمة نانتير قرب باريس. المرجع: JI DOYEN 24000274.</span><span lang="zh">由巴黎附近楠泰尔法院预审法官负责的谋杀案调查（<i>assassinat</i>：预谋杀人）。案号 JI DOYEN 24000274。</span></div></li>
+      <li><span class="ico">!</span><div><b><span lang="fr">La demande</span><span lang="en">The demand</span><span lang="ar">المطلب</span><span lang="zh">诉求</span></b>
         <span lang="fr">Arrêtez les assassins de mon père. Arrêtez ceux qui ont pillé sa succession, notaire et mandataire compris. Grève de la faim jusqu'aux arrestations.</span>
-        <span lang="en">Arrest my father's killers. Arrest those who stole his estate — including the notary and the court-appointed administrator. Hunger strike until arrests are made.</span></div></li>
+        <span lang="en">Arrest my father's killers. Arrest those who stole his estate — including the notary and the court-appointed administrator. Hunger strike until arrests are made.</span><span lang="ar">اعتقلوا قتلة أبي. اعتقلوا من نهبوا تركته، ومنهم الموثقة والوكيلة القضائية. إضراب عن الطعام حتى تتم الاعتقالات.</span><span lang="zh">逮捕杀害我父亲的凶手。逮捕侵吞他遗产的人，包括公证人和法院指定的遗产管理人。绝食直到有人被捕。</span></div></li>
     </ul>
     <div class="accuse">
-      <h2><span lang="fr">27 octobre 2026 : ce qui s'est passé à l'audition</span><span lang="en">27 October 2026: what happened at the hearing</span></h2>
+      <h2><span lang="fr">27 octobre 2026 : ce qui s'est passé à l'audition</span><span lang="en">27 October 2026: what happened at the hearing</span><span lang="ar">27 أكتوبر 2026: ما جرى في جلسة الاستماع</span><span lang="zh">2026 年 10 月 27 日：听证会上发生了什么</span></h2>
       <ul>
-        <li><span lang="fr">Le parquet a requis une enquête pour assassinat. Le juge d'instruction n'enquête pas.</span><span lang="en">The prosecutor asked for a murder investigation. The investigating judge is not investigating.</span></li>
-        <li><span lang="fr">Enquête de police déclarée « vide ». Spoliation écartée. Mais un mail de colère de 2021 versé au dossier.</span><span lang="en">The police inquiry was called "empty". The theft of the estate was set aside. But an angry email from 2021 was put on file.</span></li>
-        <li><span lang="fr">Un juge qui envisage de se déclarer incompétent, alors que mon père est mort à Neuilly, en France.</span><span lang="en">A judge who suggests the case may not be his, although my father died in Neuilly, France.</span></li>
+        <li><span lang="fr">Le parquet a requis une enquête pour assassinat. Le juge d'instruction n'enquête pas.</span><span lang="en">The prosecutor asked for a murder investigation. The investigating judge is not investigating.</span><span lang="ar">طلبت النيابة العامة التحقيق في جريمة قتل. وقاضي التحقيق لا يحقق.</span><span lang="zh">检察官要求调查谋杀案。预审法官却没有进行调查。</span></li>
+        <li><span lang="fr">Enquête de police déclarée « vide ». Spoliation écartée. Mais un mail de colère de 2021 versé au dossier.</span><span lang="en">The police inquiry was called "empty". The theft of the estate was set aside. But an angry email from 2021 was put on file.</span><span lang="ar">وُصف بحث الشرطة بأنه «فارغ». واستُبعد سلب التركة. لكن رسالة إلكترونية غاضبة من 2021 أُدرجت في الملف.</span><span lang="zh">警方调查被称为「空洞」。侵吞遗产一事被搁置。但一封 2021 年的愤怒邮件却被归入案卷。</span></li>
+        <li><span lang="fr">Un juge qui envisage de se déclarer incompétent, alors que mon père est mort à Neuilly, en France.</span><span lang="en">A judge who suggests the case may not be his, although my father died in Neuilly, France.</span><span lang="ar">قاضٍ يلمّح إلى أن القضية قد لا تكون من اختصاصه، مع أن أبي توفي في نويي بفرنسا.</span><span lang="zh">法官暗示此案可能不归他管辖，尽管我父亲是在法国讷伊去世的。</span></li>
       </ul>
-      <small><span lang="fr">Selon le récit de la partie civile, audition du 27 octobre 2026. Toutes les personnes citées sont présumées innocentes.</span><span lang="en">According to the civil party's account of the hearing on 27 October 2026. Everyone named is presumed innocent.</span></small>
+      <small><span lang="fr">Selon le récit de la partie civile, audition du 27 octobre 2026. Toutes les personnes citées sont présumées innocentes.</span><span lang="en">According to the civil party's account of the hearing on 27 October 2026. Everyone named is presumed innocent.</span><span lang="ar">بحسب رواية الطرف المدني لجلسة 27 أكتوبر 2026. وجميع المذكورين أبرياء إلى أن تثبت إدانتهم.</span><span lang="zh">以上为民事当事人对 2026 年 10 月 27 日听证的陈述。所有被提及者均被推定无罪。</span></small>
     </div>
   </div>
 
   <section aria-labelledby="h-why">
-    <h2 id="h-why"><span lang="fr">Pourquoi une grève de la faim</span><span lang="en">Why a hunger strike</span></h2>
+    <h2 id="h-why"><span lang="fr">Pourquoi une grève de la faim</span><span lang="en">Why a hunger strike</span><span lang="ar">لماذا الإضراب عن الطعام</span><span lang="zh">为什么绝食</span></h2>
     <div class="card strike">
       <p lang="fr">Bientôt dix ans de combat. Mon père est mort le 16 février 2017. Au Maroc, la gendarmerie a conclu à un <b>assassinat</b> après la découverte de preuves, et la police de Neuilly a conclu de même. Le parquet de Nanterre avait classé l'affaire sans suite le 24 septembre 2021. C'est pourtant ce même parquet qui a ensuite requis l'ouverture d'une information judiciaire du chef d'<b>assassinat</b>, sans user de la faculté de requérir un non-lieu (art. 86 al. 4 du code de procédure pénale).</p>
       <p lang="en">Nearly ten years of fighting. My father died on 16 February 2017. In Morocco the gendarmerie concluded it was <b>murder</b>, after finding evidence, and the police in Neuilly reached the same conclusion. In 2021 the Nanterre prosecutors closed the case without action. Later, the same prosecutors asked for a <b>murder investigation</b> to be opened. They could have asked for it to be dropped. They did not (art. 86, French Code of Criminal Procedure).</p>
+      <p lang="ar">ما يقارب عشر سنوات من النضال. توفي أبي في 16 فبراير 2017. في المغرب خلص الدرك إلى أنها <b>جريمة قتل</b> بعد العثور على أدلة، وانتهت شرطة نويي إلى الخلاصة نفسها. في 2021 حفظت النيابة العامة في نانتير القضية. ثم طلبت النيابة نفسها لاحقًا فتح <b>تحقيق في جريمة قتل</b>. كان بإمكانها طلب عدم المتابعة، لكنها لم تفعل (المادة 86 من قانون الإجراءات الجنائية الفرنسي).</p>
+      <p lang="zh">近十年的抗争。我父亲于 2017 年 2 月 16 日去世。在摩洛哥，宪兵在发现证据后认定这是<b>谋杀</b>，讷伊警方也得出了同样的结论。2021 年，楠泰尔检察院不予立案。后来，同一检察院却要求展开<b>谋杀案调查</b>。它本可以要求撤案，但没有这样做（法国《刑事诉讼法》第 86 条）。</p>
       <p lang="fr">Pourtant, <b>personne n'a été arrêté</b>. Pendant ce temps, sa succession a été vidée : ses appartements au Maroc sont passés à d'autres, et sa succession en France a été vendue et gérée sans que la famille obtienne de réponses. Tarik Mansouri, fils de la victime, fait une grève de la faim pacifique devant le consulat général de France à Londres, jusqu'aux arrestations.</p>
       <p lang="en">Yet <b>nobody has been arrested</b>. Meanwhile his estate has been emptied: his flats in Morocco ended up in other people's names, and his estate in France was sold and managed without the family getting answers. Tarik Mansouri, the victim's son, is on a peaceful hunger strike outside the French Consulate General in London until arrests are made.</p>
+      <p lang="ar">ومع ذلك <b>لم يُعتقل أحد</b>. وفي الأثناء أُفرغت تركته: انتقلت شققه في المغرب إلى أسماء آخرين، وبيعت تركته في فرنسا وأُديرت دون أن تحصل العائلة على أجوبة. ويخوض طارق منصوري، ابن الضحية، إضرابًا سلميًا عن الطعام أمام القنصلية العامة الفرنسية في لندن إلى أن تتم الاعتقالات.</p>
+      <p lang="zh">然而<b>至今无人被捕</b>。与此同时，他的遗产被掏空：他在摩洛哥的公寓落入他人名下，他在法国的遗产被出售和管理，家属却得不到答复。受害人之子塔里克·曼苏里正在伦敦法国总领事馆外进行和平绝食抗议，直到有人被捕。</p>
     </div>
   </section>
 
   <section aria-labelledby="h-ask">
-    <h2 id="h-ask"><span lang="fr">Ce que nous demandons</span><span lang="en">What we ask for</span></h2>
+    <h2 id="h-ask"><span lang="fr">Ce que nous demandons</span><span lang="en">What we ask for</span><span lang="ar">ما نطالب به</span><span lang="zh">我们的要求</span></h2>
     <ol class="asks">
       <li lang="fr"><b>Arrêtez les assassins de mon père.</b></li>
       <li lang="en"><b>Arrest my father's killers.</b></li>
+      <li lang="ar"><b>اعتقلوا قتلة أبي.</b></li>
+      <li lang="zh"><b>逮捕杀害我父亲的凶手。</b></li>
       <li lang="fr"><b>Arrêtez ceux qui ont pillé sa succession,</b> notaire et mandataire compris.</li>
       <li lang="en"><b>Arrest those who stole his estate</b> — including the notary and the court-appointed administrator.</li>
+      <li lang="ar"><b>اعتقلوا من نهبوا تركته،</b> ومنهم الموثقة والوكيلة القضائية.</li>
+      <li lang="zh"><b>逮捕侵吞他遗产的人，</b>包括公证人和法院指定的遗产管理人。</li>
       <li lang="fr"><b>Grève de la faim jusqu'aux arrestations.</b></li>
       <li lang="en"><b>Hunger strike until arrests are made.</b></li>
+      <li lang="ar"><b>إضراب عن الطعام حتى تتم الاعتقالات.</b></li>
+      <li lang="zh"><b>绝食直到有人被捕。</b></li>
     </ol>
   </section>
 
   <section aria-labelledby="h-tl">
-    <h2 id="h-tl"><span lang="fr">L'affaire en 9 dates</span><span lang="en">The case in 9 dates</span></h2>
-    <p style="color:var(--ink-dim);font-size:.9rem;margin:-4px 0 14px"><span lang="fr">Touchez une date pour en savoir plus.</span><span lang="en">Tap a date to read more. The original documents are in French and Arabic.</span></p>
+    <h2 id="h-tl"><span lang="fr">L'affaire en 9 dates</span><span lang="en">The case in 9 dates</span><span lang="ar">القضية في 9 تواريخ</span><span lang="zh">九个日期看懂此案</span></h2>
+    <p style="color:var(--ink-dim);font-size:.9rem;margin:-4px 0 14px"><span lang="fr">Touchez une date pour en savoir plus.</span><span lang="en">Tap a date to read more. The original documents are in French and Arabic.</span><span lang="ar">المسوا تاريخًا لمعرفة المزيد. الوثائق الأصلية بالفرنسية والعربية.</span><span lang="zh">点击日期了解详情。原始文件为法文和阿拉伯文。</span></p>
     <ol class="tl">
-      <li><details><summary><span class="d">16/02/2017</span><span class="t"><span lang="fr">Décès à Neuilly-sur-Seine</span><span lang="en">Death in Neuilly-sur-Seine</span></span></summary>
+      <li><details><summary><span class="d">16/02/2017</span><span class="t"><span lang="fr">Décès à Neuilly-sur-Seine</span><span lang="en">Death in Neuilly-sur-Seine</span><span lang="ar">الوفاة في نويي سور سين</span><span lang="zh">在塞纳河畔讷伊去世</span></span></summary>
         <div class="body">
           <p lang="fr">Abdelkrim Mansouri, né en 1946 à Annaba (Algérie), ancien conservateur d'un palais de la famille régnante d'Abu Dhabi, père de huit enfants, meurt à Neuilly-sur-Seine. Il possédait plusieurs biens au Maroc.</p>
           <p lang="en">Abdelkrim Mansouri, born in 1946 in Annaba (Algeria), former curator of a palace of Abu Dhabi's ruling family and father of eight, dies in Neuilly-sur-Seine, France. He owned several properties in Morocco.</p>
-          <div class="links"><a class="btn sm" href="dossier.html#ch1"><span lang="fr">Chapitre complet</span><span lang="en">Full chapter (in French)</span></a><a class="btn sm" href="pieces/P01_acte-de-deces-n-160-neuilly-sur-seine-copie-integrale.pdf"><span lang="fr">Acte de décès (PDF)</span><span lang="en">Death certificate (PDF, French)</span></a><button class="btn sm" data-audio="c01_p0"><span lang="fr">▶ Écouter Mena</span><span lang="en">▶ Listen (in French)</span></button></div>
+          <p lang="ar">عبد الكريم منصوري، المولود سنة 1946 في عنابة (الجزائر)، المحافظ السابق لقصر تابع للأسرة الحاكمة في أبوظبي وأب لثمانية أبناء، يتوفى في نويي سور سين بفرنسا. وكان يملك عدة عقارات في المغرب.</p>
+          <p lang="zh">阿卜杜勒克里姆·曼苏里 1946 年生于阿尔及利亚安纳巴，曾任阿布扎比统治家族一座宫殿的总管，育有八名子女，在法国塞纳河畔讷伊去世。他在摩洛哥拥有多处房产。</p>
+          <div class="links"><a class="btn sm" href="dossier.html#ch1"><span lang="fr">Chapitre complet</span><span lang="en">Full chapter</span><span lang="ar">الفصل كاملًا</span><span lang="zh">完整章节</span></a><a class="btn sm" href="pieces/P01_acte-de-deces-n-160-neuilly-sur-seine-copie-integrale.pdf"><span lang="fr">Acte de décès (PDF)</span><span lang="en">Death certificate (PDF, French)</span><span lang="ar">شهادة الوفاة (PDF، بالفرنسية)</span><span lang="zh">死亡证明（PDF，法文）</span></a><button class="btn sm" data-audio="c01_p0"><span lang="fr">▶ Écouter Mena</span><span lang="en">▶ Listen (in French)</span><span lang="ar">▶ استمعوا (بالفرنسية)</span><span lang="zh">▶ 收听（法语）</span></button></div>
         </div></details></li>
 
-      <li><details><summary><span class="d">2017 →</span><span class="t"><span lang="fr">Gendarmerie et police concluent à un assassinat</span><span lang="en">Gendarmerie and police conclude it was murder</span></span></summary>
+      <li><details><summary><span class="d"><span lang="fr">2017 →</span><span lang="en">2017 →</span><span lang="ar">منذ 2017</span><span lang="zh">2017 →</span></span><span class="t"><span lang="fr">Gendarmerie et police concluent à un assassinat</span><span lang="en">Gendarmerie and police conclude it was murder</span><span lang="ar">الدرك والشرطة يخلصان إلى أنها جريمة قتل</span><span lang="zh">宪兵和警方认定为谋杀</span></span></summary>
         <div class="body">
           <p lang="fr">Dès 2017, une plainte pour homicide avec préméditation par empoisonnement est enregistrée par le parquet général de Rabat ; elle demande l'exhumation et l'autopsie. L'autopsie n'a jamais été faite. Au Maroc, la gendarmerie a conclu à un assassinat après la découverte de preuves : son procès-verbal vise un « homicide volontaire avec préméditation et guet-apens ». La police de Neuilly a conclu de même.</p>
           <p lang="en">In 2017 the family files a complaint in Rabat, Morocco: premeditated murder by poisoning. It asks for the body to be exhumed and for an autopsy. The autopsy was never done. In Morocco, the gendarmerie concluded it was murder, after finding evidence: its report refers to "premeditated murder". The police in Neuilly reached the same conclusion.</p>
-          <div class="links"><a class="btn sm" href="dossier.html#ch2"><span lang="fr">Chapitre complet</span><span lang="en">Full chapter (in French)</span></a><a class="btn sm" href="pieces/P03_traduction-FR.pdf"><span lang="fr">Plainte de Rabat (traduction)</span><span lang="en">Rabat complaint (French translation)</span></a><button class="btn sm" data-audio="c02_p0"><span lang="fr">▶ Écouter Mena</span><span lang="en">▶ Listen (in French)</span></button></div>
+          <p lang="ar">في 2017 قدمت العائلة شكاية في الرباط بالمغرب: قتل مع سبق الإصرار بالتسميم، مع طلب نبش الجثة وتشريحها. ولم يُجرَ التشريح قط. وفي المغرب خلص الدرك إلى أنها جريمة قتل بعد العثور على أدلة: إذ يشير محضره إلى «قتل عمد مع سبق الإصرار». وانتهت شرطة نويي إلى الخلاصة نفسها.</p>
+          <p lang="zh">2017 年，家属在摩洛哥拉巴特提出控告：以投毒方式预谋杀人，并要求开棺验尸。尸检从未进行。在摩洛哥，宪兵在发现证据后认定这是谋杀：其笔录提到「预谋杀人」。讷伊警方也得出了同样的结论。</p>
+          <div class="links"><a class="btn sm" href="dossier.html#ch2"><span lang="fr">Chapitre complet</span><span lang="en">Full chapter</span><span lang="ar">الفصل كاملًا</span><span lang="zh">完整章节</span></a><a class="btn sm" href="pieces/P03_traduction-FR.pdf"><span lang="fr">Plainte de Rabat (traduction)</span><span lang="en">Rabat complaint (French translation)</span><span lang="ar">شكاية الرباط (ترجمة فرنسية)</span><span lang="zh">拉巴特控告（法文译本）</span></a><button class="btn sm" data-audio="c02_p0"><span lang="fr">▶ Écouter Mena</span><span lang="en">▶ Listen (in French)</span><span lang="ar">▶ استمعوا (بالفرنسية)</span><span lang="zh">▶ 收听（法语）</span></button></div>
         </div></details></li>
 
-      <li><details><summary><span class="d">2017 →</span><span class="t"><span lang="fr">Les biens au Maroc changent de mains</span><span lang="en">The Moroccan properties change hands</span></span></summary>
+      <li><details><summary><span class="d"><span lang="fr">2017 →</span><span lang="en">2017 →</span><span lang="ar">منذ 2017</span><span lang="zh">2017 →</span></span><span class="t"><span lang="fr">Les biens au Maroc changent de mains</span><span lang="en">The Moroccan properties change hands</span><span lang="ar">العقارات المغربية تنتقل إلى أيدٍ أخرى</span><span lang="zh">摩洛哥房产易手</span></span></summary>
         <div class="body">
           <p lang="fr">Deux appartements du défunt, immeubles 7 et 38 à Rabat, apparaissent au nom de tiers sur la base d'actes que la partie civile conteste : une vente de 2011 contredite par l'administration fiscale marocaine elle-même, et un acte de 2013 sur un bien grevé depuis 2010 d'une hypothèque du Trésor au nom du père, jamais levée.</p>
           <p lang="en">Two of his flats near Rabat (buildings 7 and 38) end up in other people's names. The family disputes the deeds. One is a 2011 sale that Morocco's own tax office contradicts. The other is a 2013 deed on a flat that still carried a 2010 state mortgage in the father's name.</p>
-          <div class="links"><a class="btn sm" href="dossier.html#ch3"><span lang="fr">Le patrimoine</span><span lang="en">The assets (in French)</span></a><a class="btn sm" href="dossier.html#ch4"><span lang="fr">Immeuble 7</span><span lang="en">Building 7 (in French)</span></a><a class="btn sm" href="dossier.html#ch5"><span lang="fr">Immeuble 38</span><span lang="en">Building 38 (in French)</span></a></div>
+          <p lang="ar">انتقلت شقتان له في الرباط (العمارتان 7 و38) إلى أسماء آخرين. وتطعن العائلة في العقود. أحدها بيع يعود إلى 2011 تناقضه إدارة الضرائب المغربية نفسها. والآخر عقد من 2013 على شقة كانت ما زالت مثقلة برهن للدولة منذ 2010 باسم الأب.</p>
+          <p lang="zh">他在拉巴特的两套公寓（7 号楼和 38 号楼）落入他人名下。家属对相关契约提出异议。其一是 2011 年的买卖，与摩洛哥税务机关的记录相矛盾。其二是 2013 年的契约，所涉公寓当时仍背负着 2010 年登记在父亲名下的国家抵押。</p>
+          <div class="links"><a class="btn sm" href="dossier.html#ch3"><span lang="fr">Le patrimoine</span><span lang="en">The assets</span><span lang="ar">الممتلكات</span><span lang="zh">财产</span></a><a class="btn sm" href="dossier.html#ch4"><span lang="fr">Immeuble 7</span><span lang="en">Building 7</span><span lang="ar">العمارة 7</span><span lang="zh">7 号楼</span></a><a class="btn sm" href="dossier.html#ch5"><span lang="fr">Immeuble 38</span><span lang="en">Building 38</span><span lang="ar">العمارة 38</span><span lang="zh">38 号楼</span></a></div>
         </div></details></li>
 
-      <li><details><summary><span class="d">02/03/2018</span><span class="t"><span lang="fr">18 mois de prison au Maroc</span><span lang="en">18 months in a Moroccan prison</span></span></summary>
+      <li><details><summary><span class="d">02/03/2018</span><span class="t"><span lang="fr">18 mois de prison au Maroc</span><span lang="en">18 months in a Moroccan prison</span><span lang="ar">18 شهرًا في سجن مغربي</span><span lang="zh">在摩洛哥监狱服刑 18 个月</span></span></summary>
         <div class="body">
           <p lang="fr">Venu chercher les biens de son père, Tarik Mansouri fait ouvrir l'appartement de l'immeuble 38, qu'il croit compris dans la succession. Il est incarcéré, condamné à trois ans ; en appel, la cour écrit elle-même que « la peine était sévère » et la réduit. Il sort le 2 septembre 2019, après dix-huit mois.</p>
           <p lang="en">Tarik goes to Morocco to find his father's property. He has the flat in building 38 opened, believing it is part of the inheritance. He is jailed and sentenced to three years. On appeal, the court itself writes that "the sentence was severe" and cuts it. He is freed on 2 September 2019, after eighteen months.</p>
-          <div class="links"><a class="btn sm" href="dossier.html#ch7"><span lang="fr">Chapitre complet</span><span lang="en">Full chapter (in French)</span></a><a class="btn sm" href="dossier.html#ch6"><span lang="fr">Le mobile</span><span lang="en">The motive (in French)</span></a></div>
+          <p lang="ar">ذهب طارق إلى المغرب للبحث عن ممتلكات والده. وطلب فتح شقة العمارة 38 معتقدًا أنها جزء من التركة. فسُجن وحُكم عليه بثلاث سنوات. وفي الاستئناف كتبت المحكمة نفسها أن «العقوبة كانت قاسية» وخفّضتها. وأُفرج عنه في 2 سبتمبر 2019 بعد ثمانية عشر شهرًا.</p>
+          <p lang="zh">塔里克前往摩洛哥寻找父亲的财产。他以为 38 号楼的公寓属于遗产，便请人开了门。他被关押并判处三年徒刑。上诉时，法院亲自写道「刑罚过于严厉」，并予以减刑。他在十八个月后于 2019 年 9 月 2 日获释。</p>
+          <div class="links"><a class="btn sm" href="dossier.html#ch7"><span lang="fr">Chapitre complet</span><span lang="en">Full chapter</span><span lang="ar">الفصل كاملًا</span><span lang="zh">完整章节</span></a><a class="btn sm" href="dossier.html#ch6"><span lang="fr">Le mobile</span><span lang="en">The motive</span><span lang="ar">الدافع</span><span lang="zh">动机</span></a></div>
         </div></details></li>
 
-      <li><details><summary><span class="d">24/09/2021</span><span class="t"><span lang="fr">Plainte classée sans suite à Nanterre</span><span lang="en">Case closed in France</span></span></summary>
+      <li><details><summary><span class="d">24/09/2021</span><span class="t"><span lang="fr">Plainte classée sans suite à Nanterre</span><span lang="en">Case closed in France</span><span lang="ar">حفظ القضية في فرنسا</span><span lang="zh">法国不予立案</span></span></summary>
         <div class="body">
           <p lang="fr">La première plainte déposée en France est classée sans suite par le parquet de Nanterre.</p>
           <p lang="en">The first complaint in France is closed without action by the Nanterre prosecutors.</p>
-          <div class="links"><a class="btn sm" href="dossier.html#ch11"><span lang="fr">La procédure</span><span lang="en">The proceedings (in French)</span></a></div>
+          <p lang="ar">حفظت النيابة العامة في نانتير أول شكاية في فرنسا.</p>
+          <p lang="zh">法国的第一份控告被楠泰尔检察院不予立案。</p>
+          <div class="links"><a class="btn sm" href="dossier.html#ch11"><span lang="fr">La procédure</span><span lang="en">The proceedings</span><span lang="ar">المسطرة القضائية</span><span lang="zh">司法程序</span></a></div>
         </div></details></li>
 
-      <li><details><summary><span class="d">2024 – 2025</span><span class="t"><span lang="fr">Information judiciaire pour assassinat</span><span lang="en">Murder investigation opens</span></span></summary>
+      <li><details><summary><span class="d">2024 – 2025</span><span class="t"><span lang="fr">Information judiciaire pour assassinat</span><span lang="en">Murder investigation opens</span><span lang="ar">فتح التحقيق في جريمة القتل</span><span lang="zh">谋杀案调查启动</span></span></summary>
         <div class="body">
           <p lang="fr">Le 12 septembre 2024, plainte avec constitution de partie civile. Le même parquet qui avait classé en 2021 requiert l'ouverture d'une information du chef d'assassinat, sans requérir de non-lieu. Ordonnance de consignation le 13 novembre 2025 ; la consignation est payée, l'information est ouverte.</p>
           <p lang="en">On 12 September 2024 Tarik files a new complaint as "civil party" (the victim's family, a formal party to the case). The prosecutors who closed the case in 2021 now ask for a murder investigation. A court order of 13 November 2025 sets a fee (€2,500). It is paid, and the investigation opens.</p>
-          <div class="links"><a class="btn sm" href="pieces/P30_ordonnance-de-consignation-2-500-qualification-assassinat-ji.pdf"><span lang="fr">Ordonnance (PDF)</span><span lang="en">Court order (PDF, French)</span></a><a class="btn sm" href="dossier.html#ch11"><span lang="fr">La procédure</span><span lang="en">The proceedings (in French)</span></a></div>
+          <p lang="ar">في 12 سبتمبر 2024 قدّم طارق شكاية جديدة بصفته «طرفًا مدنيًا» (عائلة الضحية، طرف رسمي في القضية). وطلبت النيابة التي حفظت القضية في 2021 هذه المرة التحقيق في جريمة قتل. وحدد أمر قضائي مؤرخ في 13 نوفمبر 2025 كفالة قدرها 2 500 يورو. فدُفعت وفُتح التحقيق.</p>
+          <p lang="zh">2024 年 9 月 12 日，塔里克以「民事当事人」（受害人家属，案件的正式一方）身份提出新的控告。2021 年不予立案的检察官此时要求展开谋杀案调查。2025 年 11 月 13 日的法院裁定要求缴纳 2,500 欧元保证金。保证金缴纳后，调查启动。</p>
+          <div class="links"><a class="btn sm" href="pieces/P30_ordonnance-de-consignation-2-500-qualification-assassinat-ji.pdf"><span lang="fr">Ordonnance (PDF)</span><span lang="en">Court order (PDF, French)</span><span lang="ar">الأمر القضائي (PDF، بالفرنسية)</span><span lang="zh">法院裁定（PDF，法文）</span></a><a class="btn sm" href="dossier.html#ch11"><span lang="fr">La procédure</span><span lang="en">The proceedings</span><span lang="ar">المسطرة القضائية</span><span lang="zh">司法程序</span></a></div>
         </div></details></li>
 
-      <li><details><summary><span class="d">2025 – 2026</span><span class="t"><span lang="fr">La succession française</span><span lang="en">The inheritance in France</span></span></summary>
+      <li><details><summary><span class="d">2025 – 2026</span><span class="t"><span lang="fr">La succession française</span><span lang="en">The inheritance in France</span><span lang="ar">التركة في فرنسا</span><span lang="zh">法国的遗产</span></span></summary>
         <div class="body">
           <p lang="fr">En France, la succession est gérée par une mandataire de justice et une étude notariale. La partie civile relève notamment un rapport qui situe à tort le décès « au Maroc », et une notaire déclarée démissionnaire d'office en 2017 qui réapparaît dans le dossier.</p>
           <p lang="en">In France, the inheritance is run by a court-appointed administrator and a notary (a public official who handles estates). The family points to a report that wrongly says he died "in Morocco". It also points to a notary removed from office in 2017 who reappears in the case.</p>
-          <div class="links"><a class="btn sm" href="dossier.html#ch8"><span lang="fr">La mandataire</span><span lang="en">The administrator (in French)</span></a><a class="btn sm" href="dossier.html#ch9"><span lang="fr">La notaire</span><span lang="en">The notary (in French)</span></a></div>
+          <p lang="ar">في فرنسا، تدير التركة وكيلة عيّنها القضاء وموثقة (موظفة عمومية تتولى شؤون التركات). وتشير العائلة إلى تقرير يذكر خطأً أنه توفي «في المغرب». كما تشير إلى موثقة أُقيلت في 2017 وعادت إلى الظهور في الملف.</p>
+          <p lang="zh">在法国，遗产由法院指定的管理人和一名公证人（办理遗产事务的公职人员）管理。家属指出，一份报告错误地称他「死于摩洛哥」，还有一名 2017 年被免职的公证人重新出现在案件中。</p>
+          <div class="links"><a class="btn sm" href="dossier.html#ch8"><span lang="fr">La mandataire</span><span lang="en">The administrator</span><span lang="ar">الوكيلة القضائية</span><span lang="zh">遗产管理人</span></a><a class="btn sm" href="dossier.html#ch9"><span lang="fr">La notaire</span><span lang="en">The notary</span><span lang="ar">الموثقة</span><span lang="zh">公证人</span></a></div>
         </div></details></li>
 
-      <li class="hot"><details><summary><span class="d">27/10/2026</span><span class="t"><span lang="fr">Première audition devant le juge</span><span lang="en">First hearing with the judge</span></span></summary>
+      <li class="hot"><details><summary><span class="d">27/10/2026</span><span class="t"><span lang="fr">Première audition devant le juge</span><span lang="en">First hearing with the judge</span><span lang="ar">أول جلسة أمام القاضي</span><span lang="zh">首次面见法官</span></span></summary>
         <div class="body">
           <p lang="fr">Selon la partie civile, le juge évoque une possible incompétence, au motif que des poursuites existent au Maroc. Pour la famille, c'est l'inverse : le décès a eu lieu en France, la justice française est compétente, et ces poursuites marocaines pour assassinat confirment la gravité des faits. Elle n'y voit aucune volonté d'instruire.</p>
           <p lang="en">According to the family, the judge suggested the case might not be his, because there are proceedings in Morocco. The family says the opposite is true. He died in France, so French courts are competent. And a Moroccan murder case shows how serious this is. They saw no will to investigate.</p>
+          <p lang="ar">بحسب العائلة، لمّح القاضي إلى أن القضية قد لا تكون من اختصاصه لوجود متابعات في المغرب. وترى العائلة العكس: فالوفاة حدثت في فرنسا، والقضاء الفرنسي مختص، والقضية المغربية المتعلقة بالقتل تؤكد خطورة الوقائع. ولم تلمس أي إرادة للتحقيق.</p>
+          <p lang="zh">据家属称，法官暗示此案可能不归他管辖，因为摩洛哥有相关诉讼。家属认为事实恰恰相反：他在法国去世，法国法院有管辖权；摩洛哥的谋杀案说明案情严重。他们看不到任何调查的意愿。</p>
         </div></details></li>
 
-      <li class="hot"><details><summary><span class="d"><span lang="fr">1er nov. 2026</span><span lang="en">1 Nov 2026</span></span><span class="t"><span lang="fr">Grève de la faim à Londres</span><span lang="en">Hunger strike in London</span></span></summary>
+      <li class="hot"><details><summary><span class="d"><span lang="fr">1er nov. 2026</span><span lang="en">1 Nov 2026</span><span lang="ar">1 نوفمبر 2026</span><span lang="zh">2026 年 11 月 1 日</span></span><span class="t"><span lang="fr">Grève de la faim à Londres</span><span lang="en">Hunger strike in London</span><span lang="ar">إضراب عن الطعام في لندن</span><span lang="zh">在伦敦绝食抗议</span></span></summary>
         <div class="body">
           <p lang="fr">À partir du 1er novembre 2026, Tarik Mansouri jeûne devant le consulat général de France à Londres, jusqu'aux arrestations : les assassins de son père, et ceux qui ont pillé sa succession, notaire et mandataire compris.</p>
           <p lang="en">From 1 November 2026, Tarik Mansouri is on hunger strike outside the French Consulate General in London. He will continue until arrests are made: his father's killers, and those who stole his estate, including the notary and the court-appointed administrator.</p>
+          <p lang="ar">ابتداءً من 1 نوفمبر 2026، يخوض طارق منصوري إضرابًا عن الطعام أمام القنصلية العامة الفرنسية في لندن. وسيواصله إلى أن تتم الاعتقالات: قتلة والده ومن نهبوا تركته، ومنهم الموثقة والوكيلة القضائية.</p>
+          <p lang="zh">自 2026 年 11 月 1 日起，塔里克·曼苏里在伦敦法国总领事馆外绝食抗议。他将坚持到有人被捕：杀害他父亲的凶手，以及侵吞遗产的人，包括公证人和法院指定的遗产管理人。</p>
         </div></details></li>
     </ol>
   </section>
 
   <section aria-labelledby="h-help">
-    <h2 id="h-help"><span lang="fr">Comment aider</span><span lang="en">How you can help</span></h2>
+    <h2 id="h-help"><span lang="fr">Comment aider</span><span lang="en">How you can help</span><span lang="ar">كيف يمكنكم المساعدة</span><span lang="zh">您可以如何帮助</span></h2>
     <div class="grid">
       <button class="btn gold" data-share>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-        <span><span lang="fr">Partager cette page</span><span lang="en">Share this page</span><small><span lang="fr">Plus elle circule, plus il est difficile d'ignorer le dossier.</span><span lang="en">The more it spreads, the harder the case is to ignore.</span></small></span>
+        <span><span lang="fr">Partager cette page</span><span lang="en">Share this page</span><span lang="ar">شاركوا هذه الصفحة</span><span lang="zh">分享此页面</span><small><span lang="fr">Plus elle circule, plus il est difficile d'ignorer le dossier.</span><span lang="en">The more it spreads, the harder the case is to ignore.</span><span lang="ar">كلما انتشرت، صار تجاهل القضية أصعب.</span><span lang="zh">传播越广，此案就越难被忽视。</span></small></span>
       </button>
       <a class="btn" href="dossier-complet-mansouri.zip" download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v3h16v-3"/></svg>
-        <span><span lang="fr">Journalistes, avocats, élus : le dossier complet</span><span lang="en">Journalists, lawyers, MPs: download the full file</span><small>ZIP · 21 Mo / MB · <span lang="fr">pièces originales + traductions FR</span><span lang="en">original documents (French/Arabic) + French translations</span></small></span>
+        <span><span lang="fr">Journalistes, avocats, élus : le dossier complet</span><span lang="en">Journalists, lawyers, MPs: download the full file</span><span lang="ar">صحفيون، محامون، نواب: حمّلوا الملف الكامل</span><span lang="zh">记者、律师、议员：下载完整案卷</span><small>ZIP · 21 Mo / MB · <span lang="fr">pièces originales + traductions FR</span><span lang="en">original documents (French/Arabic) + French translations</span><span lang="ar">الوثائق الأصلية (فرنسية/عربية) + ترجمات فرنسية</span><span lang="zh">原始文件（法文/阿拉伯文）+ 法文译本</span></small></span>
       </a>
     </div>
   </section>
 
   <section aria-labelledby="h-more">
-    <h2 id="h-more"><span lang="fr">Aller plus loin</span><span lang="en">Go deeper</span></h2>
+    <h2 id="h-more"><span lang="fr">Aller plus loin</span><span lang="en">Go deeper</span><span lang="ar">لمعرفة المزيد</span><span lang="zh">深入了解</span></h2>
     <div class="card">
       <div class="mena-row">
         <img src="img/mena.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
-        <p><span lang="fr"><b>Mena</b>, une assistante IA, raconte tout le dossier en 13 chapitres audio et répond à vos questions à partir des pièces.</span><span lang="en"><b>Mena</b>, an AI assistant, tells the whole case in 13 audio chapters and answers questions from the documents. In French.</span></p>
+        <p><span lang="fr"><b>Mena</b>, une assistante IA, raconte tout le dossier en 13 chapitres audio et répond à vos questions à partir des pièces.</span><span lang="en"><b>Mena</b>, an AI assistant, tells the whole case in 13 audio chapters and answers questions from the documents. Text in four languages, audio in French.</span><span lang="ar"><b>مينا</b>، مساعدة بالذكاء الاصطناعي، تروي القضية كاملة في 13 فصلًا صوتيًا وتجيب عن الأسئلة انطلاقًا من الوثائق. النص بأربع لغات والصوت بالفرنسية.</span><span lang="zh"><b>Mena</b> 是一名 AI 助手，用 13 个音频章节讲述全案，并依据文件回答问题。文字有四种语言，音频为法语。</span></p>
       </div>
       <div class="grid" style="margin-top:14px">
-        <a class="btn" href="dossier.html"><span><span lang="fr">Le dossier complet, chapitre par chapitre</span><span lang="en">Full case file (in French)</span><small><span lang="fr">Récit, audio, imagerie satellite, questions à Mena</span><span lang="en">13 chapters, audio, satellite images, ask Mena</span></small></span></a>
-        <a class="btn" href="dossier.html#bordereau"><span><span lang="fr">Les 42 pièces une par une</span><span lang="en">All 42 documents (in French and Arabic)</span></span></a>
-        <a class="btn" href="../"><span><span lang="fr">Le site Vérité &amp; Justice</span><span lang="en">The Vérité &amp; Justice website (French/Arabic)</span></span></a>
+        <a class="btn" href="dossier.html"><span><span lang="fr">Le dossier complet, chapitre par chapitre</span><span lang="en">Full case file</span><span lang="ar">الملف الكامل</span><span lang="zh">完整案卷</span><small><span lang="fr">Récit, audio, imagerie satellite, questions à Mena</span><span lang="en">13 chapters, audio, satellite images, ask Mena</span><span lang="ar">13 فصلًا، صوت، صور أقمار صناعية، اسألوا مينا</span><span lang="zh">13 个章节、音频、卫星图像、向 Mena 提问</span></small></span></a>
+        <a class="btn" href="dossier.html#bordereau"><span><span lang="fr">Les 42 pièces une par une</span><span lang="en">All 42 documents (in French and Arabic)</span><span lang="ar">الوثائق الـ42 كلها (بالفرنسية والعربية)</span><span lang="zh">全部 42 份文件（法文和阿拉伯文）</span></span></a>
+        <a class="btn" href="../"><span><span lang="fr">Le site Vérité &amp; Justice</span><span lang="en">The Vérité &amp; Justice website (French/Arabic)</span><span lang="ar">موقع Vérité &amp; Justice (فرنسية/عربية)</span><span lang="zh">Vérité &amp； Justice 网站（法文/阿拉伯文）</span></span></a>
       </div>
     </div>
   </section>
 
   <p class="note">
-    <span lang="fr">Page publiée par la partie civile, Tarik Mansouri. Les analyses présentées sont les siennes ; les personnes mises en cause sont présumées innocentes. Les traductions de l'arabe sont des traductions libres, non assermentées. Mena est une IA : elle peut se tromper.</span>
-    <span lang="en">Published by the victim's son, Tarik Mansouri, civil party in the case. The views are his own. Everyone involved is presumed innocent. Translations from Arabic are informal, not certified. Mena is an AI and can make mistakes.</span>
+    <span lang="fr">Page publiée par la partie civile, Tarik Mansouri. Les analyses présentées sont les siennes ; les personnes mises en cause sont présumées innocentes. Les traductions de l'arabe sont des traductions libres, non assermentées. Mena est une IA : elle peut se tromper. Les versions anglaise, arabe et chinoise du récit sont des traductions : le français fait foi.</span>
+    <span lang="en">Published by the victim's son, Tarik Mansouri, civil party in the case. The views are his own. Everyone involved is presumed innocent. Translations from Arabic are informal, not certified. Mena is an AI and can make mistakes. The English, Arabic and Chinese versions of the story are translations: the French text prevails.</span>
+    <span lang="ar">نشر هذه الصفحة طارق منصوري، ابن الضحية والطرف المدني في القضية. والآراء آراؤه الشخصية. وجميع المعنيين أبرياء إلى أن تثبت إدانتهم. ترجمات النصوص العربية ترجمات حرة غير محلَّفة. ومينا ذكاء اصطناعي وقد تخطئ. النسخ الإنجليزية والعربية والصينية ترجمات: والنص الفرنسي هو المرجع.</span>
+    <span lang="zh">本页由受害人之子、本案民事当事人塔里克·曼苏里发布。文中观点仅代表其本人。所有相关人员均被推定无罪。阿拉伯文的翻译为非正式翻译，未经认证。Mena 是 AI，可能出错。英文、阿拉伯文和中文版本均为译文，以法文为准。</span>
   </p>
 </main>
 
 <nav class="bar" aria-label="Actions">
-  <button class="btn gold" data-share><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg><span lang="fr">Partager</span><span lang="en">Share</span></button>
-  <a class="btn" href="dossier.html"><span lang="fr">Dossier complet</span><span lang="en">Full file (French)</span></a>
+  <button class="btn gold" data-share><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg><span lang="fr">Partager</span><span lang="en">Share</span><span lang="ar">شاركوا</span><span lang="zh">分享</span></button>
+  <a class="btn" href="dossier.html"><span lang="fr">Dossier complet</span><span lang="en">Full file</span><span lang="ar">الملف الكامل</span><span lang="zh">完整案卷</span></a>
 </nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -317,20 +355,30 @@ const URL_PAGE = "https://abdelkrim-mansouri.online/mena/";
 const $ = s => document.querySelectorAll(s);
 const L = () => document.documentElement.dataset.l;
 
+const TXT = {
+  fr:{ title:"Justice pour Abdelkrim Mansouri", share:"Mort en 2017. La gendarmerie au Maroc et la police de Neuilly ont conclu à un assassinat. Personne n'est arrêté. Grève de la faim à Londres jusqu'aux arrestations. Le dossier en 1 minute :", copied:"Lien copié", copy:"Copiez le lien :", close:"Access the story ✕", sound:"🔊 Tap for sound" },
+  en:{ title:"Justice for Abdelkrim Mansouri", share:"He died in 2017. The gendarmerie in Morocco and the police in Neuilly concluded it was murder. Nobody has been arrested. His son is on hunger strike in London until arrests are made. The case in one minute:", copied:"Link copied", copy:"Copy the link:", close:"Access the story ✕", sound:"🔊 Tap for sound" },
+  ar:{ title:"العدالة لعبد الكريم منصوري", share:"توفي في 2017. خلص الدرك في المغرب وشرطة نويي إلى أنها جريمة قتل. ولم يُعتقل أحد. ابنه مضرب عن الطعام في لندن إلى أن تتم الاعتقالات. القضية في دقيقة واحدة:", copied:"تم نسخ الرابط", copy:"انسخوا الرابط:", close:"اقرأوا القصة ✕", sound:"🔊 المسوا لتشغيل الصوت" },
+  zh:{ title:"为阿卜杜勒克里姆·曼苏里讨回公道", share:"他于 2017 年去世。摩洛哥宪兵和讷伊警方都认定这是谋杀。至今无人被捕。他的儿子正在伦敦绝食抗议，直到有人被捕。一分钟了解此案：", copied:"链接已复制", copy:"复制链接：", close:"阅读事件经过 ✕", sound:"🔊 点击开启声音" }
+};
+function setLang(l){
+  const h = document.documentElement; h.dataset.l = l; h.lang = l; h.dir = l === "ar" ? "rtl" : "ltr";
+  document.title = TXT[l].title;
+  document.getElementById("player-close").textContent = TXT[l].close;
+  document.getElementById("player-sound").textContent = TXT[l].sound;
+}
 $(".lang button").forEach(b => b.addEventListener("click", () => {
-  const l = b.dataset.set; document.documentElement.dataset.l = l; document.documentElement.lang = l;
+  const l = b.dataset.set; setLang(l);
   try { localStorage.setItem("mena-lang", l); } catch(e) {}
 }));
 
 function toast(msg){ const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("on"); setTimeout(() => t.classList.remove("on"), 2200); }
 
 $("[data-share]").forEach(b => b.addEventListener("click", async () => {
-  const data = L() === "fr"
-    ? { title:"Justice pour Abdelkrim Mansouri", text:"Mort en 2017. La gendarmerie au Maroc et la police de Neuilly ont conclu à un assassinat. Personne n'est arrêté. Grève de la faim à Londres jusqu'aux arrestations. Le dossier en 1 minute :", url:URL_PAGE }
-    : { title:"Justice for Abdelkrim Mansouri", text:"He died in 2017. The gendarmerie in Morocco and the police in Neuilly concluded it was murder. Nobody has been arrested. His son is on hunger strike in London until arrests are made. The case in one minute:", url:URL_PAGE };
+  const t = TXT[L()], data = { title:t.title, text:t.share, url:URL_PAGE };
   if (navigator.share) { try { await navigator.share(data); return; } catch(e) { if (e.name === "AbortError") return; } }
-  try { await navigator.clipboard.writeText(URL_PAGE); toast(L() === "fr" ? "Lien copié" : "Link copied"); }
-  catch(e) { prompt(L() === "fr" ? "Copiez le lien :" : "Copy the link:", URL_PAGE); }
+  try { await navigator.clipboard.writeText(URL_PAGE); toast(TXT[L()].copied); }
+  catch(e) { prompt(TXT[L()].copy, URL_PAGE); }
 }));
 
 // Audio chargé seulement au toucher
@@ -360,6 +408,7 @@ $("[data-audio]").forEach(b => b.addEventListener("click", () => {
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&p.classList.contains("on"))close();});
   v.addEventListener("ended",close);
   v.addEventListener("volumechange",function(){if(!v.muted)p.classList.remove("muted");});
+  setLang(L());
   // Film anglais lancé à l'arrivée (scan du QR), sans le son : les navigateurs bloquent l'autoplay sonore. Une fois par visite.
   var vu=false;try{vu=sessionStorage.getItem("mena-film-vu")==="1";sessionStorage.setItem("mena-film-vu","1");}catch(e){}
   var eco=navigator.connection&&navigator.connection.saveData;
